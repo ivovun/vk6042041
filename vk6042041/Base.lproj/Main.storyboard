@@ -12,7 +12,7 @@
         <!--Start ScreenVC-->
         <scene sceneID="zrc-oc-1d6">
             <objects>
-                <viewController id="9TJ-kC-y0D" customClass="VKStartScreenVC" customModule="vfaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9TJ-kC-y0D" customClass="VKStartScreenVC" customModule="vk6042041" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6LF-wj-VAf"/>
                         <viewControllerLayoutGuide type="bottom" id="6pt-5t-VM4"/>
@@ -28,14 +28,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
                                         <state key="normal" title="Авторизоваться"/>
                                         <connections>
-                                            <action selector="authorize:" destination="9TJ-kC-y0D" eventType="touchUpInside" id="swJ-xU-cxp"/>
+                                            <action selector="authorize:" destination="9TJ-kC-y0D" eventType="touchUpInside" id="BDk-sU-z0i"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVT-ZO-sdC">
                                         <rect key="frame" x="34.5" y="36" width="46" height="30"/>
                                         <state key="normal" title="Выйти"/>
                                         <connections>
-                                            <action selector="logout:" destination="9TJ-kC-y0D" eventType="touchUpInside" id="Gdi-sL-JHh"/>
+                                            <action selector="logout:" destination="9TJ-kC-y0D" eventType="touchUpInside" id="vhq-pU-9KG"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -61,7 +61,7 @@
         <!--MainVC-->
         <scene sceneID="1DC-at-4K7">
             <objects>
-                <viewController id="q1y-bT-KQa" customClass="mainVC" customModule="vfaces" sceneMemberID="viewController">
+                <viewController id="q1y-bT-KQa" customClass="mainVC" customModule="vk6042041" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pxt-3U-Ujm"/>
                         <viewControllerLayoutGuide type="bottom" id="zrV-qE-6Qo"/>
