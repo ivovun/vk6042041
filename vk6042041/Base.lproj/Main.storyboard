@@ -1,26 +1,98 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wuB-ZR-Zb7">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Start ScreenVC-->
+        <scene sceneID="zrc-oc-1d6">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9TJ-kC-y0D" customClass="VKStartScreenVC" customModule="vfaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="6LF-wj-VAf"/>
+                        <viewControllerLayoutGuide type="bottom" id="6pt-5t-VM4"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="UPJ-VH-Md7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="lNc-oo-Ojw">
+                                <rect key="frame" x="130.5" y="300.5" width="115" height="66"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpD-3f-NeF">
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
+                                        <state key="normal" title="Авторизоваться"/>
+                                        <connections>
+                                            <action selector="authorize:" destination="9TJ-kC-y0D" eventType="touchUpInside" id="swJ-xU-cxp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVT-ZO-sdC">
+                                        <rect key="frame" x="34.5" y="36" width="46" height="30"/>
+                                        <state key="normal" title="Выйти"/>
+                                        <connections>
+                                            <action selector="logout:" destination="9TJ-kC-y0D" eventType="touchUpInside" id="Gdi-sL-JHh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="lNc-oo-Ojw" firstAttribute="centerX" secondItem="UPJ-VH-Md7" secondAttribute="centerX" id="f1C-2t-a97"/>
+                            <constraint firstItem="lNc-oo-Ojw" firstAttribute="centerY" secondItem="UPJ-VH-Md7" secondAttribute="centerY" id="rcH-qZ-D6s"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Cxc-wv-kNA"/>
+                    <connections>
+                        <segue destination="q1y-bT-KQa" kind="show" identifier="Show mainVC" id="Cgd-Wi-7I9">
+                            <nil key="action"/>
+                        </segue>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ga5-8x-yTU" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="893.60000000000002" y="777.66116941529242"/>
+        </scene>
+        <!--MainVC-->
+        <scene sceneID="1DC-at-4K7">
+            <objects>
+                <viewController id="q1y-bT-KQa" customClass="mainVC" customModule="vfaces" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pxt-3U-Ujm"/>
+                        <viewControllerLayoutGuide type="bottom" id="zrV-qE-6Qo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wxn-eu-nAJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ktg-jC-g1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1823" y="778"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="l0j-bA-Hs6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wuB-ZR-Zb7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Yf-PH-cmx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9TJ-kC-y0D" kind="relationship" relationship="rootViewController" id="Yk6-HI-5d0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s2s-6E-7BT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="116" y="777.66116941529242"/>
         </scene>
     </scenes>
 </document>

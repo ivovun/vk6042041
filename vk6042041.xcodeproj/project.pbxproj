@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3280C916EC574C6C44B5D9BF /* Pods_vk6042041.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0EDC9040E46BB6644BF48F /* Pods_vk6042041.framework */; };
+		5058F9C21F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9BF1F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift */; };
+		5058F9C31F23579E006F1E3B /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9C01F23579E006F1E3B /* UIViewControllerExtensions.swift */; };
+		5058F9C41F23579E006F1E3B /* VKStartScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9C11F23579E006F1E3B /* VKStartScreenVC.swift */; };
+		5058F9C61F2357FA006F1E3B /* mainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9C51F2357FA006F1E3B /* mainVC.swift */; };
 		50CBF7441F2342550088CF3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBF7431F2342550088CF3D /* AppDelegate.swift */; };
 		50CBF7461F2342550088CF3D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBF7451F2342550088CF3D /* ViewController.swift */; };
 		50CBF7491F2342550088CF3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50CBF7471F2342550088CF3D /* Main.storyboard */; };
@@ -19,6 +23,10 @@
 		1B69F39E6691DB4A856375D8 /* Pods-vk6042041.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk6042041.release.xcconfig"; path = "Pods/Target Support Files/Pods-vk6042041/Pods-vk6042041.release.xcconfig"; sourceTree = "<group>"; };
 		2F0EDC9040E46BB6644BF48F /* Pods_vk6042041.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vk6042041.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3B9CF9B776F0A972E70C15 /* Pods-vk6042041.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk6042041.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vk6042041/Pods-vk6042041.debug.xcconfig"; sourceTree = "<group>"; };
+		5058F9BF1F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstantsForObjCAndSwift.swift; sourceTree = "<group>"; };
+		5058F9C01F23579E006F1E3B /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		5058F9C11F23579E006F1E3B /* VKStartScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKStartScreenVC.swift; sourceTree = "<group>"; };
+		5058F9C51F2357FA006F1E3B /* mainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainVC.swift; sourceTree = "<group>"; };
 		50CBF7401F2342550088CF3D /* vk6042041.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vk6042041.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50CBF7431F2342550088CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50CBF7451F2342550088CF3D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +82,10 @@
 				50CBF7451F2342550088CF3D /* ViewController.swift */,
 				50CBF7471F2342550088CF3D /* Main.storyboard */,
 				50CBF74A1F2342550088CF3D /* Assets.xcassets */,
+				5058F9BF1F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift */,
+				5058F9C51F2357FA006F1E3B /* mainVC.swift */,
+				5058F9C01F23579E006F1E3B /* UIViewControllerExtensions.swift */,
+				5058F9C11F23579E006F1E3B /* VKStartScreenVC.swift */,
 				50CBF74C1F2342550088CF3D /* LaunchScreen.storyboard */,
 				50CBF74F1F2342550088CF3D /* Info.plist */,
 			);
@@ -212,8 +224,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5058F9C31F23579E006F1E3B /* UIViewControllerExtensions.swift in Sources */,
 				50CBF7461F2342550088CF3D /* ViewController.swift in Sources */,
+				5058F9C41F23579E006F1E3B /* VKStartScreenVC.swift in Sources */,
+				5058F9C21F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift in Sources */,
 				50CBF7441F2342550088CF3D /* AppDelegate.swift in Sources */,
+				5058F9C61F2357FA006F1E3B /* mainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +397,7 @@
 				50CBF7541F2342550088CF3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
