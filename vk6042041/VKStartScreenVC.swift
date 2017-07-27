@@ -79,7 +79,7 @@ class VKStartScreenVC: UIViewController, VKSdkUIDelegate, VKSdkDelegate {
     // MARK: - Navigation
   
   func startWorking() {
-    performSegue(withIdentifier: GlobalConstantsForObjCAndSwift.SHOW_MAIN_VC_SEGUE, sender: self)
+    performSegue(withIdentifier: GlobalConstantsForObjCAndSwift.SHOW_TEST_VC_SEGUE, sender: self)
   }
   
     /*

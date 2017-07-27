@@ -16,5 +16,6 @@ import VK_ios_sdk
   static var SCOPE : [String] = { return [VK_PER_FRIENDS, VK_PER_WALL, VK_PER_AUDIO, VK_PER_PHOTOS, VK_PER_NOHTTPS, VK_PER_EMAIL, VK_PER_MESSAGES] }()
   
   static var SHOW_MAIN_VC_SEGUE: String = { return "Show mainVC"}()
+  static var SHOW_TEST_VC_SEGUE: String = { return "Show TestVC"}()
   
 }

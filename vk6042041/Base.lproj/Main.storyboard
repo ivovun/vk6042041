@@ -52,11 +52,53 @@
                         <segue destination="q1y-bT-KQa" kind="show" identifier="Show mainVC" id="Cgd-Wi-7I9">
                             <nil key="action"/>
                         </segue>
+                        <segue destination="rO8-2q-cil" kind="show" identifier="Show TestVC" id="H3y-Ly-UHu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ga5-8x-yTU" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="893.60000000000002" y="777.66116941529242"/>
+        </scene>
+        <!--Test Table Table View Controller-->
+        <scene sceneID="orZ-Fi-DkV">
+            <objects>
+                <tableViewController id="rO8-2q-cil" customClass="TestTableTableViewController" customModule="vk6042041" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="QfA-A5-Y7H">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TestRow" id="FgU-LQ-seg">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FgU-LQ-seg" id="mM8-Vr-G9e">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZhX-7n-jcV">
+                                            <rect key="frame" x="166" y="11" width="30" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="rO8-2q-cil" id="Ajj-ze-B8q"/>
+                            <outlet property="delegate" destination="rO8-2q-cil" id="HiX-wu-9Zw"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="yTj-lQ-nnN" kind="show" identifier="API_CALL" id="NSr-Hd-Vzo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VHd-GY-nGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1156" y="1566"/>
         </scene>
         <!--MainVC-->
         <scene sceneID="1DC-at-4K7">
@@ -75,6 +117,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ktg-jC-g1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1823" y="778"/>
+        </scene>
+        <!--Api Call View Controller-->
+        <scene sceneID="oki-Xc-OT2">
+            <objects>
+                <viewController id="yTj-lQ-nnN" customClass="ApiCallViewController" customModule="vk6042041" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bQ0-tQ-oXX"/>
+                        <viewControllerLayoutGuide type="bottom" id="RKv-21-6Kg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fsz-ma-yih">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="methodName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOG-pq-waC">
+                                <rect key="frame" x="20" y="72" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mVc-BC-TSV">
+                                <rect key="frame" x="0.0" y="101" width="375" height="566"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="mVc-BC-TSV" secondAttribute="trailing" id="D4K-wv-GiH"/>
+                            <constraint firstItem="RKv-21-6Kg" firstAttribute="top" secondItem="mVc-BC-TSV" secondAttribute="bottom" id="HMI-1k-VST"/>
+                            <constraint firstItem="mVc-BC-TSV" firstAttribute="top" secondItem="VOG-pq-waC" secondAttribute="bottom" constant="8" symbolic="YES" id="In0-bb-Fap"/>
+                            <constraint firstItem="VOG-pq-waC" firstAttribute="top" secondItem="bQ0-tQ-oXX" secondAttribute="bottom" constant="8" symbolic="YES" id="Jvh-gV-XT6"/>
+                            <constraint firstItem="VOG-pq-waC" firstAttribute="leading" secondItem="Fsz-ma-yih" secondAttribute="leading" constant="20" symbolic="YES" id="U9J-MZ-kbo"/>
+                            <constraint firstItem="mVc-BC-TSV" firstAttribute="leading" secondItem="Fsz-ma-yih" secondAttribute="leading" id="lqw-Mf-kCQ"/>
+                            <constraint firstAttribute="trailing" secondItem="VOG-pq-waC" secondAttribute="trailing" constant="20" symbolic="YES" id="vaa-xu-ee9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="callResult" destination="mVc-BC-TSV" id="8wg-Jj-n4H"/>
+                        <outlet property="methodName" destination="VOG-pq-waC" id="330-KZ-Ov9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1yM-rM-53E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2015" y="1566"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l0j-bA-Hs6">
