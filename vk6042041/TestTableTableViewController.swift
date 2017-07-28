@@ -124,7 +124,7 @@ class TestTableTableViewController: UITableViewController {
   
   func callMethod( request : VKRequest) {
     self.callingRequest = request
-    self.performSegue(withIdentifier: "API_CALL", sender: self)
+    self.performSegue(withIdentifier: ConstantsStruct.SegueIdentifiers.API_CALL, sender: self)
   }
   
 
