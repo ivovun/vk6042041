@@ -22,11 +22,24 @@ class ApiCallViewController: UIViewController {
     self.callingRequest?.debugTiming = true
     self.callingRequest?.requestTimeout = 10
     self.callingRequest?.execute(resultBlock: { [unowned self] (response) in
-      self.callResult.text = "Result: \(String(describing: response))"
+      
+      let resultText = "Result: \(String(describing: response))"
+//      print(response?.json as Any  )
+      //print(resultText)
+//      let parser = JsonParser(newJson: response?.json)
+//      print(parser ?? "no items")
+      //print(response?.json["items"])
+      //print(response?.responseString ?? "no")
+      let users = UsersInfo(jsonString: response?.responseString)
+      print(users ?? " no users data")
+      //let _ = UsersInfo(data: response?.json)
+      self.callResult.text = resultText
       self.callingRequest = nil
       }, errorBlock: { (error : Error?) in
       self.callResult.text = error as! String
       self.callingRequest = nil
+        
+    
     })
     
     // Do any additional setup after loading the view.

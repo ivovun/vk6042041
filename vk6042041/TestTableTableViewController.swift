@@ -53,8 +53,9 @@ class TestTableTableViewController: UITableViewController {
     VK_API_ONLINE:1,
     VK_API_PHOTO:1,
     VK_API_SEX:1,
-    VK_API_STATUS:1
-  ]
+    VK_API_STATUS:1,
+    VK_API_FIELDS: [VK_API_PHOTO, ConstantsStruct.VK_API_FIELDS.VK_API_SEARCH_FIELDS]
+  ] as [String : Any]
   
   var labels = [USERS_SEARCH]
 

@@ -40,4 +40,21 @@ struct ConstantsStruct {
     static let Detail = "DetailViewController"
   }
   
+  struct VK_API_FIELDS {
+    
+    static let id = "id"
+    static let first_name = "first_name"
+    static let last_name  = "last_name"
+    
+    //photo
+    static let photo = "photo"
+    static let photo_50 = "photo_50"
+    static let photo_100 = "photo_100"
+    static let photo_200 = "photo_200"
+    static let photo_200_orig = "photo_200_orig"
+    static let photo_400 = "photo_400"
+    static let photo_400_orig = "photo_400_orig"
+    static let VK_API_SEARCH_FIELDS = [photo,photo_50,photo_100,photo_200, photo_400_orig].joined(separator: ",")
+  }
+  
 }
