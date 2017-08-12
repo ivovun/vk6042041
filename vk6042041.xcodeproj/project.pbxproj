@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		3280C916EC574C6C44B5D9BF /* Pods_vk6042041.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0EDC9040E46BB6644BF48F /* Pods_vk6042041.framework */; };
 		50349B991F3D6602006D4528 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */; };
-		5038446B1F3429FF002084F0 /* usersearchresp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5038446A1F3429FF002084F0 /* usersearchresp.json */; };
-		5052E1071F3821F0006A1910 /* usersearchresp2.json in Resources */ = {isa = PBXBuildFile; fileRef = 5052E1061F3821F0006A1910 /* usersearchresp2.json */; };
 		5058F9C21F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9BF1F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift */; };
 		5058F9C31F23579E006F1E3B /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9C01F23579E006F1E3B /* UIViewControllerExtensions.swift */; };
 		5058F9C41F23579E006F1E3B /* VKStartScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9C11F23579E006F1E3B /* VKStartScreenVC.swift */; };
@@ -31,8 +29,6 @@
 		2F0EDC9040E46BB6644BF48F /* Pods_vk6042041.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vk6042041.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3B9CF9B776F0A972E70C15 /* Pods-vk6042041.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk6042041.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vk6042041/Pods-vk6042041.debug.xcconfig"; sourceTree = "<group>"; };
 		50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
-		5038446A1F3429FF002084F0 /* usersearchresp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usersearchresp.json; sourceTree = "<group>"; };
-		5052E1061F3821F0006A1910 /* usersearchresp2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usersearchresp2.json; sourceTree = "<group>"; };
 		5058F9BF1F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstantsForObjCAndSwift.swift; sourceTree = "<group>"; };
 		5058F9C01F23579E006F1E3B /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		5058F9C11F23579E006F1E3B /* VKStartScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKStartScreenVC.swift; sourceTree = "<group>"; };
@@ -115,8 +111,6 @@
 		50CBF7421F2342550088CF3D /* vk6042041 */ = {
 			isa = PBXGroup;
 			children = (
-				5038446A1F3429FF002084F0 /* usersearchresp.json */,
-				5052E1061F3821F0006A1910 /* usersearchresp2.json */,
 				50349B9B1F3D666E006D4528 /* Model */,
 				50349B9A1F3D6627006D4528 /* Controllers */,
 				50CBF7431F2342550088CF3D /* AppDelegate.swift */,
@@ -200,10 +194,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5052E1071F3821F0006A1910 /* usersearchresp2.json in Resources */,
 				50CBF74E1F2342550088CF3D /* LaunchScreen.storyboard in Resources */,
 				50CBF74B1F2342550088CF3D /* Assets.xcassets in Resources */,
-				5038446B1F3429FF002084F0 /* usersearchresp.json in Resources */,
 				50CBF7491F2342550088CF3D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

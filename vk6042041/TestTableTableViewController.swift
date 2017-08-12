@@ -43,19 +43,6 @@ class TestTableTableViewController: UITableViewController {
    sex =1
    status =1
  */
-  let defaultGirlsSearch   = [
-    VK_API_AGE_FROM: 22,
-    VK_API_AGE_TO: 32,
-    VK_API_BIRTH_DAY: 22,
-    VK_API_BIRTH_MONTH: 11,
-    VK_API_CITY: 1,
-    VK_API_COUNTRY:1,
-    VK_API_ONLINE:1,
-    VK_API_PHOTO:1,
-    VK_API_SEX:1,
-    VK_API_STATUS:1,
-    VK_API_FIELDS: [VK_API_PHOTO, ConstantsStruct.VK_API_FIELDS.VK_API_SEARCH_FIELDS]
-  ] as [String : Any]
   
   var labels = [USERS_SEARCH]
 
@@ -116,7 +103,7 @@ class TestTableTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let label = labels[indexPath.row] as String? {
       if label == USERS_SEARCH {
-        callMethod(request: VKApi.users().search(defaultGirlsSearch))
+        callMethod(request: VKApi.users().search(ConstantsStruct.Searches.defaultGirlsSearch))
         
         
       }

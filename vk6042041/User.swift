@@ -24,8 +24,8 @@ struct User  {
   var usersFields :  [String : String?] = [:]
   
   public init(json: [String: Any]) throws {
-    guard let id_ = json[ConstantsStruct.VK_API_FIELDS.id] as? Int else {
-      throw SerializationError.missing(ConstantsStruct.VK_API_FIELDS.id)
+    guard let id_ = json[ConstantsStruct.Vf_user_fields.id] as? Int else {
+      throw SerializationError.missing(ConstantsStruct.Vf_user_fields.id)
     }
     
     id = id_
@@ -41,21 +41,21 @@ struct User  {
     "verified": 0
      */
     
-    guard let first_name = json[ConstantsStruct.VK_API_FIELDS.first_name] as? String else {
-      throw SerializationError.missing(errorForUserWithId(id: "\(id_)", missingField: ConstantsStruct.VK_API_FIELDS.first_name))
+    guard let first_name = json[ConstantsStruct.Vf_user_fields.first_name] as? String else {
+      throw SerializationError.missing(errorForUserWithId(id: "\(id_)", missingField: ConstantsStruct.Vf_user_fields.first_name))
     }
     
-    guard let last_name = json[ConstantsStruct.VK_API_FIELDS.last_name] as? String else {
-      throw SerializationError.missing(errorForUserWithId(id: "\(id_)", missingField: ConstantsStruct.VK_API_FIELDS.last_name))
+    guard let last_name = json[ConstantsStruct.Vf_user_fields.last_name] as? String else {
+      throw SerializationError.missing(errorForUserWithId(id: "\(id_)", missingField: ConstantsStruct.Vf_user_fields.last_name))
     }
     
     usersFields = [
-      ConstantsStruct.VK_API_FIELDS.first_name : first_name ,
-      ConstantsStruct.VK_API_FIELDS.last_name  : last_name ,
-      ConstantsStruct.VK_API_FIELDS.photo_50   : json[ConstantsStruct.VK_API_FIELDS.photo_50] as? String  ,
-      ConstantsStruct.VK_API_FIELDS.photo_100  : json[ConstantsStruct.VK_API_FIELDS.photo_100] as? String ,
-      ConstantsStruct.VK_API_FIELDS.photo_200  : json[ConstantsStruct.VK_API_FIELDS.photo_200] as? String ,
-      ConstantsStruct.VK_API_FIELDS.photo_400_orig : json[ConstantsStruct.VK_API_FIELDS.photo_400_orig] as? String ,
+      ConstantsStruct.Vf_user_fields.first_name : first_name ,
+      ConstantsStruct.Vf_user_fields.last_name  : last_name ,
+      ConstantsStruct.Vf_user_fields.photo_50   : json[ConstantsStruct.Vf_user_fields.photo_50]  as? String  ,
+      ConstantsStruct.Vf_user_fields.photo_100  : json[ConstantsStruct.Vf_user_fields.photo_100] as? String ,
+      ConstantsStruct.Vf_user_fields.photo_200  : json[ConstantsStruct.Vf_user_fields.photo_200] as? String ,
+      ConstantsStruct.Vf_user_fields.photo_max  : json[ConstantsStruct.Vf_user_fields.photo_max] as? String ,
     ]
  
   }
