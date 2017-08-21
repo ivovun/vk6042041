@@ -18,6 +18,8 @@ class ApiCallViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    
     self.methodName.text = self.callingRequest?.methodName
     self.callingRequest?.debugTiming = true
     self.callingRequest?.requestTimeout = 10
@@ -30,8 +32,8 @@ class ApiCallViewController: UIViewController {
 //      print(parser ?? "no items")
       //print(response?.json["items"])
       //print(response?.responseString ?? "no")
-      let users = UsersInfo(jsonString: response?.responseString)
-      print(users ?? " no users data")
+      let info = UsersInfo(jsonString: response?.responseString)
+      print(info ?? " no users data")
       //let _ = UsersInfo(data: response?.json)
       self.callResult.text = resultText
       self.callingRequest = nil

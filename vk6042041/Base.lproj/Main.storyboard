@@ -99,29 +99,30 @@
                     </tableView>
                     <connections>
                         <segue destination="yTj-lQ-nnN" kind="show" identifier="API_CALL" id="NSr-Hd-Vzo"/>
-                        <segue destination="v6P-pq-gSW" kind="show" identifier="ShowFindedUsersCVC" id="uoZ-vK-ePC"/>
+                        <segue destination="v6P-pq-gSW" kind="show" identifier="ShowFoundUsersCVC_OLD" id="uoZ-vK-ePC"/>
+                        <segue destination="v6P-pq-gSW" kind="show" identifier="ShowFoundUsersCVC" id="IW7-6E-cPk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VHd-GY-nGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1156" y="1566"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Search Collection View Controller-->
         <scene sceneID="q30-mI-BJJ">
             <objects>
-                <collectionViewController id="v6P-pq-gSW" sceneMemberID="viewController">
+                <collectionViewController id="v6P-pq-gSW" customClass="SearchCollectionViewController" customModule="vk6042041" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ygo-2f-QzW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mwD-24-roB">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="mwD-24-roB">
                             <size key="itemSize" width="200" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="findedUserCollectionViewCell" id="Thb-mV-wGe">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="foundUserCollectionViewCell" id="Thb-mV-wGe" customClass="FoundUserCollectionViewCell" customModule="vk6042041" customModuleProvider="target">
                                 <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -152,6 +153,9 @@
                                     <constraint firstAttribute="trailing" secondItem="IbN-So-ITK" secondAttribute="trailing" constant="2" id="fp2-m6-epa"/>
                                     <constraint firstItem="IbN-So-ITK" firstAttribute="top" secondItem="Thb-mV-wGe" secondAttribute="top" constant="2" id="qTt-xD-GNI"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="idLabel" destination="fqY-dU-fHd" id="w0c-RM-YOR"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -247,4 +251,7 @@
             <point key="canvasLocation" x="116" y="777.66116941529242"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="IW7-6E-cPk"/>
+    </inferredMetricsTieBreakers>
 </document>

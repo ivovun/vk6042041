@@ -7,23 +7,133 @@
 //
 
 import UIKit
+import VK_ios_sdk
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = ConstantsStruct.CellIdentifiers.FoundUserCollectionViewCell
+
+
 
 class SearchCollectionViewController: UICollectionViewController {
   
-    //fileprivate var usersDataSource = UsersInfo(jsonString: <#T##String?#>)
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
+  // MARK: Model
+  
+  // part of our Model
+  // Array of Users
+  // and corresponds to our collection view
+  var foundUsers:[User] = []
+  
+  
+  var usersDataSource: UsersInfo?
+  var callResult = ""
+  
+  
+  // public part of our Model
+  // when this is set
+  // we'll reset our findedUsers Array
+  // to reflect the result of fetching Users that match
+  var searchParameters: [String: Any]? {
+    didSet{
+      /*if isViewLoaded && (view.window != nil) { // 
+       (view.window != nil) этот вариант не подойдет
+       т.к. searchParameters может изменяться из контролера в котором фильтр поиска изменяется
+      */
+      if isViewLoaded   {
+        searchForUsers()
+      }
+    }
+  }
+  
+  // MARK: Updating the Collection view
+  private func searchForUsers() {
+    
+    guard isViewLoaded else {
+      /*if isViewLoaded && (view.window != nil) { //
+       (view.window != nil) этот вариант не подойдет
+       т.к. searchParameters может изменяться из контролера в котором фильтр поиска изменяется
+       */
+      return
+    }
+    
+    guard let searchParameters = searchParameters else {
+      presentAlert(withTitle: "Предупреждение", withMessage: "не заданы парамеры поиска")
+      return
+    }
+    
+    foundUsers.removeAll()
+    collectionView?.reloadData()
+    
+    var request = VKApi.users().search(searchParameters)
+    
+      if request == nil {
+        presentAlert(withTitle: "Предупреждение", withMessage: "не заданы парамеры поиска")
+        return
+      }
+    
+      request?.debugTiming = true
+      request?.requestTimeout = 10
+      request?.execute(resultBlock: { [unowned self] (response) in
+      
+        //let resultText = "Result: \(String(describing: response))"
+        //      print(response?.json as Any  )
+        //print(resultText)
+        //      let parser = JsonParser(newJson: response?.json)
+        //      print(parser ?? "no items")
+        //print(response?.json["items"])
+        //print(response?.responseString ?? "no") 
+        
+        var noFoundUsers = true
+        
+        if let  info = UsersInfo(jsonString: response?.responseString) {
+          self.foundUsers = info.users
+          
+          
+          if self.foundUsers.count > 0      {
+            noFoundUsers = false
+          }
+          
+          print(self.foundUsers.count)
+          
+          self.collectionView?.reloadData()
+        }
+        
+        if noFoundUsers {
+          self.presentAlert(withTitle: "Предупреждение", withMessage: "не найдено не одного пользователя по параметрам \(searchParameters)")
+        }
+        
+        
+         request = nil
+        }, errorBlock: { (error : Error?) in
+           request = nil
+          
+      })
+    
+    
+      
+    
+  }
+  
+  // Added after lecture for REFRESHING
+  @IBAction func refresh(_ sender: UIRefreshControl) {
+    searchForUsers()
+  }
+ 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    
+      let  width = (collectionView?.frame.width)! / 3
+    let layout  = collectionViewLayout as! UICollectionViewFlowLayout
+    layout.itemSize = CGSize(width: width, height: width)
+    
+         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+    
+        searchForUsers()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,24 +153,9 @@ class SearchCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+ 
 
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
-        return cell
-    }
+ 
 
     // MARK: UICollectionViewDelegate
 
@@ -92,5 +187,31 @@ class SearchCollectionViewController: UICollectionViewController {
     
     }
     */
+  
+  deinit {
+    //self.callingRequest = nil
+  }
+ }
+
+// MARK UICollectionViewDataSource
+extension SearchCollectionViewController {
+  
+  override  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 1
+  }
+  
+  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return foundUsers.count
+  }
+  
+  
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FoundUserCollectionViewCell
+    
+    // Configure the cell
+    cell.idLabel!.text =  "\(indexPath.row)"
+    
+    return cell
+  }
 
 }

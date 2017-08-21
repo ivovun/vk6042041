@@ -37,7 +37,7 @@ struct User  {
     "photo_50": "https://pp.userap...994/R5SaCBEYgBQ.jpg",
     "photo_100": "https://pp.userap...993/6iAXd5OccfY.jpg",
     "photo_200": "https://pp.userap...992/EA-w_d7LZT4.jpg",
-    "photo_400_orig": "https://pp.userap...991/dArGDkkpjE8.jpg",
+    "photo_max": "https://pp.userap...991/dArGDkkpjE8.jpg",
     "verified": 0
      */
     

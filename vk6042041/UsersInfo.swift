@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import VK_ios_sdk
 
 class UsersInfo {
   
-  var users: [User]? = []
+  let users: [User]
+  var errorDescription: String?
   
+  
+    
+
   init?(jsonString: String?) {
+    
+     //VKApi.users().search(ConstantsStruct.Searches.defaultGirlsSearch)
     
     guard let jsonString = jsonString ,
       let data = jsonString.data(using: .utf8) ,
@@ -28,31 +35,35 @@ class UsersInfo {
         return nil
     }
     
+    var _users: [User] = []
+    
     for (_, user_dict) in items.enumerated() {
       
       do {
         let user = try User(json: user_dict)
         //print(user)
-        users?.append(user)
+        _users.append(user)
 
       } catch let error {
         print(error)
         return nil
       }
      }
+    
+    users = _users
    }
- }
+  
+  
+}
 
 extension UsersInfo: CustomStringConvertible {
   public var description: String {
     
     var resultString = " no users "
     
-    if let users = users {
-      resultString = ""
-      for (index, el) in users.enumerated() {
-        resultString += "\(index). \n    \(el)"
-      }
+    resultString = ""
+    for (index, el) in users.enumerated() {
+      resultString += "\(index). \n    \(el)"
     }
     
     return resultString

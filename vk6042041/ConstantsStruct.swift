@@ -22,8 +22,8 @@ import VK_ios_sdk
 struct ConstantsStruct {
   
   struct CellIdentifiers {
-    static let Blue = "BlueCellIdentifier"
-    static let Large = "LargeCellIdentifier"
+    static let FoundUserCollectionViewCell = "foundUserCollectionViewCell"
+    
   }
   
   struct FontSizes {
@@ -39,8 +39,11 @@ struct ConstantsStruct {
   
   struct SegueIdentifiers {
     static let API_CALL = "API_CALL"
+    static let SHOW_COLLECTION_VIEW_SEARCH = "ShowFoundUsersCVC"
+     
     static let Detail = "DetailViewController"
   }
+  
   
   struct Searches {
     static let defaultGirlsSearch = [

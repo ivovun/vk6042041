@@ -9,6 +9,8 @@
 import UIKit
 import VK_ios_sdk
 
+let CVC_USERS_SEARCH = "Collection view users search"
+
 let USERS_SEARCH = "users.search"
 let USERS_GET = "users.get"
 let FRIENDS_GET = "friends.get"
@@ -44,7 +46,7 @@ class TestTableTableViewController: UITableViewController {
    status =1
  */
   
-  var labels = [USERS_SEARCH]
+  var labels = [USERS_SEARCH, CVC_USERS_SEARCH]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +70,10 @@ class TestTableTableViewController: UITableViewController {
       let apiTestVC = segue.destination as! ApiCallViewController
       apiTestVC.callingRequest = self.callingRequest
       self.callingRequest = nil
+    }  else if segue.identifier == ConstantsStruct.SegueIdentifiers.SHOW_COLLECTION_VIEW_SEARCH {
+      if let SVC = segue.destination as? SearchCollectionViewController {
+        SVC.searchParameters = ConstantsStruct.Searches.defaultGirlsSearch
+      }
     }
   }
 
@@ -103,17 +109,23 @@ class TestTableTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let label = labels[indexPath.row] as String? {
       if label == USERS_SEARCH {
-        callMethod(request: VKApi.users().search(ConstantsStruct.Searches.defaultGirlsSearch))
+        callMethod(request: VKApi.users().search(ConstantsStruct.Searches.defaultGirlsSearch), withSegueId: ConstantsStruct.SegueIdentifiers.API_CALL)
         
+       
+      } else if label == CVC_USERS_SEARCH {
         
+        callMethod(request: nil, withSegueId: ConstantsStruct.SegueIdentifiers.SHOW_COLLECTION_VIEW_SEARCH)
+   
       }
     }
   }
   
-  func callMethod( request : VKRequest) {
+  func callMethod( request : VKRequest?, withSegueId segueId: String) {
     self.callingRequest = request
-    self.performSegue(withIdentifier: ConstantsStruct.SegueIdentifiers.API_CALL, sender: self)
+    self.performSegue(withIdentifier: segueId, sender: self)
   }
+  
+  
   
 
     /*
