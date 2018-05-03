@@ -10,6 +10,8 @@ import UIKit
 import VK_ios_sdk
 
 private let reuseIdentifier = ConstantsStruct.CellIdentifiers.FoundUserCollectionViewCell
+// про использование NSCache нашел тут https://stackoverflow.com/questions/37018916/swift-async-load-image
+let imageCache = NSCache<NSString, AnyObject>()
 
 
 
@@ -209,9 +211,11 @@ extension SearchCollectionViewController {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FoundUserCollectionViewCell
     
     // Configure the cell
-    cell.idLabel!.text =  "\(indexPath.row)"
+    cell.user = foundUsers[indexPath.row]
     
     return cell
   }
 
 }
+
+

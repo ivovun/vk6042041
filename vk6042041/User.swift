@@ -59,6 +59,15 @@ struct User  {
     ]
  
   }
+  
+  public func getImageURL(withSizeParam fieldName: String) -> URL? {
+    
+    if let urlString = usersFields[fieldName] as? String, let url = URL(string: urlString) {
+      return url
+    } else {
+      return nil
+    }
+  }
 }
 
 extension User: CustomStringConvertible {
