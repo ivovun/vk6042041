@@ -16,7 +16,7 @@ fileprivate func errorForUserWithId(id: String, missingField: String) -> String 
    return " for user with ID = \(id) error:  missing field = \(missingField)"
 }
 
-struct User  {
+struct User: Codable  {
   
   
   // делал по принципу описанному в JSON Tutorial- raywenderlich.com   https://www.raywenderlich.com/150322/swift-json-tutorial-2

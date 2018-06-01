@@ -9,7 +9,7 @@
 import UIKit
 import VK_ios_sdk
 
-class UsersInfo {
+class UsersInfo: Codable {
   
   let users: [User]
   var errorDescription: String?
