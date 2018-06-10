@@ -23,25 +23,81 @@ class ApiCallViewController: UIViewController {
     self.methodName.text = self.callingRequest?.methodName
     self.callingRequest?.debugTiming = true
     self.callingRequest?.requestTimeout = 10
-    self.callingRequest?.execute(resultBlock: { [unowned self] (response) in
-      
-      let resultText = "Result: \(String(describing: response))"
-//      print(response?.json as Any  )
-      //print(resultText)
-//      let parser = JsonParser(newJson: response?.json)
-//      print(parser ?? "no items")
-      //print(response?.json["items"])
-      //print(response?.responseString ?? "no")
-      let info = UsersInfo(jsonString: response?.responseString)
-      print(info ?? " no users data")
-      //let _ = UsersInfo(data: response?.json)
-      self.callResult.text = resultText
-      self.callingRequest = nil
-      }, errorBlock: { (error : Error?) in
-      self.callResult.text = error as! String
-      self.callingRequest = nil
+    self.callingRequest?.execute(resultBlock:
+      { [unowned self] (response) in
         
-    
+        let resultText = "Result: \(String(describing: response))"
+        //      print(response?.json as Any  )
+        //print(resultText)
+        //      let parser = JsonParser(newJson: response?.json)
+        //      print(parser ?? "no items")
+        //print(response?.json["items"])
+        //print(response?.responseString ?? "no")
+        
+        
+        
+        if let jsonString = response?.responseString {
+          if let data = jsonString.data(using: .utf8) {
+            
+            do {
+              let info = try  JSONDecoder().decode(UsersInfo.self, from: data)
+              
+              print(info )
+              //let _ = UsersInfo(data: response?.json)
+              self.callResult.text = resultText
+              self.callingRequest = nil
+
+              
+            } catch DecodingError.dataCorrupted(let context) {
+              print(context)
+            } catch DecodingError.keyNotFound(let key, let context) {
+              print("Key '\(key)' not found:", context.debugDescription)
+              print("codingPath:", context.codingPath)
+            } catch DecodingError.valueNotFound(let value, let context) {
+              print("Value '\(value)' not found:", context.debugDescription)
+              print("codingPath:", context.codingPath)
+            } catch DecodingError.typeMismatch(let type, let context)  {
+              print("Type '\(type)' mismatch:", context.debugDescription)
+              print("codingPath:", context.codingPath)
+            } catch {
+              print("error: ", error)
+            }
+            
+            
+//            if let info = try?  JSONDecoder().decode(UsersInfo.self, from: data)  {
+//              //let info = UsersInfo(jsonString: response?.responseString)
+//              //print(info ?? " no users data")
+//              print(info )
+//              //let _ = UsersInfo(data: response?.json)
+//              self.callResult.text = resultText
+//              self.callingRequest = nil
+//            } else  {
+//              print( " decoding error ")
+//              return
+//            }
+          }
+        }
+        
+        
+        
+//        guard let jsonString = response?.responseString ,
+//          let data = jsonString.data(using: .utf8) ,
+//          let info = try?  JSONDecoder().decode(UsersInfo.self, from: data) else  {
+//            print( " decoding error ")
+//            return
+//        }
+//
+//        //let info = UsersInfo(jsonString: response?.responseString)
+//        //print(info ?? " no users data")
+//        print(info )
+//        //let _ = UsersInfo(data: response?.json)
+//        self.callResult.text = resultText
+//        self.callingRequest = nil
+        
+        
+      }, errorBlock: { (error : Error?) in
+        self.callResult.text = error as! String
+        self.callingRequest = nil
     })
     
     // Do any additional setup after loading the view.

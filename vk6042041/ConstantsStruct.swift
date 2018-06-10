@@ -66,6 +66,8 @@ struct ConstantsStruct {
     static let id = "id"
     static let first_name = "first_name"
     static let last_name  = "last_name"
+    static let screen_name  = "screen_name"
+    
     
     //photo  описания фото тут https://vk.com/dev/objects/user_2
     //квадратные
@@ -80,7 +82,7 @@ struct ConstantsStruct {
     static let photo_400_orig = "photo_400_orig"
     static let photo_max_orig = "photo_max_orig"
     
-    static let squarePhotosCommaSeparatedString = [VK_API_PHOTO,photo_50,photo_100,photo_200, photo_max].joined(separator: ",")
+    static let squarePhotosCommaSeparatedString = [id,first_name,screen_name,last_name, photo, VK_API_PHOTO,photo_50,photo_100,photo_200, photo_max].joined(separator: ",")
   }
   
 }

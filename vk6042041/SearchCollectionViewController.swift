@@ -85,8 +85,16 @@ class SearchCollectionViewController: UICollectionViewController {
         
         var noFoundUsers = true
         
-        if let  info = UsersInfo(jsonString: response?.responseString) {
-          self.foundUsers = info.users
+        
+        guard let jsonString = response?.responseString ,
+          let data = jsonString.data(using: .utf8) ,
+          let info = try?  JSONDecoder().decode(UsersInfo.self, from: data) else  {
+            return
+        }
+        
+//        if let  info = UsersInfo(jsonString: response?.responseString) {
+//        if let  info = try JSONDecoder().decode(UsersInfo.self, from: <#T##Data#>) UsersInfo(jsonString: response?.responseString) {
+          self.foundUsers = info.response.items
           
           
           if self.foundUsers.count > 0      {
@@ -96,7 +104,7 @@ class SearchCollectionViewController: UICollectionViewController {
           print(self.foundUsers.count)
           
           self.collectionView?.reloadData()
-        }
+//        }
         
         if noFoundUsers {
           self.presentAlert(withTitle: "Предупреждение", withMessage: "не найдено не одного пользователя по параметрам \(searchParameters)")
