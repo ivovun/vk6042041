@@ -14,7 +14,6 @@
 		5058F9C41F23579E006F1E3B /* VKStartScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9C11F23579E006F1E3B /* VKStartScreenVC.swift */; };
 		5058F9C61F2357FA006F1E3B /* mainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9C51F2357FA006F1E3B /* mainVC.swift */; };
 		505A53E51F2D996000D12323 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A53E41F2D996000D12323 /* User.swift */; };
-		5064741D20C0F10F00094D96 /* json_example.json in Resources */ = {isa = PBXBuildFile; fileRef = 5064741C20C0F10F00094D96 /* json_example.json */; };
 		5065A8B01F26FDCF007B42DC /* ApiCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */; };
 		5065A8B41F271057007B42DC /* TestTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065A8B31F271057007B42DC /* TestTableTableViewController.swift */; };
 		509E41A41F29EA48001BA998 /* ConstantsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509E41A31F29EA48001BA998 /* ConstantsStruct.swift */; };
@@ -36,7 +35,6 @@
 		5058F9C11F23579E006F1E3B /* VKStartScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKStartScreenVC.swift; sourceTree = "<group>"; };
 		5058F9C51F2357FA006F1E3B /* mainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainVC.swift; sourceTree = "<group>"; };
 		505A53E41F2D996000D12323 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		5064741C20C0F10F00094D96 /* json_example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = json_example.json; path = ../../../../../.Trash/json_example.json; sourceTree = "<group>"; };
 		5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCallViewController.swift; sourceTree = "<group>"; };
 		5065A8B31F271057007B42DC /* TestTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableTableViewController.swift; sourceTree = "<group>"; };
 		509E41A31F29EA48001BA998 /* ConstantsStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsStruct.swift; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 		50349B9B1F3D666E006D4528 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5064741C20C0F10F00094D96 /* json_example.json */,
 				50F318181F359CB300F42F2A /* UsersInfo.swift */,
 				505A53E41F2D996000D12323 /* User.swift */,
 				509E41A31F29EA48001BA998 /* ConstantsStruct.swift */,
@@ -210,7 +207,6 @@
 			files = (
 				50CBF74E1F2342550088CF3D /* LaunchScreen.storyboard in Resources */,
 				50CBF74B1F2342550088CF3D /* Assets.xcassets in Resources */,
-				5064741D20C0F10F00094D96 /* json_example.json in Resources */,
 				50CBF7491F2342550088CF3D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,7 +436,7 @@
 				50CBF7511F2342550088CF3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		50CBF7521F2342550088CF3D /* Build configuration list for PBXNativeTarget "vk6042041" */ = {
 			isa = XCConfigurationList;
@@ -449,7 +445,7 @@
 				50CBF7541F2342550088CF3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

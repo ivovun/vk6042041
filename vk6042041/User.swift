@@ -24,6 +24,10 @@ struct User: Codable  {
   let screen_name: String
   let photo: String
   let photo_50: String
+  let photo_100: String
+  let photo_200: String
+  let photo_max: String
+  
 //  let photo_100: String
 //  let photo_200: String
 //  let photo_max: String
@@ -96,8 +100,12 @@ struct User: Codable  {
   
   public func getImageURL(withSizeParam fieldName: String) -> URL? {
     
-    return nil
-    
+        if  let url = URL(string: fieldName) {
+          return url
+        } else {
+          return nil
+        }
+
 //    if let urlString = usersFields[fieldName] as? String, let url = URL(string: urlString) {
 //      return url
 //    } else {

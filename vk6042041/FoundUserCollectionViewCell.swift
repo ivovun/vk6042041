@@ -10,7 +10,7 @@ import UIKit
 
 class FoundUserCollectionViewCell: UICollectionViewCell {
   
-  @IBOutlet weak var userImageView: UIImageView!
+  @IBOutlet weak var userImageView: VF_CustomImageView!
   
  
   override func prepareForReuse() {
@@ -30,16 +30,46 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
      }
   }
   
+  //
+ 
   private func updateUI() {
     
     userImageView?.image = nil
-    if let profileImageURL = user?.getImageURL(withSizeParam: ConstantsStruct.Vf_user_fields.photo_100) {
-      // FIXME: blocks main thread
-
-      if let imageData = try? Data(contentsOf: profileImageURL) {
-        userImageView?.image = UIImage(data: imageData)
-      }
+    
+    
+    
+    if let user = user {
+      userImageView?.loadImageUsingUrlString(urlString:  user.photo_200)
     }
+
+//    if let user = user,  let profileImageURL = URL(string: user.photo_200)   {
+//      // FIXME: blocks main thread
+//
+////      if let imageData = try? Data(contentsOf: profileImageURL) {
+////        userImageView?.image = UIImage(data: imageData)
+////      }
+//      userImageView.imageFromServerURL(urlString: user.photo_200)
+//    }
     
   }
 }
+
+//extension UIImageView {
+//  public func imageFromServerURL(urlString: String) {
+//
+//    URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
+//
+//      if error != nil {
+//        print(error)
+//        return
+//      }
+//      DispatchQueue.main.async {
+//        let image = UIImage(data: data!)
+//        self.image = image
+//      }
+//
+//    }).resume()
+//  }
+//
+//}
+

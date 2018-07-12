@@ -87,15 +87,23 @@ class SearchCollectionViewController: UICollectionViewController {
         
         
         guard let jsonString = response?.responseString ,
-          let data = jsonString.data(using: .utf8) ,
-          let info = try?  JSONDecoder().decode(UsersInfo.self, from: data) else  {
+          let data = jsonString.data(using: .utf8)
+//          ,
+//          let info = try?  JSONDecoder().decode(UsersInfo.self, from: data)
+          
+          else  {
             return
         }
         
-//        if let  info = UsersInfo(jsonString: response?.responseString) {
-//        if let  info = try JSONDecoder().decode(UsersInfo.self, from: <#T##Data#>) UsersInfo(jsonString: response?.responseString) {
-          self.foundUsers = info.response.items
+        do {
+          let info = try  JSONDecoder().decode(UsersInfo.self, from: data)
           
+          //print(info )
+          //let _ = UsersInfo(data: response?.json)
+          
+          //        if let  info = UsersInfo(jsonString: response?.responseString) {
+          //        if let  info = try JSONDecoder().decode(UsersInfo.self, from: <#T##Data#>) UsersInfo(jsonString: response?.responseString) {
+          self.foundUsers = info.response.items
           
           if self.foundUsers.count > 0      {
             noFoundUsers = false
@@ -104,21 +112,33 @@ class SearchCollectionViewController: UICollectionViewController {
           print(self.foundUsers.count)
           
           self.collectionView?.reloadData()
-//        }
+          //        }
+          
+        } catch DecodingError.dataCorrupted(let context) {
+          print(context)
+        } catch DecodingError.keyNotFound(let key, let context) {
+          print("Key '\(key)' not found:", context.debugDescription)
+          print("codingPath:", context.codingPath)
+        } catch DecodingError.valueNotFound(let value, let context) {
+          print("Value '\(value)' not found:", context.debugDescription)
+          print("codingPath:", context.codingPath)
+        } catch DecodingError.typeMismatch(let type, let context)  {
+          print("Type '\(type)' mismatch:", context.debugDescription)
+          print("codingPath:", context.codingPath)
+        } catch {
+          print("error: ", error)
+        }
+        
         
         if noFoundUsers {
           self.presentAlert(withTitle: "Предупреждение", withMessage: "не найдено не одного пользователя по параметрам \(searchParameters)")
         }
-        
         
          request = nil
         }, errorBlock: { (error : Error?) in
            request = nil
           
       })
-    
-    
-      
     
   }
   
@@ -224,6 +244,44 @@ extension SearchCollectionViewController {
     return cell
   }
 
+}
+
+
+class VF_CustomImageView: UIImageView {
+  // идею взял тут  https://www.youtube.com/watch?v=XFvs6eraBXM
+  var imageUrlString: String?
+  
+  public func loadImageUsingUrlString(urlString: String) {
+    
+    imageUrlString = urlString
+    
+    if let imageFromCache = imageCache.object(forKey: urlString as NSString) as? UIImage {
+      self.image = imageFromCache
+      return
+    }
+
+    self.image = nil
+
+    if let url = URL(string: urlString) {
+      
+      URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
+        
+        if error != nil {
+          print(error ?? "some error in loadImageUsingUrlString" )
+          return
+        }
+        DispatchQueue.main.async {
+          if let imageToCache = UIImage(data: data!) {
+            if self.imageUrlString == urlString {
+              self.image = imageToCache
+            }
+            imageCache.setObject(imageToCache, forKey: urlString as NSString)
+          }
+         }
+      }).resume()
+    }
+    
+  }
 }
 
 
