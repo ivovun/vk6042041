@@ -10,12 +10,12 @@ import UIKit
 
 class FoundUserCollectionViewCell: UICollectionViewCell {
   
-  @IBOutlet weak var userImageView: VF_CustomImageView!
+  @IBOutlet weak var userImageView: UIImageView!
   
  
-  override func prepareForReuse() {
-    userImageView.image = nil
-  }
+//  override func prepareForReuse() {
+//    userImageView.image = nil
+//  }
   
   
   // public API of this UICollectionViewCell subclass
@@ -24,23 +24,24 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
   // as set by this var
 
   
-  var user: User? {
-    didSet {
-      updateUI()
-     }
-  }
+  var user: User?
+//  {
+////    didSet {
+////      updateUI()
+////     }
+//  }
   
   //
  
-  private func updateUI() {
-    
-    userImageView?.image = nil
-    
-    
-    
-    if let user = user {
-      userImageView?.loadImageUsingUrlString(urlString:  user.photo_200)
-    }
+//  private func updateUI() {
+//
+//    userImageView?.image = nil
+//
+//
+//
+//    if let user = user {
+//      userImageView?.loadImageUsingUrlString(urlString:  user.photo_200)
+//    }
 
 //    if let user = user,  let profileImageURL = URL(string: user.photo_200)   {
 //      // FIXME: blocks main thread
@@ -51,7 +52,7 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
 //      userImageView.imageFromServerURL(urlString: user.photo_200)
 //    }
     
-  }
+//  }
 }
 
 //extension UIImageView {

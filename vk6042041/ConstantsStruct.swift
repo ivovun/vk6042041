@@ -44,20 +44,25 @@ struct ConstantsStruct {
     static let Detail = "DetailViewController"
   }
   
-  
+
   struct Searches {
     static let defaultGirlsSearch = [
+      //  VK_API_ONLINE:1,
+      VK_API_OFFSET: 0,
+      VK_API_COUNT: 58,
+//      "count": 157,
       VK_API_AGE_FROM: 22,
       VK_API_AGE_TO: 32,
       VK_API_BIRTH_DAY: 22,
       VK_API_BIRTH_MONTH: 11,
       VK_API_CITY: 1,
       VK_API_COUNTRY:1,
-      VK_API_ONLINE:1,
+      VK_API_ONLINE:0,
       VK_API_PHOTO:1,
       VK_API_SEX:1,
       VK_API_STATUS:1,
-      VK_API_FIELDS: [VK_API_PHOTO, ConstantsStruct.Vf_user_fields.squarePhotosCommaSeparatedString]
+//      VK_API_FIELDS: [VK_API_PHOTO, ConstantsStruct.Vf_user_fields.squarePhotosCommaSeparatedString]
+      VK_API_FIELDS: "\(VK_API_PHOTO), \(ConstantsStruct.Vf_user_fields.squarePhotosCommaSeparatedString)"
       ] as [String : Any]
   }
   
@@ -83,6 +88,7 @@ struct ConstantsStruct {
     static let photo_max_orig = "photo_max_orig"
     
     static let squarePhotosCommaSeparatedString = [id,first_name,screen_name,last_name, photo, VK_API_PHOTO,photo_50,photo_100,photo_200, photo_max].joined(separator: ",")
+//    static let squarePhotosCommaSeparatedString = [id,first_name,screen_name,last_name, photo_200].joined(separator: ",")
   }
   
 }
