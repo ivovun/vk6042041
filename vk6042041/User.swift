@@ -16,17 +16,40 @@ fileprivate func errorForUserWithId(id: String, missingField: String) -> String 
    return " for user with ID = \(id) error:  missing field = \(missingField)"
 }
 
-struct User: Codable  {
+struct User: Decodable  {
   
-  let id : Int
-  let first_name: String
-  let last_name: String
-  let screen_name: String
+//  let id : Int
+//  let first_name: String
+//  let last_name: String
+//  let screen_name: String
   let photo: String
-  let photo_50: String
-  let photo_100: String
+//  let photo_50: String
+//  let photo_100: String
   let photo_200: String
-  let photo_max: String
+//  let photo_max: String
+  
+  public enum CodingKeys: String, CodingKey {
+//   case id
+//    case first_name
+//    case last_name
+//    case screen_name
+    case photo
+    case photo_200
+   }
+  
+  init(from decoder: Decoder) throws  {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    
+    photo = try values.decode(String.self, forKey: .photo)
+    
+    if let photo_200_try = try? values.decode(String.self, forKey: .photo_200) {
+      photo_200 = photo_200_try
+    }  else {
+      photo_200 = photo
+    }
+    
+ 
+  }
   
 //  let photo_100: String
 //  let photo_200: String

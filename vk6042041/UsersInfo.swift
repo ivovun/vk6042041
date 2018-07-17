@@ -9,12 +9,12 @@
 import UIKit
 import VK_ios_sdk
 
-struct Users: Codable {
+struct Users: Decodable {
   let count: Int
   let items: [User]
 }
 
-struct UsersInfo: Codable {
+struct UsersInfo: Decodable {
   let response: Users
  
 //  let users: [User]

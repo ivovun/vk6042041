@@ -44,12 +44,17 @@ struct ConstantsStruct {
     static let Detail = "DetailViewController"
   }
   
+  struct SearchParameters {
+    static let max_VK_API_COUNT = 997 // больше этого значения запрос возвращает 0 значений
+    static let min_VK_API_COUNT = 8 // меньше 10 не запрашивать  так как у меня проерка на makeNewSearchIfNeeded
+    static let max_quantityOfsearches = 10  //// 1000 / 57 = 18 хотя потом нужно будет отменить при смене параметров поиска
+  }
 
   struct Searches {
     static let defaultGirlsSearch = [
       //  VK_API_ONLINE:1,
       VK_API_OFFSET: 0,
-      VK_API_COUNT: 58,
+      VK_API_COUNT: max(ConstantsStruct.SearchParameters.max_VK_API_COUNT, ConstantsStruct.SearchParameters.min_VK_API_COUNT),
 //      "count": 157,
       VK_API_AGE_FROM: 22,
       VK_API_AGE_TO: 32,
@@ -87,7 +92,8 @@ struct ConstantsStruct {
     static let photo_400_orig = "photo_400_orig"
     static let photo_max_orig = "photo_max_orig"
     
-    static let squarePhotosCommaSeparatedString = [id,first_name,screen_name,last_name, photo, VK_API_PHOTO,photo_50,photo_100,photo_200, photo_max].joined(separator: ",")
+    static let squarePhotosCommaSeparatedString = [id,first_name,screen_name,last_name, photo, photo_200].joined(separator: ",")
+//    static let squarePhotosCommaSeparatedString = [id,first_name,screen_name,last_name, photo, VK_API_PHOTO,photo_50,photo_100,photo_200, photo_max].joined(separator: ",")
 //    static let squarePhotosCommaSeparatedString = [id,first_name,screen_name,last_name, photo_200].joined(separator: ",")
   }
   

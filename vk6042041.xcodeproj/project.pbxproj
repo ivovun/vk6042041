@@ -18,6 +18,7 @@
 		5065A8B01F26FDCF007B42DC /* ApiCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */; };
 		5065A8B41F271057007B42DC /* TestTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065A8B31F271057007B42DC /* TestTableTableViewController.swift */; };
 		509E41A41F29EA48001BA998 /* ConstantsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509E41A31F29EA48001BA998 /* ConstantsStruct.swift */; };
+		509F0D7420FB8C83008D4C33 /* Timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509F0D7320FB8C83008D4C33 /* Timers.swift */; };
 		50CBF7441F2342550088CF3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBF7431F2342550088CF3D /* AppDelegate.swift */; };
 		50CBF7491F2342550088CF3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50CBF7471F2342550088CF3D /* Main.storyboard */; };
 		50CBF74B1F2342550088CF3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CBF74A1F2342550088CF3D /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCallViewController.swift; sourceTree = "<group>"; };
 		5065A8B31F271057007B42DC /* TestTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableTableViewController.swift; sourceTree = "<group>"; };
 		509E41A31F29EA48001BA998 /* ConstantsStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsStruct.swift; sourceTree = "<group>"; };
+		509F0D7320FB8C83008D4C33 /* Timers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timers.swift; sourceTree = "<group>"; };
 		50CBF7401F2342550088CF3D /* vk6042041.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vk6042041.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50CBF7431F2342550088CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50CBF7481F2342550088CF3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				505A53E41F2D996000D12323 /* User.swift */,
 				509E41A31F29EA48001BA998 /* ConstantsStruct.swift */,
 				5048721420F84BBE00C70950 /* json_example */,
+				509F0D7320FB8C83008D4C33 /* Timers.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				50E097CC1F4ADB1800B05A50 /* FoundUserCollectionViewCell.swift in Sources */,
 				5065A8B01F26FDCF007B42DC /* ApiCallViewController.swift in Sources */,
 				50E949D720F74BFA00F18423 /* ImagesAndTextsModel.swift in Sources */,
+				509F0D7420FB8C83008D4C33 /* Timers.swift in Sources */,
 				50E949D320F7477A00F18423 /* LazyLoadCollectionViewController.swift in Sources */,
 				50CBF7441F2342550088CF3D /* AppDelegate.swift in Sources */,
 				5058F9C61F2357FA006F1E3B /* mainVC.swift in Sources */,
