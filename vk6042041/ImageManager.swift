@@ -9,7 +9,9 @@
 import UIKit
 
 private let _singletonInstance = ImageManager()
-private let kLazyLoadMaxCacheImageSize = 2000
+private let kLazyLoadMaxCacheImageSize = 500
+let kLazyLoadPlaceholderImage = UIImage(named: "placeholder")!
+
 
 class ImageManager: NSObject {
     var imageCache = [String: UIImage]()
@@ -23,8 +25,8 @@ class ImageManager: NSObject {
         imageCache[url] = image
     }
     
-    func getImageURLList() -> [String] { return kLazyLoadImages }
-    
+
+  
     func cachedImageForURL(_ url: String) -> UIImage? { return imageCache[url] }
     
     func clearCache() { imageCache.removeAll() }
@@ -33,7 +35,7 @@ class ImageManager: NSObject {
         // do we have this cached?
     
     if emptyCache {
-      //imageCache.removeAll()
+      imageCache.removeAll()
     }
     
         if let cachedImage = cachedImageForURL(urlString) {

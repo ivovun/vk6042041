@@ -66,6 +66,7 @@ struct ConstantsStruct {
       VK_API_PHOTO:1,
       VK_API_SEX:1,
       VK_API_STATUS:1,
+      VK_API_HAS_PHOTO:1,
 //      VK_API_FIELDS: [VK_API_PHOTO, ConstantsStruct.Vf_user_fields.squarePhotosCommaSeparatedString]
       VK_API_FIELDS: "\(VK_API_PHOTO), \(ConstantsStruct.Vf_user_fields.squarePhotosCommaSeparatedString)"
       ] as [String : Any]
