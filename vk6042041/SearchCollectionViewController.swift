@@ -161,6 +161,7 @@ class SearchCollectionViewController: UICollectionViewController  {
       itIsAFirstApearanceOfTheView = false
       searchForUsers()
     }
+    // добавил calculateNewCollectionFrameOrigin_and_CollectionFrame для того:
     // чтобы после того как обратно возращался из UserInfoCollectionViewController - восстановиить положение клеток
     // иначе съезжает наверх
     calculateNewCollectionFrameOrigin_and_CollectionFrame()
