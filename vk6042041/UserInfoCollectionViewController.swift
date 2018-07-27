@@ -11,11 +11,17 @@ import UIKit
 private let reuseIdentifier = ConstantsStruct.CellIdentifiers.SelectedUserCollectionViewCell
 
 class UserInfoCollectionViewController: UICollectionViewController {
-  
+  //https://stackoverflow.com/questions/39546856/how-to-open-an-url-in-swift3
   @IBAction func openUserProfile(_ sender: Any) {
-//    guard let url =  else {
-//      <#statements#>
-//    }
+    guard let url = URL(string:"https://vk.com/id\(user!.id)") else {
+      return
+    }
+    
+    if #available(iOS 10.0, *) {
+      UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    } else {
+      UIApplication.shared.openURL(url)
+    }
   }
   var user: User?
   
