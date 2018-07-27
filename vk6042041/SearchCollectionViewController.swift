@@ -28,6 +28,9 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
   var oldScrollViewContentOffsetY: CGFloat = 0.0
    var needCalculateItemSize = true
   var itemWidth: CGFloat = 0.0
+  
+  
+  //добавил протокол и свойство comeBackFromUserDetail  ,   так как при возврате от USER Detail система автоматически ставит navigationBar ( даже если он не виден - все равно isHidden == false ) и в результате на  phone X все съезжает collectionView frame из-за того что обнуляется свойство collectionView?.frame.origin.y == 0.0 когда в портрете
   var comeBackFromUserDetail = false
   
   // public part of our Model
@@ -245,6 +248,7 @@ extension SearchCollectionViewController {
   }
   
   // MARK: Sizing
+  
   
   private func calculateItemSize() {
     
