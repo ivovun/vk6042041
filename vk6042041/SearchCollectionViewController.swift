@@ -164,10 +164,12 @@ class SearchCollectionViewController: UICollectionViewController  {
     // добавил calculateNewCollectionFrameOrigin_and_CollectionFrame для того:
     // чтобы после того как обратно возращался из UserInfoCollectionViewController - восстановиить положение клеток
     // иначе съезжает наверх
-    calculateNewCollectionFrameOrigin_and_CollectionFrame()
-    
+    //  Добавил анимацию, чтобы плавно делал calculateNewCollectionFrameOrigin_and_CollectionFrame
+    UIView.animate(withDuration: 0.5, animations: {self.calculateNewCollectionFrameOrigin_and_CollectionFrame()})
+ 
   }
   
+ 
     // MARK: - Navigation
   
    // In a storyboard-based application, you will often want to do a little preparation before navigation
