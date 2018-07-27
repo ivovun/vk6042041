@@ -12,8 +12,7 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var userImageView: UIImageView!
   
- 
-//  override func prepareForReuse() {
+ //  override func prepareForReuse() {
 //    userImageView.image = nil
 //  }
   

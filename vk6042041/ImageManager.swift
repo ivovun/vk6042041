@@ -30,11 +30,14 @@ class ImageManager: NSObject {
     func cachedImageForURL(_ url: String) -> UIImage? { return imageCache[url] }
     
     func clearCache() { imageCache.removeAll() }
+  
     
   func downloadImageFromURL(_ urlString: String, emptyCache: Bool = false, completion: ((_ success: Bool, _ image: UIImage?, _ imageURL: String) -> Void)?) {
         // do we have this cached?
     
     if emptyCache {
+      print("очищаем кэш, количество:\(imageCache.count)")
+
       imageCache.removeAll()
     }
     

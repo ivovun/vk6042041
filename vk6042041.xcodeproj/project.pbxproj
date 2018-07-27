@@ -17,8 +17,12 @@
 		505A53E51F2D996000D12323 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A53E41F2D996000D12323 /* User.swift */; };
 		5065A8B01F26FDCF007B42DC /* ApiCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */; };
 		5065A8B41F271057007B42DC /* TestTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065A8B31F271057007B42DC /* TestTableTableViewController.swift */; };
+		5085C00C2102E0F8006FC14E /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5085C00B2102E0F8006FC14E /* extensions.swift */; };
+		50888AC221086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50888AC121086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift */; };
 		509E41A41F29EA48001BA998 /* ConstantsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509E41A31F29EA48001BA998 /* ConstantsStruct.swift */; };
 		509F0D7420FB8C83008D4C33 /* Timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509F0D7320FB8C83008D4C33 /* Timers.swift */; };
+		50C1D9F821003A8C0097FC49 /* UserInfoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1D9F721003A8C0097FC49 /* UserInfoCollectionViewController.swift */; };
+		50C1D9FA2101E3480097FC49 /* UserInfoSectionHeaderHeaderUICollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1D9F92101E3480097FC49 /* UserInfoSectionHeaderHeaderUICollectionReusableView.swift */; };
 		50CBF7441F2342550088CF3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBF7431F2342550088CF3D /* AppDelegate.swift */; };
 		50CBF7491F2342550088CF3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50CBF7471F2342550088CF3D /* Main.storyboard */; };
 		50CBF74B1F2342550088CF3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CBF74A1F2342550088CF3D /* Assets.xcassets */; };
@@ -41,8 +45,12 @@
 		505A53E41F2D996000D12323 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCallViewController.swift; sourceTree = "<group>"; };
 		5065A8B31F271057007B42DC /* TestTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableTableViewController.swift; sourceTree = "<group>"; };
+		5085C00B2102E0F8006FC14E /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		50888AC121086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Full_ImageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		509E41A31F29EA48001BA998 /* ConstantsStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsStruct.swift; sourceTree = "<group>"; };
 		509F0D7320FB8C83008D4C33 /* Timers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timers.swift; sourceTree = "<group>"; };
+		50C1D9F721003A8C0097FC49 /* UserInfoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCollectionViewController.swift; sourceTree = "<group>"; };
+		50C1D9F92101E3480097FC49 /* UserInfoSectionHeaderHeaderUICollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSectionHeaderHeaderUICollectionReusableView.swift; sourceTree = "<group>"; };
 		50CBF7401F2342550088CF3D /* vk6042041.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vk6042041.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50CBF7431F2342550088CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50CBF7481F2342550088CF3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +86,8 @@
 		5005E1F31F4460EC00831C99 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				50888AC121086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift */,
+				50C1D9F92101E3480097FC49 /* UserInfoSectionHeaderHeaderUICollectionReusableView.swift */,
 				50E097CB1F4ADB1800B05A50 /* FoundUserCollectionViewCell.swift */,
 			);
 			name = Layout;
@@ -86,9 +96,10 @@
 		50349B9A1F3D6627006D4528 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */,
-				5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */,
 				5065A8B31F271057007B42DC /* TestTableTableViewController.swift */,
+				50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */,
+				50C1D9F721003A8C0097FC49 /* UserInfoCollectionViewController.swift */,
+				5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */,
 				5058F9C11F23579E006F1E3B /* VKStartScreenVC.swift */,
 				5058F9C51F2357FA006F1E3B /* mainVC.swift */,
 				5058F9C01F23579E006F1E3B /* UIViewControllerExtensions.swift */,
@@ -105,6 +116,7 @@
 				509E41A31F29EA48001BA998 /* ConstantsStruct.swift */,
 				5048721420F84BBE00C70950 /* json_example */,
 				509F0D7320FB8C83008D4C33 /* Timers.swift */,
+				5085C00B2102E0F8006FC14E /* extensions.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -284,9 +296,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				50349B991F3D6602006D4528 /* SearchCollectionViewController.swift in Sources */,
+				5085C00C2102E0F8006FC14E /* extensions.swift in Sources */,
 				50F318191F359CB300F42F2A /* UsersInfo.swift in Sources */,
+				50888AC221086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift in Sources */,
 				5058F9C31F23579E006F1E3B /* UIViewControllerExtensions.swift in Sources */,
 				5058F9C41F23579E006F1E3B /* VKStartScreenVC.swift in Sources */,
+				50C1D9FA2101E3480097FC49 /* UserInfoSectionHeaderHeaderUICollectionReusableView.swift in Sources */,
 				509E41A41F29EA48001BA998 /* ConstantsStruct.swift in Sources */,
 				5058F9C21F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift in Sources */,
 				5065A8B41F271057007B42DC /* TestTableTableViewController.swift in Sources */,
@@ -294,6 +309,7 @@
 				50E097CC1F4ADB1800B05A50 /* FoundUserCollectionViewCell.swift in Sources */,
 				5065A8B01F26FDCF007B42DC /* ApiCallViewController.swift in Sources */,
 				509F0D7420FB8C83008D4C33 /* Timers.swift in Sources */,
+				50C1D9F821003A8C0097FC49 /* UserInfoCollectionViewController.swift in Sources */,
 				50CBF7441F2342550088CF3D /* AppDelegate.swift in Sources */,
 				5058F9C61F2357FA006F1E3B /* mainVC.swift in Sources */,
 				50E949D120F7475400F18423 /* ImageManager.swift in Sources */,

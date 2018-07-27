@@ -72,7 +72,7 @@ class TestTableTableViewController: UITableViewController {
       self.callingRequest = nil
     }  else if segue.identifier == ConstantsStruct.SegueIdentifiers.SHOW_COLLECTION_VIEW_SEARCH {
       if let SVC = segue.destination as? SearchCollectionViewController {
-        SVC.searchParameters = ConstantsStruct.Searches.defaultGirlsSearch
+        SVC.searchParameters = ConstantsStruct.SearchesDefaults.SearchParameters
       }
     }
   }
@@ -109,7 +109,7 @@ class TestTableTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let label = labels[indexPath.row] as String? {
       if label == USERS_SEARCH {
-        callMethod(request: VKApi.users().search(ConstantsStruct.Searches.defaultGirlsSearch), withSegueId: ConstantsStruct.SegueIdentifiers.API_CALL)
+        callMethod(request: VKApi.users().search(ConstantsStruct.SearchesDefaults.SearchParameters), withSegueId: ConstantsStruct.SegueIdentifiers.API_CALL)
         
        
       } else if label == CVC_USERS_SEARCH {
