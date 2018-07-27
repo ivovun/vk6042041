@@ -13,7 +13,7 @@ private let reuseIdentifier = ConstantsStruct.CellIdentifiers.FoundUsersCollecti
 // про использование NSCache нашел тут https://stackoverflow.com/questions/37018916/swift-async-load-image
 private let kLazyLoadCellImageViewTag = 1
 
-class SearchCollectionViewController: UICollectionViewController  {
+class SearchCollectionViewController: UICollectionViewController, ControllerNeedToHaveThisMethod  {
   
   // MARK: Model
   
@@ -28,6 +28,7 @@ class SearchCollectionViewController: UICollectionViewController  {
   var oldScrollViewContentOffsetY: CGFloat = 0.0
    var needCalculateItemSize = true
   var itemWidth: CGFloat = 0.0
+  var comeBackFromUserDetail = false
   
   // public part of our Model
   // when this is set
@@ -43,6 +44,10 @@ class SearchCollectionViewController: UICollectionViewController  {
      }
   }
   
+  
+  func setComeBackFromUserDetailToTrue() {
+    comeBackFromUserDetail = true
+  }
   
   // MARK: Updating the Collection view
   func searchForUsers(_ newSearch: Bool = false) {
@@ -143,7 +148,7 @@ class SearchCollectionViewController: UICollectionViewController  {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    collectionView?.contentInsetAdjustmentBehavior =  .never
+    //collectionView?.contentInsetAdjustmentBehavior =  .never
     
     calculateItemSize()
     
@@ -165,7 +170,7 @@ class SearchCollectionViewController: UICollectionViewController  {
     // чтобы после того как обратно возращался из UserInfoCollectionViewController - восстановиить положение клеток
     // иначе съезжает наверх
     //  Добавил анимацию, чтобы плавно делал calculateNewCollectionFrameOrigin_and_CollectionFrame
-    UIView.animate(withDuration: 0.5, animations: {self.calculateNewCollectionFrameOrigin_and_CollectionFrame()})
+    //UIView.animate(withDuration: 0.5, animations: {self.calculateNewCollectionFrameOrigin_and_CollectionFrame()})
  
   }
   
@@ -179,6 +184,7 @@ class SearchCollectionViewController: UICollectionViewController  {
     if segue.identifier == ConstantsStruct.SegueIdentifiers.SHOW_USER_INFO, let row = sender as? Int {
       if let userVC = segue.destination as? UserInfoCollectionViewController {
         userVC.user = foundUsers![row]
+
       }
      }
    }
@@ -290,7 +296,8 @@ extension SearchCollectionViewController {
     return (maxSize, minSize, inPortrait,topPadding, rightPadding ,maxAllowableCollectionViewHeight, maxAllowableCollectionViewWidth )
   }
  
-  private func calculateNewCollectionFrameOrigin_and_CollectionFrame( ) {
+   func calculateNewCollectionFrameOrigin_and_CollectionFrame( ) {
+    
     
     
     let numberOfrows = floor( (windowTraitParameters.maxAllowableCollectionViewHeight) / itemWidth )
@@ -310,16 +317,21 @@ extension SearchCollectionViewController {
     
     if windowTraitParameters.inPortrait {
       
-      collectionView?.frame.origin.y = navigationController!.navigationBar.isHidden ? windowTraitParameters.topPadding + heightOfFreeSpaceOnTop  : 0.0
+      collectionView?.frame.origin.y = navigationController!.navigationBar.isHidden || comeBackFromUserDetail ? windowTraitParameters.topPadding + heightOfFreeSpaceOnTop  : 0.0
       collectionView?.frame.origin.x = 0.0
     } else {
       collectionView?.frame.origin.y = 0.0
       collectionView?.frame.origin.x = windowTraitParameters.rightPadding + widthOfFreeSpaceOnSide
     }
     
+//    if comeBackFromUserDetail {
+//      navigationController!.setNavigationBarHidden(true, animated: false)
+//    }
     
-    print(" <setNewCollectionFrameOriginY_and_HeightOfCollectionFrame==================>>>>>>)")
-    print("  collectionView?.frame.origin.y = \(collectionView?.frame.origin.y ?? 0),  view.safeAreaInsets.top = \(view.safeAreaInsets.top) beginCollectionViewHeght = \(windowTraitParameters.maxAllowableCollectionViewHeight)")
+    
+    
+    print(" <calculateNewCollectionFrameOrigin_and_CollectionFrame==================>>>>>>)")
+    print("collectionView?.frame.origin.y = \(collectionView?.frame.origin.y ?? 0), view.safeAreaInsets.top = \(view.safeAreaInsets.top) maxAllowableCollectionViewHeight = \(windowTraitParameters.maxAllowableCollectionViewHeight), collectionView?.frame.height = \(collectionView!.frame.height)")
   }
  
   // MARK:  Scroll view
@@ -331,14 +343,14 @@ extension SearchCollectionViewController {
       
       if oldScrollViewContentOffsetY >  scrollView.contentOffset.y  {
         print("scroll DOWN")
- 
+        comeBackFromUserDetail = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         navBarHeight = 0.0
         
       }  else if oldScrollViewContentOffsetY < scrollView.contentOffset.y {
         print("scroll UP")
- 
+        comeBackFromUserDetail = false
         self.navigationController?.setNavigationBarHidden(true, animated: true)
       }
     }

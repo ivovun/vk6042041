@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ControllerNeedToHaveThisMethod {
+   func setComeBackFromUserDetailToTrue()
+}
+
 private let reuseIdentifier = ConstantsStruct.CellIdentifiers.SelectedUserCollectionViewCell
 
 class UserInfoCollectionViewController: UICollectionViewController {
@@ -52,7 +56,14 @@ class UserInfoCollectionViewController: UICollectionViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     self.navigationController?.setNavigationBarHidden(true, animated: true)
-
+    
+    if let   previousViewController = navigationController!.viewControllers[navigationController!.viewControllers.count-1] as? ControllerNeedToHaveThisMethod
+    {
+      previousViewController.setComeBackFromUserDetailToTrue()
+//      previousViewController.calculateNewCollectionFrameOrigin_and_CollectionFrame()
+//      previousViewController.collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
   }
  
   /*
