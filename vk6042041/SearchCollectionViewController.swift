@@ -28,6 +28,8 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
   var oldScrollViewContentOffsetY: CGFloat = 0.0
    var needCalculateItemSize = true
   var itemWidth: CGFloat = 0.0
+//  let statusBarHeight = UIApplication.shared.statusBarFrame.height
+
   
   
   //добавил протокол и свойство comeBackFromUserDetail  ,   так как при возврате от USER Detail система автоматически ставит navigationBar ( даже если он не виден - все равно isHidden == false ) и в результате на  phone X все съезжает collectionView frame из-за того что обнуляется свойство collectionView?.frame.origin.y == 0.0 когда в портрете
@@ -199,7 +201,177 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     performSegue(withIdentifier: ConstantsStruct.SegueIdentifiers.SHOW_USER_INFO, sender: indexPath.row)
   }
+  // MARK: Sizing
+  override var prefersStatusBarHidden: Bool {
+//    if let navCon = navigationController {
+//      return navCon.navigationBar.isHidden
+//    }
+    return true
+  }
+  
+  var numberOfPhotosColumns = ConstantsStruct.SearchesDefaults.numberOfPhotosColumns {
+    didSet{
+      ConstantsStruct.SearchesDefaults.numberOfPhotosColumns = numberOfPhotosColumns
+      needCalculateItemSize = true
+      UIView.animate(withDuration: 0.95) {
+        self.calculateItemSize()
+      }
+      
+      collectionView?.collectionViewLayout.invalidateLayout()
+      needCalculateItemSize = false
+    }
+  }
+  
+  var  maxZoomingScale: CGFloat = 0.0
+  var  minZoomingScale: CGFloat = 0.0
+  var zoomingDirectionIsUp = false
+  
+  @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
+    
+ 
+    
+    if sender.state == .began {
+      maxZoomingScale = 1.0
+      minZoomingScale = 1.0
+    }
+    else  if sender.state == .changed {
+        maxZoomingScale = max(maxZoomingScale, sender.scale, 1)
+        minZoomingScale = min(minZoomingScale, sender.scale, 1)
+    } else if sender.state == .ended {
+      
+      let difMax = abs(maxZoomingScale - 1)
+      let difMin = abs(minZoomingScale - 1)
+      
+      numberOfPhotosColumns = min(10,max( numberOfPhotosColumns + ( difMin > difMax ? 1 : -1) , 1))
 
+      print(" difMax = \(difMax), difMin = \(difMin)")
+    }
+    
+    
+    // РАБОТАЕТ
+//    let dif = (1.0 - sender.scale) * 7
+//    zoomingNumber += dif
+//    zoomingNumber = max(1, min(100,zoomingNumber))
+//    numberOfPhotosColumns = min(10,max( Int(floor(zoomingNumber / 10)), 1))
+    
+    
+     print(" sender = \(sender.scale),  numberOfPhotosColumns = \(numberOfPhotosColumns), maxZoomingScale = \(maxZoomingScale), minZoomingScale = \(minZoomingScale)")
+     sender.scale = 1
+   }
+  
+  private func calculateItemSize() {
+    
+    if needCalculateItemSize == false {
+      return
+    }
+    needCalculateItemSize = false
+    
+    itemWidth = windowTraitParameters.minSize / CGFloat( numberOfPhotosColumns)
+    
+    let layout  = collectionViewLayout as! UICollectionViewFlowLayout
+    layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+  }
+  
+  var windowTraitParameters: ( maxSize: CGFloat, minSize: CGFloat, inPortrait: Bool,topPadding:CGFloat, rightPadding:CGFloat, maxAllowableCollectionViewHeight: CGFloat, maxAllowableCollectionViewWidth: CGFloat)
+  {
+    let maxSize: CGFloat
+    let minSize: CGFloat
+    let inPortrait: Bool
+    let maxAllowableCollectionViewHeight: CGFloat
+    let maxAllowableCollectionViewWidth: CGFloat
+    
+    let window = UIApplication.shared.keyWindow
+    let topPadding = window!.safeAreaInsets.top
+    //    let bottomPadding = window!.safeAreaInsets.bottom
+    let rightPadding = window!.safeAreaInsets.right
+    
+    if window!.frame.height > window!.frame.width {
+      maxSize = window!.frame.height
+      minSize = window!.frame.width
+      inPortrait = true
+    } else {
+      inPortrait = false
+      maxSize = window!.frame.width
+      minSize = window!.frame.height
+    }
+    
+    
+    if inPortrait {
+      maxAllowableCollectionViewHeight = maxSize
+      maxAllowableCollectionViewWidth = minSize
+    } else {
+      maxAllowableCollectionViewHeight = minSize
+      maxAllowableCollectionViewWidth = maxSize
+    }
+    
+    return (maxSize, minSize, inPortrait,topPadding, rightPadding ,maxAllowableCollectionViewHeight, maxAllowableCollectionViewWidth )
+  }
+  
+  func calculateNewCollectionFrameOrigin_and_CollectionFrame( ) {
+    
+    let numberOfrows = floor( (windowTraitParameters.maxAllowableCollectionViewHeight) / itemWidth )
+    let numberOfColumns = floor( (windowTraitParameters.maxAllowableCollectionViewWidth) / itemWidth )
+    collectionView?.frame.size.height = numberOfrows * itemWidth
+    collectionView?.frame.size.width = numberOfColumns * itemWidth
+    
+    var heightOfFreeSpaceOnTop: CGFloat = 0.0
+    if windowTraitParameters.topPadding == 0 {
+      heightOfFreeSpaceOnTop = (windowTraitParameters.maxAllowableCollectionViewHeight -  collectionView!.frame.size.height) / 2
+    }
+    
+    var widthOfFreeSpaceOnSide: CGFloat = 0.0
+    if windowTraitParameters.rightPadding == 0 {
+      widthOfFreeSpaceOnSide = (windowTraitParameters.maxAllowableCollectionViewWidth -  collectionView!.frame.size.width) / 2
+    }
+    
+    if windowTraitParameters.inPortrait {
+      
+      if let navCon =  navigationController {
+        collectionView?.frame.origin.y = navCon.navigationBar.isHidden || comeBackFromUserDetail ? windowTraitParameters.topPadding + heightOfFreeSpaceOnTop  : 0.0
+        collectionView?.frame.origin.x = 0.0
+      }
+      
+    } else {
+      collectionView?.frame.origin.y = 0.0
+      collectionView?.frame.origin.x = windowTraitParameters.rightPadding + widthOfFreeSpaceOnSide
+    }
+    
+    //    print(" <calculateNewCollectionFrameOrigin_and_CollectionFrame==================>>>>>>)")
+    //    print("collectionView?.frame.origin.y = \(collectionView?.frame.origin.y ?? 0), view.safeAreaInsets.top = \(view.safeAreaInsets.top) maxAllowableCollectionViewHeight = \(windowTraitParameters.maxAllowableCollectionViewHeight), collectionView?.frame.height = \(collectionView!.frame.height)")
+  }
+  
+  // MARK:  Scroll view
+  override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    
+    var navBarHeight:CGFloat = self.navigationController!.navigationBar.frame.size.height
+    
+    if oldScrollViewContentOffsetY != scrollView.contentOffset.y {
+      
+      if oldScrollViewContentOffsetY >  scrollView.contentOffset.y  {
+        print("scroll DOWN")
+        comeBackFromUserDetail = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        navBarHeight = 0.0
+        
+      }  else if oldScrollViewContentOffsetY < scrollView.contentOffset.y {
+        print("scroll UP")
+        comeBackFromUserDetail = false
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+      }
+    }
+    
+    oldScrollViewContentOffsetY = scrollView.contentOffset.y + navBarHeight
+    
+    print(" <<scrollViewDidEndDecelerating ===================>>")
+    print("  collectionView?.frame.height = \(String(describing: collectionView?.frame.height))" )
+    print(" collectionView.contentOffset.y = \( collectionView?.contentOffset.y ?? 0))")
+    print(" collectionView.frame.origin.y = \( collectionView?.frame.origin.y ?? 0)")
+    print(" oldScrollViewContentOffsetY = \( oldScrollViewContentOffsetY  ) beginCollectionViewHeght = \(windowTraitParameters.maxAllowableCollectionViewHeight)")
+    print(" view.safeAreaInsets.top = \( view.safeAreaInsets.top  ) bottom = \(view.safeAreaInsets.bottom) left = \(view.safeAreaInsets.left) right = \(view.safeAreaInsets.right) ")
+  }
+
+  
 }
 
 // MARK UICollectionViewDataSource
@@ -247,127 +419,7 @@ extension SearchCollectionViewController {
     calculateNewCollectionFrameOrigin_and_CollectionFrame()
   }
   
-  // MARK: Sizing
   
-  
-  private func calculateItemSize() {
-    
-    if needCalculateItemSize == false {
-      return
-    }
-    needCalculateItemSize = false
-    
-    itemWidth = windowTraitParameters.minSize / CGFloat( ConstantsStruct.SearchesDefaults.numberOfPhotosColumns)
-    
-    let layout  = collectionViewLayout as! UICollectionViewFlowLayout
-    layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-  }
-  
-  var windowTraitParameters: ( maxSize: CGFloat, minSize: CGFloat, inPortrait: Bool,topPadding:CGFloat, rightPadding:CGFloat, maxAllowableCollectionViewHeight: CGFloat, maxAllowableCollectionViewWidth: CGFloat)
-  {
-    let maxSize: CGFloat
-    let minSize: CGFloat
-    let inPortrait: Bool
-    let maxAllowableCollectionViewHeight: CGFloat
-    let maxAllowableCollectionViewWidth: CGFloat
-    
-    
-    let window = UIApplication.shared.keyWindow
-    let topPadding = window!.safeAreaInsets.top
-//    let bottomPadding = window!.safeAreaInsets.bottom
-    let rightPadding = window!.safeAreaInsets.right
- 
-    
-    if window!.frame.height > window!.frame.width {
-      maxSize = window!.frame.height
-      minSize = window!.frame.width
-      inPortrait = true
-    } else {
-      inPortrait = false
-      maxSize = window!.frame.width
-      minSize = window!.frame.height
-    }
-    
-    if inPortrait {
-      maxAllowableCollectionViewHeight = maxSize
-      maxAllowableCollectionViewWidth = minSize
-    } else {
-      maxAllowableCollectionViewHeight = minSize
-      maxAllowableCollectionViewWidth = maxSize
-    }
-    
-    
-    return (maxSize, minSize, inPortrait,topPadding, rightPadding ,maxAllowableCollectionViewHeight, maxAllowableCollectionViewWidth )
-  }
- 
-   func calculateNewCollectionFrameOrigin_and_CollectionFrame( ) {
-    
-    
-    
-    let numberOfrows = floor( (windowTraitParameters.maxAllowableCollectionViewHeight) / itemWidth )
-    let numberOfColumns = floor( (windowTraitParameters.maxAllowableCollectionViewWidth) / itemWidth )
-    collectionView?.frame.size.height = numberOfrows * itemWidth
-    collectionView?.frame.size.width = numberOfColumns * itemWidth
-    
-    var heightOfFreeSpaceOnTop: CGFloat = 0.0
-    if windowTraitParameters.topPadding == 0 {
-      heightOfFreeSpaceOnTop = (windowTraitParameters.maxAllowableCollectionViewHeight -  collectionView!.frame.size.height) / 2
-    }
-    
-    var widthOfFreeSpaceOnSide: CGFloat = 0.0
-    if windowTraitParameters.rightPadding == 0 {
-      widthOfFreeSpaceOnSide = (windowTraitParameters.maxAllowableCollectionViewWidth -  collectionView!.frame.size.width) / 2
-    }
-    
-    if windowTraitParameters.inPortrait {
-      
-      collectionView?.frame.origin.y = navigationController!.navigationBar.isHidden || comeBackFromUserDetail ? windowTraitParameters.topPadding + heightOfFreeSpaceOnTop  : 0.0
-      collectionView?.frame.origin.x = 0.0
-    } else {
-      collectionView?.frame.origin.y = 0.0
-      collectionView?.frame.origin.x = windowTraitParameters.rightPadding + widthOfFreeSpaceOnSide
-    }
-    
-//    if comeBackFromUserDetail {
-//      navigationController!.setNavigationBarHidden(true, animated: false)
-//    }
-    
-    
-    
-    print(" <calculateNewCollectionFrameOrigin_and_CollectionFrame==================>>>>>>)")
-    print("collectionView?.frame.origin.y = \(collectionView?.frame.origin.y ?? 0), view.safeAreaInsets.top = \(view.safeAreaInsets.top) maxAllowableCollectionViewHeight = \(windowTraitParameters.maxAllowableCollectionViewHeight), collectionView?.frame.height = \(collectionView!.frame.height)")
-  }
- 
-  // MARK:  Scroll view
-  override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    
-    var navBarHeight:CGFloat = self.navigationController!.navigationBar.frame.size.height
-    
-    if oldScrollViewContentOffsetY != scrollView.contentOffset.y {
-      
-      if oldScrollViewContentOffsetY >  scrollView.contentOffset.y  {
-        print("scroll DOWN")
-        comeBackFromUserDetail = false
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        navBarHeight = 0.0
-        
-      }  else if oldScrollViewContentOffsetY < scrollView.contentOffset.y {
-        print("scroll UP")
-        comeBackFromUserDetail = false
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-      }
-    }
-
-    oldScrollViewContentOffsetY = scrollView.contentOffset.y + navBarHeight
- 
-    print(" <<scrollViewDidEndDecelerating ===================>>")
-    print("  collectionView?.frame.height = \(String(describing: collectionView?.frame.height))" )
-    print(" collectionView.contentOffset.y = \( collectionView?.contentOffset.y ?? 0))")
-    print(" collectionView.frame.origin.y = \( collectionView?.frame.origin.y ?? 0)")
-    print(" oldScrollViewContentOffsetY = \( oldScrollViewContentOffsetY  ) beginCollectionViewHeght = \(windowTraitParameters.maxAllowableCollectionViewHeight)")
-    print(" view.safeAreaInsets.top = \( view.safeAreaInsets.top  ) bottom = \(view.safeAreaInsets.bottom) left = \(view.safeAreaInsets.left) right = \(view.safeAreaInsets.right) ")
-  }
   
 // MARK: - Lazy Loading of cells
  

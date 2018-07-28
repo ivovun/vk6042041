@@ -150,6 +150,7 @@
                         <connections>
                             <outlet property="dataSource" destination="v6P-pq-gSW" id="DxQ-re-nBt"/>
                             <outlet property="delegate" destination="v6P-pq-gSW" id="sfE-ob-Huy"/>
+                            <outletCollection property="gestureRecognizers" destination="nEX-rE-5G1" appends="YES" id="MoP-PS-jRR"/>
                         </connections>
                     </collectionView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -159,6 +160,11 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOo-N4-cmR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="nEX-rE-5G1">
+                    <connections>
+                        <action selector="handlePinch:" destination="v6P-pq-gSW" id="4Bj-co-Eja"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1780" y="1635"/>
         </scene>
@@ -170,6 +176,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RHy-cK-6AZ">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="50" height="245"/>
