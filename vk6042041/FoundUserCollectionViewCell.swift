@@ -12,9 +12,10 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var userImageView: UIImageView!
   
- //  override func prepareForReuse() {
-//    userImageView.image = nil
-//  }
+  @IBOutlet weak var rowNumberLabel: UILabel!
+    override func prepareForReuse() {
+    userImageView.image = nil
+  }
   
   
   // public API of this UICollectionViewCell subclass
@@ -22,18 +23,26 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
   // and each instance will have its own user to show
   // as set by this var
 
-  
+  var rowNumber:Int? = 0
   var user: User?
-//  {
-////    didSet {
-////      updateUI()
-////     }
-//  }
+  {
+    didSet {
+      updateUI()
+     }
+  }
   
   //
  
-//  private func updateUI() {
-//
+  private func updateUI() {
+    
+    if ConstantsStruct.TestParameters.showCellRowNumber {
+//      rowNumberLabel.adjustsFontSizeToFitWidth = true
+//      rowNumberLabel.adjustsLetterSpacingToFitWidth = true
+      rowNumberLabel?.text = "\(rowNumber ?? 0)"
+    } else {
+      rowNumberLabel?.text  = ""
+    }
+
 //    userImageView?.image = nil
 //
 //
@@ -41,7 +50,7 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
 //    if let user = user {
 //      userImageView?.loadImageUsingUrlString(urlString:  user.photo_200)
 //    }
-
+//
 //    if let user = user,  let profileImageURL = URL(string: user.photo_200)   {
 //      // FIXME: blocks main thread
 //
@@ -51,7 +60,7 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
 //      userImageView.imageFromServerURL(urlString: user.photo_200)
 //    }
     
-//  }
+  }
 }
 
 //extension UIImageView {

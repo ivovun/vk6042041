@@ -132,17 +132,32 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rJT-pG-XKC">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="136"/>
+                                            <rect key="frame" x="32" y="0.0" width="136" height="136"/>
+                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="rJT-pG-XKC" secondAttribute="height" multiplier="1:1" priority="800" id="bcA-mc-dJX"/>
+                                            </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="showCellRowNumber" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OxS-vY-YwX" userLabel="RowNumber">
+                                            <rect key="frame" x="45.5" y="110" width="146.5" height="18"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <color key="textColor" red="1" green="0.027751767635061264" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="top" secondItem="Thb-mV-wGe" secondAttribute="top" id="AXb-oJ-ccP"/>
-                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="leading" secondItem="Thb-mV-wGe" secondAttribute="leading" id="HeV-3i-b6V"/>
-                                    <constraint firstAttribute="bottom" secondItem="rJT-pG-XKC" secondAttribute="bottom" id="d82-2g-1g0"/>
-                                    <constraint firstAttribute="trailing" secondItem="rJT-pG-XKC" secondAttribute="trailing" id="jjr-VC-ewg"/>
+                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="leading" secondItem="Thb-mV-wGe" secondAttribute="leading" priority="250" id="1uf-2m-5Ft"/>
+                                    <constraint firstItem="OxS-vY-YwX" firstAttribute="centerY" secondItem="Thb-mV-wGe" secondAttribute="centerY" id="Fdp-en-twU"/>
+                                    <constraint firstAttribute="trailing" secondItem="rJT-pG-XKC" secondAttribute="trailing" priority="250" id="HzU-xw-RmW"/>
+                                    <constraint firstAttribute="bottom" secondItem="rJT-pG-XKC" secondAttribute="bottom" id="WtA-R5-Iad"/>
+                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="centerX" secondItem="Thb-mV-wGe" secondAttribute="centerX" id="Za2-ST-sXY"/>
+                                    <constraint firstItem="OxS-vY-YwX" firstAttribute="centerX" secondItem="Thb-mV-wGe" secondAttribute="centerX" id="afF-6b-QFY"/>
+                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="centerY" secondItem="Thb-mV-wGe" secondAttribute="centerY" id="bcn-0d-4vX"/>
+                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="top" secondItem="Thb-mV-wGe" secondAttribute="top" id="wCJ-Vq-Anh"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="rowNumberLabel" destination="OxS-vY-YwX" id="RjL-bR-N8S"/>
                                     <outlet property="userImageView" destination="rJT-pG-XKC" id="mtx-OU-cTi"/>
                                 </connections>
                             </collectionViewCell>
@@ -156,6 +171,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="collectionView" destination="ygo-2f-QzW" id="9w8-41-oEV"/>
+                        <outlet property="pinchGesture" destination="nEX-rE-5G1" id="G2G-Sk-eR5"/>
                         <segue destination="8a3-Ll-6jG" kind="show" identifier="showUserInfo" id="BAR-sz-vQY"/>
                     </connections>
                 </collectionViewController>
@@ -166,7 +182,7 @@
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1780" y="1635"/>
+            <point key="canvasLocation" x="1780" y="1634.9325337331336"/>
         </scene>
         <!--User Info Collection View Controller-->
         <scene sceneID="aDv-B6-oye">

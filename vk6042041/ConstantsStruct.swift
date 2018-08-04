@@ -48,13 +48,21 @@ struct ConstantsStruct {
   }
   
   struct SearchParameters {
-    static let max_VK_API_COUNT = 100 // больше этого значения запрос возвращает 0 значений
+    static let max_VK_API_COUNT = 300 // больше этого значения запрос возвращает 0 значений
     static let min_VK_API_COUNT = 8 // меньше 10 не запрашивать  так как у меня проерка на makeNewSearchIfNeeded
     static let max_quantityOfsearches = 10  //// 1000 / 57 = 18 хотя потом нужно будет отменить при смене параметров поиска
   }
   
   struct UserDefaults {
     static let DEFAULT_BIRTH_DATE = "1.1.0001"
+  }
+  
+  struct Durations {
+    static let pinchCellResizeInSeconds = 1.5
+  }
+  
+  struct TestParameters {
+    static let showCellRowNumber = true
   }
 
   struct SearchesDefaults {
