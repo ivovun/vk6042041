@@ -8,13 +8,16 @@
 
 import UIKit
 
-class FoundUserCollectionViewCell: UICollectionViewCell {
+class FoundUserCollectionViewCell: UICollectionViewCell, TypeWithOptional_user_Property {
   
   @IBOutlet weak var userImageView: UIImageView!
   
   @IBOutlet weak var rowNumberLabel: UILabel!
-    override func prepareForReuse() {
+    
+  override func prepareForReuse() {
     userImageView.image = nil
+    rowNumber = nil
+    user = nil
   }
   
   
@@ -31,7 +34,6 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
      }
   }
   
-  //
  
   private func updateUI() {
     
@@ -42,43 +44,13 @@ class FoundUserCollectionViewCell: UICollectionViewCell {
     } else {
       rowNumberLabel?.text  = ""
     }
-
-//    userImageView?.image = nil
-//
-//
-//
-//    if let user = user {
-//      userImageView?.loadImageUsingUrlString(urlString:  user.photo_200)
-//    }
-//
-//    if let user = user,  let profileImageURL = URL(string: user.photo_200)   {
-//      // FIXME: blocks main thread
-//
-////      if let imageData = try? Data(contentsOf: profileImageURL) {
-////        userImageView?.image = UIImage(data: imageData)
-////      }
-//      userImageView.imageFromServerURL(urlString: user.photo_200)
-//    }
-    
+  
+    User.updateImageForUserView(self, imageView: userImageView, imagePlaceHolder: ConstantsStruct.Images.kLazyLoadPlaceholderImage)
+ 
   }
+  
+  
+  
 }
 
-//extension UIImageView {
-//  public func imageFromServerURL(urlString: String) {
-//
-//    URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
-//
-//      if error != nil {
-//        print(error)
-//        return
-//      }
-//      DispatchQueue.main.async {
-//        let image = UIImage(data: data!)
-//        self.image = image
-//      }
-//
-//    }).resume()
-//  }
-//
-//}
 

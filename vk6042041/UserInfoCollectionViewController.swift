@@ -14,7 +14,7 @@ protocol ControllerNeedToHaveThisMethod {
 
 private let reuseIdentifier = ConstantsStruct.CellIdentifiers.SelectedUserCollectionViewCell
 
-class UserInfoCollectionViewController: UICollectionViewController {
+class UserInfoCollectionViewController: UICollectionViewController, TypeWithOptional_user_Property {
   //https://stackoverflow.com/questions/39546856/how-to-open-an-url-in-swift3
   @IBAction func openUserProfile(_ sender: Any) {
     guard let url = URL(string:"https://vk.com/id\(user!.id)") else {
@@ -101,17 +101,19 @@ class UserInfoCollectionViewController: UICollectionViewController {
     
     sectionHeaderView.user = user
     let imageView = sectionHeaderView.viewWithTag(ConstantsStruct.LazyTags.tagForCollectionHeaderImageView) as! UIImageView
-    imageView.image = kLazyLoadPlaceholderImage
-    if let imageURL = user?.photo_200 {
-      imageView.addActivityIndicator()
-      ImageManager.sharedInstance.downloadImageFromURL(imageURL, emptyCache: false  ) { [weak self] (success, image,imageURL ) -> Void in
-        if success && image != nil && self?.user!.photo_200 == imageURL {
-          imageView.image = image
-          imageView.removeActivitiIndicator()
-        }
-      }
-      
-    }
+    User.updateImageForUserView(self, imageView: imageView, imagePlaceHolder: ConstantsStruct.Images.kLazyLoadPlaceholderImage)
+    
+//    imageView.image = ConstantsStruct.Images.kLazyLoadPlaceholderImage
+//    if let imageURL = user?.photo_200 {
+//      imageView.addActivityIndicator()
+//      ImageManager.sharedInstance.downloadImageFromURL(imageURL ) { [weak self] (success, image,imageURL ) -> Void in
+//        if success && image != nil && self?.user!.photo_200 == imageURL {
+//          imageView.image = image
+//          imageView.removeActivitiIndicator()
+//        }
+//      }
+//
+//    }
     return sectionHeaderView
    }
   /*

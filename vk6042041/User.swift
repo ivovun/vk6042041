@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum SerializationError: Error {
   case missing(String)
@@ -28,6 +29,10 @@ fileprivate func tryToDecodeElseReturnDefault(defaultValue: String, values: Keye
   
   return resultString
   
+}
+
+protocol TypeWithOptional_user_Property {
+  var user: User? {get}
 }
 
 
@@ -88,6 +93,27 @@ struct User: Decodable  {
         }
 
    }
+  
+  static func  updateImageForUserView(_ someType: TypeWithOptional_user_Property, imageView: UIImageView, imagePlaceHolder: UIImage, addActivitiIndicator: Bool = false) {
+    imageView.image = imagePlaceHolder
+    // load image.
+    
+    if addActivitiIndicator {
+      imageView.addActivityIndicator()
+    }
+    
+    if let imageURL = someType.user?.photo_200 {
+      ImageManager.sharedInstance.downloadImageFromURL(imageURL) { (success, image,imageURL ) -> Void in
+        if success && image != nil && someType.user!.photo_200 == imageURL {
+          if addActivitiIndicator {
+            imageView.removeActivitiIndicator()
+          }
+          imageView.image = image
+        }
+      }
+    }
+  }
+
 }
 
  

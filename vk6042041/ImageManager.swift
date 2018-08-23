@@ -10,7 +10,6 @@ import UIKit
 
 private let _singletonInstance = ImageManager()
 private let kLazyLoadMaxCacheImageSize = 500
-let kLazyLoadPlaceholderImage = UIImage(named: "placeholder")!
 
 
 class ImageManager: NSObject {
@@ -32,15 +31,10 @@ class ImageManager: NSObject {
     func clearCache() { imageCache.removeAll() }
   
     
-  func downloadImageFromURL(_ urlString: String, emptyCache: Bool = false, completion: ((_ success: Bool, _ image: UIImage?, _ imageURL: String) -> Void)?) {
+  func downloadImageFromURL(_ urlString: String, completion: ((_ success: Bool, _ image: UIImage?, _ imageURL: String) -> Void)?) {
         // do we have this cached?
     
-    if emptyCache {
-      print("очищаем кэш, количество:\(imageCache.count)")
-
-      imageCache.removeAll()
-    }
-    
+ 
         if let cachedImage = cachedImageForURL(urlString) {
             DispatchQueue.main.async(execute: {completion?(true, cachedImage, urlString) })
         } else if let url = URL(string: urlString) { // download from URL asynchronously
@@ -62,5 +56,7 @@ class ImageManager: NSObject {
             downloadTask.resume()
         } else { completion?(false, nil,"") }
     }
+  
+
     
 }

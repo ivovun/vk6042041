@@ -10,12 +10,8 @@ import Foundation
 import UIKit
 
 // MARK: UIView extensions
-class fadeViewForActivivtyIndicator: UIView {
-  
-}
-class activityIndicatorForView: UIActivityIndicatorView {
-  
-}
+class fadeViewForActivivtyIndicator: UIView {}
+class activityIndicatorForView: UIActivityIndicatorView {}
 
 extension UIView {
   

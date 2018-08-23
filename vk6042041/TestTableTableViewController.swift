@@ -73,6 +73,8 @@ class TestTableTableViewController: UITableViewController {
     }  else if segue.identifier == ConstantsStruct.SegueIdentifiers.SHOW_COLLECTION_VIEW_SEARCH {
       if let SVC = segue.destination as? SearchCollectionViewController {
         SVC.searchParameters = ConstantsStruct.SearchesDefaults.SearchParameters
+      } else if let SVC2 = segue.destination as? SearchViewController {
+        SVC2.searchParameters = ConstantsStruct.SearchesDefaults.SearchParameters
       }
     }
   }

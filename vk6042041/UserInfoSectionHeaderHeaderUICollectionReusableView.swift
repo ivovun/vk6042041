@@ -8,7 +8,8 @@
 
 import UIKit
 
-class UserInfoSectionHeaderUICollectionReusableView: UICollectionReusableView {
+class UserInfoSectionHeaderUICollectionReusableView: UICollectionReusableView, TypeWithOptional_user_Property {
+ 
   
  
   @IBOutlet weak var userPhoto_200: UIImageView!
@@ -17,14 +18,14 @@ class UserInfoSectionHeaderUICollectionReusableView: UICollectionReusableView {
   @IBOutlet weak var last_name: UILabel!
   @IBOutlet weak var first_name: UILabel!
   @IBOutlet weak var screen_name: UILabel!
-  var user: User! {
+  var user: User? {
     didSet {
-      if superview?.window != nil {
+      if superview?.window != nil && user != nil {
         
-        last_name.text = user.last_name
-        first_name.text = user.first_name
-        screen_name.text = user.screen_name
-        bdate.text = user.bdate 
+        last_name.text = user!.last_name
+        first_name.text = user!.first_name
+        screen_name.text = user!.screen_name
+        bdate.text = user!.bdate
         age.text = ""
         
         

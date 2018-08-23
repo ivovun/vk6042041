@@ -21,30 +21,24 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
   // Array of Users
   // and corresponds to our collection view
   var foundUsers:[User]? = []
-  
-//  let contentOffset_KeyPath = "frame"
-  
-  
-  
-  var itsAFirstCell = true
-   var lastSearchTime = DispatchTime.now()
+  var lastSearchTime = DispatchTime.now()
   var itIsAFirstApearanceOfTheView = true
   var oldScrollViewContentOffsetY: CGFloat = 0.0
-   var needCalculateItemSize = true
+  var needCalculateItemSize = true
   var itemWidth: CGFloat = 0.0
   var showStatusBar = false {
     didSet{
       setNeedsStatusBarAppearanceUpdate()
-//      collectionView?.collectionViewLayout.invalidateLayout()
-//      print("showStatusBar = \(showStatusBar),  prefersStatusBarHidden = \(prefersStatusBarHidden)")
     }
   }
-//  let statusBarHeight = UIApplication.shared.statusBarFrame.height
-
-  
   
   //добавил протокол и свойство comeBackFromUserDetail  ,   так как при возврате от USER Detail система автоматически ставит navigationBar ( даже если он не виден - все равно isHidden == false ) и в результате на  phone X все съезжает collectionView frame из-за того что обнуляется свойство collectionView?.frame.origin.y == 0.0 когда в портрете
   var comeBackFromUserDetail = false
+  
+  func setComeBackFromUserDetailToTrue() {
+    comeBackFromUserDetail = true
+  }
+
   
   // public part of our Model
   // when this is set
@@ -56,14 +50,10 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
        (view.window != nil) этот вариант не подойдет
        т.к. searchParameters может изменяться из контролера в котором фильтр поиска изменяется
        */
-         searchForUsers(true)
-     }
+      searchForUsers(true)
+    }
   }
-  
-  
-  func setComeBackFromUserDetailToTrue() {
-    comeBackFromUserDetail = true
-  }
+ 
   
   // MARK: Updating the Collection view
   func searchForUsers(_ newSearch: Bool = false) {
@@ -89,10 +79,9 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
       foundUsers?.removeAll()
       collectionView?.reloadData()
     }
- 
-    searchParameters[VK_API_OFFSET] = foundUsers?.count ?? 0
     
-
+    searchParameters[VK_API_OFFSET] = foundUsers?.count ?? 0
+ 
     print("Парамеры поиска \(searchParameters)" )
     
     var request = VKApi.users().search(searchParameters)
@@ -108,7 +97,7 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
     request?.requestTimeout = 10
     request?.execute(resultBlock: { [weak self] (response: VKResponse?) in
       
-       self?.view.removeActivitiIndicator()
+      self?.view.removeActivitiIndicator()
       
       guard let jsonString = response?.responseString ,
         let data = jsonString.data(using: .utf8)
@@ -121,7 +110,6 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
         
         newItems = info.response.items
         
- 
         self?.foundUsers = (self?.foundUsers ?? [User]()) + newItems
         print( "Количество пользователей = \(self?.foundUsers?.count ?? 0)")
         self?.collectionView?.reloadData()
@@ -150,95 +138,25 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
       request = nil
       } , errorBlock: { (error : Error?) in
         print("error = \(String(describing: error))")
-      request = nil
+        request = nil
     })
-
-   }
+    
+  }
   
   // Added after lecture for REFRESHING
   @IBAction func refresh(_ sender: UIRefreshControl) {
     searchForUsers()
   }
   
-  
-//  @objc private func swipeUpOrDown(swipe: UISwipeGestureRecognizer) {
-//
-//    collectionView?.isScrollEnabled = true
-//  }
-  
-//  lazy var panGesture =  UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture: )))
-  
-//  @objc private func handlePanGesture(gesture: UIPanGestureRecognizer  ) {
-//
-//    if gesture.state == .ended {
-//      collectionView?.isScrollEnabled = true
-//    }
-//
-//  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
-    //collectionView?.contentInsetAdjustmentBehavior =  .never
-    
     calculateItemSize()
-    
-//    addCollectionViewObserver()
     
     self.navigationController?.hidesBarsOnSwipe = true
     
-//    panGesture.delegate = self
-//    collectionView?.addGestureRecognizer(panGesture)
-    
-//    let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpOrDown(swipe:)))
-//    upSwipe.direction = .up
-//    self.collectionView?.addGestureRecognizer(upSwipe )
-//
-//    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpOrDown(swipe:)))
-//    downSwipe.direction = .down
-//    self.collectionView?.addGestureRecognizer(downSwipe )
-    
-//    for gesture in (self.collectionView?.gestureRecognizers)!
-//    {
-//      // get the good one, i discover there are 2
-////      if(gesture is UISwipeGestureRecognizer)
-////      {
-////        // replace delegate by yours (Do not forget to implement the gesture protocol)
-////        (gesture as! UISwipeGestureRecognizer).delegate = self
-////        print(" gesture = \(gesture)")
-////      }
-//
-//
-////      if  (gesture.classForCoder.description() ==  "UIScrollViewPanGestureRecognizer")
-////      {
-////        (gesture ).require(toFail: pinchGesture)
-//////        gesture.isEnabled = false
-////        print(" gesture! = \(gesture)")
-////
-////        //      myUIScrollViewPagingSwipeGestureRecognizer = otherGestureRecognizer
-////        //      return true
-////      }
-//////
-////
-////          if  (gesture.classForCoder.description() ==  "UIScrollViewPagingSwipeGestureRecognizer")
-////          {
-////            gesture.require(toFail: pinchGesture)
-//////            gesture.isEnabled = false
-////            print(" gesture! = \(gesture)")
-////
-////      //      myUIScrollViewPagingSwipeGestureRecognizer = otherGestureRecognizer
-////            //      return true
-////          }
-//
-//    }
-
-    
-//    self.navigationController?.navigationBar.alpha = 0.15
-    //navigationController?.view.backgroundColor = UIColor.clear
-
   }
- 
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
@@ -251,26 +169,23 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
     // иначе съезжает наверх
     //  Добавил анимацию, чтобы плавно делал calculateNewCollectionFrameOrigin_and_CollectionFrame
     //UIView.animate(withDuration: 0.5, animations: {self.calculateNewCollectionFrameOrigin_and_CollectionFrame()})
- 
   }
   
- 
-    // MARK: - Navigation
+  // MARK: - Navigation
+  @IBOutlet weak var searchBar: UISearchBar!
   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if segue.identifier == ConstantsStruct.SegueIdentifiers.SHOW_USER_INFO, let row = sender as? Int {
       if let userVC = segue.destination as? UserInfoCollectionViewController {
         userVC.user = foundUsers![row]
-
       }
-     }
-   }
- 
-  // MARK: UICollectionViewDataSource
+    }
+  }
   
+  // MARK: UICollectionViewDataSource
   
   // MARK: UICollectionViewDelegate
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -278,13 +193,9 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
   }
   // MARK: Sizing
   override var prefersStatusBarHidden: Bool {
-//    if let navCon = navigationController {
-//      return navCon.navigationBar.isHidden
-//    }
     if showStatusBar {
       return false
     }
- 
     return true
   }
   
@@ -292,11 +203,7 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
     didSet{
       ConstantsStruct.SearchesDefaults.numberOfPhotosColumns = numberOfPhotosColumns
       needCalculateItemSize = true
-//      UIView.animate(withDuration: 1.95) {
-        self.calculateItemSize()
-
-//      }
-      //collectionView?.collectionViewLayout.invalidateLayout()
+      self.calculateItemSize()
     }
   }
   
@@ -309,58 +216,22 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
     }
   }
   
-//  func addCollectionViewObserver() {
-//    //https://www.youtube.com/watch?v=OlpCyPcLSp4
-//    collectionView?.addObserver(self, forKeyPath: contentOffset_KeyPath, options: [.old, .new], context: nil)
-//  }
-  
-//  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-////    if let keypath == keyPath,  keypath == contentOffset_KeyPath, let collectionView == object as? UICollectionView {
-//    if let keypath = keyPath, keypath == contentOffset_KeyPath, let collectionView = object as? UICollectionView {
-//
-//      // dbltj https://www.youtube.com/watch?v=OlpCyPcLSp4  14:11
-//      if collectionView.isScrollEnabled == false {
-//        collectionView.contentOffset.y = fixedCollectionViewOffsetY
-//      }
-//    }
-//
-//
-//  }
- 
-//  deinit {
-//    collectionView?.removeObserver(self, forKeyPath: contentOffset_KeyPath)
-//  }
-  
   var zoomingNumber: CGFloat = 0.0
-//  var fixedCollectionViewOffsetY: CGFloat = 0.0
+  //  var fixedCollectionViewOffsetY: CGFloat = 0.0
   @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
     
- 
- //    if  sender.state == .began ||  sender.state == .possible || sender.state == .recognized {
-      if  sender.state ==   .began  {
-        
-        //  делаем скролл в самое начало  так ка только в этом случае нормально - плавно идет анимация увеличения размера клетки или уменьшения
-        self.showStatusBar = false
-//        UIView.animate(withDuration: 1.0) {
-          self.navigationController?.setNavigationBarHidden(true, animated: false)
-
-          self.collectionView?.contentOffset.y = 0.0 //- UIApplication.shared.statusBarFrame.height
-
-//        }
-
-        
-//      collectionView?.isScrollEnabled = false
-//        collectionView?.isUserInteractionEnabled = false
-//  //      collectionView?.delaysContentTouches
-//      //  collectionView?.canCancelContentTouches = false
-////      self.fixedCollectionViewOffsetY = self.collectionView!.contentOffset.y
-//      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 * ConstantsStruct.Durations.pinchCellResizeInSeconds) {
-//        self.collectionView?.isScrollEnabled = true
-//        self.collectionView?.isUserInteractionEnabled = true
-//       }
-        
+    //    if  sender.state == .began ||  sender.state == .possible || sender.state == .recognized {
+    if  sender.state ==   .began  {
+      
+      //  делаем скролл в самое начало  так ка только в этом случае нормально - плавно идет анимация увеличения размера клетки или уменьшения
+      
+       // Добалвяем навигейшн бар и статус бар , так как если их не будет и сделать очень мелкие клетки то все клетки могут поместиться на одной странице и в этом случае не получится вызвать навигейшшн  бар через перелистование вниз, поэтом у  делаем его сразу видимым
+      self.showStatusBar = true
+      self.navigationController?.setNavigationBarHidden(false, animated: false)
+      
+      self.collectionView?.contentOffset.y = 0.0 //- UIApplication.shared.statusBarFrame.height
     }
-
+    
     if sender.state == .began {
       maxZoomingScale = 1.0
       minZoomingScale = 1.0
@@ -373,26 +244,12 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
       let difMax = abs(maxZoomingScale - 1)
       let difMin = abs(minZoomingScale - 1)
       
-      numberOfPhotosColumns = min(10,max( numberOfPhotosColumns + ( difMin > difMax ? 1 : -1) , 1))
+      numberOfPhotosColumns = min(ConstantsStruct.SearchParameters.maxNumberOfColumns ,max( numberOfPhotosColumns + ( difMin > difMax ? 1 : -1) , 1))
       
       print(" difMax = \(difMax), difMin = \(difMin)")
     }
- 
-//   //   РАБОТАЕТ
-//    let dif = (1.0 - sender.scale) * 7
-//    zoomingNumber += dif
-//    zoomingNumber = max(1, min(100,zoomingNumber))
-//    numberOfPhotosColumns = min(10,max( Int(floor(zoomingNumber / 10)), 1))
-//
-//
-//     print(" sender = \(sender.scale),  numberOfPhotosColumns = \(numberOfPhotosColumns), maxZoomingScale = \(maxZoomingScale), minZoomingScale = \(minZoomingScale)")
-    
-    
-    
-    
-    
-     sender.scale = 1
-    }
+    sender.scale = 1
+  }
   
   private func calculateItemSize() {
     
@@ -407,8 +264,6 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
     UIView.animate(withDuration: ConstantsStruct.Durations.pinchCellResizeInSeconds) {
       layout.itemSize = CGSize(width: self.itemWidth, height: self.itemWidth)
     }
-    
-    
   }
   
   var windowTraitParameters: ( maxSize: CGFloat, minSize: CGFloat, inPortrait: Bool,topPadding:CGFloat, rightPadding:CGFloat, maxAllowableCollectionViewHeight: CGFloat, maxAllowableCollectionViewWidth: CGFloat)
@@ -434,17 +289,15 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
       minSize = window!.frame.height
     }
     
-    
     if inPortrait {
       maxAllowableCollectionViewHeight = maxSize
       maxAllowableCollectionViewHeight = maxAllowableCollectionViewHeight + itemWidth / 5
-
+      
       maxAllowableCollectionViewWidth = minSize
     } else {
       maxAllowableCollectionViewHeight = minSize
       maxAllowableCollectionViewWidth = maxSize
     }
-    
     
     if let navBar = navigationController?.navigationBar {
       if !navBar.isHidden {
@@ -501,8 +354,6 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
       }
       
     }
-    
-    
     //    print(" <calculateNewCollectionFrameOrigin_and_CollectionFrame==================>>>>>>)")
     //    print("collectionView?.frame.origin.y = \(collectionView?.frame.origin.y ?? 0), view.safeAreaInsets.top = \(view.safeAreaInsets.top) maxAllowableCollectionViewHeight = \(windowTraitParameters.maxAllowableCollectionViewHeight), collectionView?.frame.height = \(collectionView!.frame.height)")
   }
@@ -511,7 +362,7 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
   override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     
     var navBarHeight:CGFloat = self.navigationController!.navigationBar.frame.size.height
-//    var navBarVisibilityHasChanged = false
+    //    var navBarVisibilityHasChanged = false
     if oldScrollViewContentOffsetY != scrollView.contentOffset.y {
       
       if oldScrollViewContentOffsetY  >  scrollView.contentOffset.y  + windowTraitParameters.maxAllowableCollectionViewHeight / 2 {
@@ -520,66 +371,30 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         showStatusBar = true
         navBarHeight = 0.0
-//        navBarVisibilityHasChanged = true
+        //        navBarVisibilityHasChanged = true
         
       }  else if oldScrollViewContentOffsetY  + windowTraitParameters.maxAllowableCollectionViewHeight / 2 < scrollView.contentOffset.y {
         print("scroll UP")
         comeBackFromUserDetail = false
-
+        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         showStatusBar = false
-
-//        navBarVisibilityHasChanged = true
-
+        
+        //        navBarVisibilityHasChanged = true
+        
       }
     }
     
-//    if  navBarVisibilityHasChanged == true {
-//      calculateNewCollectionFrameOrigin_and_CollectionFrame()
-//      collectionView?.collectionViewLayout.invalidateLayout()
-//
-//    }
-
-    
     oldScrollViewContentOffsetY = scrollView.contentOffset.y + navBarHeight
     
-//    print(" <<scrollViewDidEndDecelerating ===================>>")
-//    print("  collectionView?.frame.height = \(String(describing: collectionView?.frame.height))" )
-//    print(" collectionView.contentOffset.y = \( collectionView?.contentOffset.y ?? 0))")
-//    print(" collectionView.frame.origin.y = \( collectionView?.frame.origin.y ?? 0)")
-//    print(" oldScrollViewContentOffsetY = \( oldScrollViewContentOffsetY  ) beginCollectionViewHeght = \(windowTraitParameters.maxAllowableCollectionViewHeight)")
-//    print(" view.safeAreaInsets.top = \( view.safeAreaInsets.top  ) bottom = \(view.safeAreaInsets.bottom) left = \(view.safeAreaInsets.left) right = \(view.safeAreaInsets.right) ")
+    //    print(" <<scrollViewDidEndDecelerating ===================>>")
+    //    print("  collectionView?.frame.height = \(String(describing: collectionView?.frame.height))" )
+    //    print(" collectionView.contentOffset.y = \( collectionView?.contentOffset.y ?? 0))")
+    //    print(" collectionView.frame.origin.y = \( collectionView?.frame.origin.y ?? 0)")
+    //    print(" oldScrollViewContentOffsetY = \( oldScrollViewContentOffsetY  ) beginCollectionViewHeght = \(windowTraitParameters.maxAllowableCollectionViewHeight)")
+    //    print(" view.safeAreaInsets.top = \( view.safeAreaInsets.top  ) bottom = \(view.safeAreaInsets.bottom) left = \(view.safeAreaInsets.left) right = \(view.safeAreaInsets.right) ")
   }
-
-  //MARK:  UIGestureRecognizerDelegate
-  
-//  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//    //    if gestureRecognizer == .
-////    print(" gestureRecognizer = \(gestureRecognizer)")
-////    print(" otherGestureRecognizer = \(otherGestureRecognizer)")
-//
-//
-////    if otherGestureRecognizer == self.pinchGesture {
-////      print("!!!")
-////    }
-//
-//
-////    if (gestureRecognizer.classForCoder.description() ==  "UIScrollViewPagingSwipeGestureRecognizer")  {
-////      print("!!!")
-////    }
-//
-//    if  gestureRecognizer  ==  self.panGesture  && otherGestureRecognizer == self.pinchGesture {
-//      return true
-//    }
-//        print(" gestureRecognizer = \(gestureRecognizer)")
-//        print(" otherGestureRecognizer = \(otherGestureRecognizer)")
-//
-//    //let x = pinchGesture.classForCoder
-//    return false
-//  }
-
 }
-
 
 // MARK UICollectionViewDataSource
 extension SearchCollectionViewController {
@@ -597,25 +412,9 @@ extension SearchCollectionViewController {
     
     // Configure the cell
     cell.rowNumber = indexPath.row + 1
-    cell.user = foundUsers?[indexPath.row]
-    updateImageForCell(cell, inCollectionView: collectionView, atIndexPath: indexPath)
-    
+    cell.user = foundUsers?[indexPath.item]
+ 
     return cell
-  }
-  
-  func updateImageForCell(_ cell: FoundUserCollectionViewCell, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: IndexPath) {
-    let imageView = cell.viewWithTag(kLazyLoadCellImageViewTag) as! UIImageView
-    imageView.image = kLazyLoadPlaceholderImage
-    // load image.
-    
-    if let imageURL = cell.user?.photo_200 {
-      ImageManager.sharedInstance.downloadImageFromURL(imageURL, emptyCache: itsAFirstCell) { (success, image,imageURL ) -> Void in
-        if success && image != nil && cell.user!.photo_200 == imageURL {
-          imageView.image = image
-        }
-      }
-    }
-    itsAFirstCell = false
   }
  
   override func viewWillLayoutSubviews() {
@@ -624,39 +423,8 @@ extension SearchCollectionViewController {
     if oldScrollViewContentOffsetY == 0.0 {
       oldScrollViewContentOffsetY = (collectionView?.contentOffset.y)!
     }
-    calculateNewCollectionFrameOrigin_and_CollectionFrame()
+//    calculateNewCollectionFrameOrigin_and_CollectionFrame()
   }
-  
-  
-  
-// MARK: - Lazy Loading of cells
- 
-//  override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//
-//    /*  раньше планировал делать следующий запрос когда досигли дна
-//    // взято тут https://stackoverflow.com/questions/7706152/iphone-knowing-if-a-uiscrollview-reached-the-top-or-bottom
-//    let scrollViewHeight = scrollView.frame.size.height
-//    let scrollContentSizeHeight = scrollView.contentSize.height
-//    let scrollOffset = scrollView.contentOffset.y
-//
-//    //    print("scrollOffset + scrollViewHeight = \(scrollOffset + scrollViewHeight), scrollContentSizeHeight = \(scrollContentSizeHeight)")
-//
-//    if (scrollOffset == 0)
-//    {
-//      // then we are at the top
-//    }
-//    else if (scrollOffset + scrollViewHeight >= scrollContentSizeHeight )
-//    {
-//      // then we are at the end
-//      print("достигнули дна ")
-//      //searchForUsers()
-//
-//    }
-//     //    print("////////////////////////////////////////")
-//    //    print("scrollContentSizeHeight = \(scrollContentSizeHeight)")
-//    //    print("scrollOffset + scrollViewHeight = \(scrollOffset + scrollViewHeight)")
-//    */
-//   }
   
 }
 
