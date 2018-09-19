@@ -371,12 +371,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gAa-ah-YUr">
-                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gAa-ah-YUr">
+                                <rect key="frame" x="0.0" y="144" width="375" height="690"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="690" id="2Ly-rN-3ZA"/>
-                                    <constraint firstAttribute="width" constant="375" id="Z30-d8-wrW"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hqe-YW-NxQ">
                                     <size key="itemSize" width="320" height="224"/>
@@ -423,14 +423,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Z30-d8-wrW"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="WoD-dn-JDA" id="KId-MF-org"/>
                                     <outlet property="delegate" destination="WoD-dn-JDA" id="H5X-eT-m3K"/>
+                                    <outletCollection property="gestureRecognizers" destination="1YO-WT-icC" appends="YES" id="eLK-pJ-ktn"/>
                                 </connections>
                             </collectionView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jbz-SH-uM5">
@@ -440,27 +436,35 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="gAa-ah-YUr" firstAttribute="leading" secondItem="QEC-UD-fQ2" secondAttribute="leading" id="5HQ-lG-ecK"/>
-                            <constraint firstItem="gAa-ah-YUr" firstAttribute="top" secondItem="Qcw-Pp-xoc" secondAttribute="bottom" id="BxV-6z-hdc"/>
+                            <constraint firstItem="gAa-ah-YUr" firstAttribute="top" secondItem="Qcw-Pp-xoc" secondAttribute="bottom" constant="56" id="BxV-6z-hdc"/>
                             <constraint firstAttribute="trailing" secondItem="jbz-SH-uM5" secondAttribute="trailing" id="S9E-7n-4rR"/>
-                            <constraint firstItem="jbz-SH-uM5" firstAttribute="top" secondItem="gAa-ah-YUr" secondAttribute="top" id="jWA-cc-DqJ"/>
+                            <constraint firstItem="jbz-SH-uM5" firstAttribute="top" secondItem="Qcw-Pp-xoc" secondAttribute="bottom" id="jWA-cc-DqJ"/>
                             <constraint firstAttribute="trailing" secondItem="gAa-ah-YUr" secondAttribute="trailing" id="oUi-od-Ufd"/>
                             <constraint firstItem="jbz-SH-uM5" firstAttribute="leading" secondItem="QEC-UD-fQ2" secondAttribute="leading" id="pvR-HS-ol3"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1YO-WT-icC" appends="YES" id="WL8-xf-OZW"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="collectionHeightConstraint" destination="2Ly-rN-3ZA" id="TOI-Gv-72d"/>
                         <outlet property="collectionLeadingConstraint" destination="5HQ-lG-ecK" id="0BD-bS-EvZ"/>
                         <outlet property="collectionTopConstraint" destination="BxV-6z-hdc" id="JxE-RK-GMY"/>
                         <outlet property="collectionTrailingConstraint" destination="oUi-od-Ufd" id="GtB-Zg-Ki7"/>
-                        <outlet property="collectionWidthConstraint" destination="Z30-d8-wrW" id="kcl-zn-JV4"/>
                         <outlet property="foundUsersCollectionView" destination="gAa-ah-YUr" id="9j6-Vj-coP"/>
                         <outlet property="searchBar" destination="jbz-SH-uM5" id="1r3-ql-3LY"/>
                         <outlet property="searchBarTopConstraint" destination="jWA-cc-DqJ" id="ELs-Fm-0LX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sfg-ct-ucq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="1YO-WT-icC">
+                    <connections>
+                        <action selector="handlePinch:" destination="WoD-dn-JDA" id="aN6-z7-xfC"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2661.5999999999999" y="1277.8110944527737"/>
         </scene>

@@ -18,8 +18,6 @@
 		5065A8B01F26FDCF007B42DC /* ApiCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */; };
 		5065A8B41F271057007B42DC /* TestTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065A8B31F271057007B42DC /* TestTableTableViewController.swift */; };
 		50686E4A2115B87B009ECF8B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50686E492115B87B009ECF8B /* SearchViewController.swift */; };
-		50686E4C2115BC5D009ECF8B /* UsersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50686E4B2115BC5D009ECF8B /* UsersPresenter.swift */; };
-		50686E4E2115BC87009ECF8B /* UsersDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50686E4D2115BC87009ECF8B /* UsersDatasource.swift */; };
 		5085C00C2102E0F8006FC14E /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5085C00B2102E0F8006FC14E /* extensions.swift */; };
 		50888AC221086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50888AC121086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift */; };
 		509E41A41F29EA48001BA998 /* ConstantsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509E41A31F29EA48001BA998 /* ConstantsStruct.swift */; };
@@ -49,8 +47,6 @@
 		5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCallViewController.swift; sourceTree = "<group>"; };
 		5065A8B31F271057007B42DC /* TestTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableTableViewController.swift; sourceTree = "<group>"; };
 		50686E492115B87B009ECF8B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		50686E4B2115BC5D009ECF8B /* UsersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersPresenter.swift; sourceTree = "<group>"; };
-		50686E4D2115BC87009ECF8B /* UsersDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersDatasource.swift; sourceTree = "<group>"; };
 		5085C00B2102E0F8006FC14E /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		50888AC121086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Full_ImageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		509E41A31F29EA48001BA998 /* ConstantsStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsStruct.swift; sourceTree = "<group>"; };
@@ -132,8 +128,6 @@
 		5098F60B211942EB00C736F2 /* var1 */ = {
 			isa = PBXGroup;
 			children = (
-				50686E4B2115BC5D009ECF8B /* UsersPresenter.swift */,
-				50686E4D2115BC87009ECF8B /* UsersDatasource.swift */,
 				50686E492115B87B009ECF8B /* SearchViewController.swift */,
 				50C26FAE212D6A2A0002F642 /* vk6042041-Bridging-Header.h */,
 			);
@@ -319,7 +313,6 @@
 				50F318191F359CB300F42F2A /* UsersInfo.swift in Sources */,
 				50888AC221086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift in Sources */,
 				50686E4A2115B87B009ECF8B /* SearchViewController.swift in Sources */,
-				50686E4C2115BC5D009ECF8B /* UsersPresenter.swift in Sources */,
 				5058F9C31F23579E006F1E3B /* UIViewControllerExtensions.swift in Sources */,
 				5058F9C41F23579E006F1E3B /* VKStartScreenVC.swift in Sources */,
 				50C1D9FA2101E3480097FC49 /* UserInfoSectionHeaderHeaderUICollectionReusableView.swift in Sources */,
@@ -327,7 +320,6 @@
 				5058F9C21F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift in Sources */,
 				5065A8B41F271057007B42DC /* TestTableTableViewController.swift in Sources */,
 				505A53E51F2D996000D12323 /* User.swift in Sources */,
-				50686E4E2115BC87009ECF8B /* UsersDatasource.swift in Sources */,
 				50E097CC1F4ADB1800B05A50 /* FoundUserCollectionViewCell.swift in Sources */,
 				5065A8B01F26FDCF007B42DC /* ApiCallViewController.swift in Sources */,
 				509F0D7420FB8C83008D4C33 /* Timers.swift in Sources */,

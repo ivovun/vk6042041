@@ -34,6 +34,13 @@ struct ConstantsStruct {
     static let Small: CGFloat = 10.0
   }
   
+  
+  struct Sizes {
+    static let searchBarHeight: CGFloat = 56.0
+    static let constraintTolerance: CGFloat = 10.0
+
+  }
+  
  
   struct SegueIdentifiers {
     static let API_CALL = "API_CALL"
@@ -61,7 +68,8 @@ struct ConstantsStruct {
   }
   
   struct Durations {
-    static let pinchCellResizeInSeconds = 1.5
+    static let pinchCellResizeInSeconds = 0.5
+    static let correctContentOffsetForPinchOrRotate = 0.1
   }
   
   struct Images {
