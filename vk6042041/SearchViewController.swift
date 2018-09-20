@@ -87,9 +87,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   //добавил протокол и свойство comeBackFromUserDetail  ,   так как при возврате от USER Detail система автоматически ставит navigationBar ( даже если он не виден - все равно isHidden == false ) и в результате на  phone X все съезжает collectionView frame из-за того что обнуляется свойство collectionView?.frame.origin.y == 0.0 когда в портрете
   var comeBackFromUserDetail = false
   
-  func setComeBackFromUserDetailToTrue() {
-    comeBackFromUserDetail = true
-  }
+  func setComeBackFromUserDetailToTrue() { comeBackFromUserDetail = true }
   
   private func itemWidthFor(newNumberOfPhotosColumns : Int) -> CGFloat {
     let superViewBounds = foundUsersCollectionView.superview!.bounds
@@ -138,7 +136,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     var cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight: CGFloat = 0.0
     
     if let navigationBar = self.navigationController?.navigationBar {
-     cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight =  navigationBar.isHidden ?  UIApplication.shared.keyWindow!.safeAreaInsets.top : navigationBar.frame.height + UIApplication.shared.statusBarFrame.height + searchBar.frame.height
+     cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight =  navBarIsHidden ?  UIApplication.shared.keyWindow!.safeAreaInsets.top : navigationBar.frame.height + UIApplication.shared.statusBarFrame.height + searchBar.frame.height
     } else {
       cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight =  0.0
     }
@@ -435,9 +433,19 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     foundUsersCollectionView.addObserver(self, forKeyPath: nameOf_bounds_keyPath, options: [.new, .old], context: nil)
   }
   
+  private var navBarIsHidden = false {
+    didSet{
+      // navBarIsHidden - выносим в отдельную перемнную так как navigationBat.isHidden - не всегда выдает правильное значение видимо из-за анимации
+      // то есть на самом деле он уже начал уибраться но  navigationBat.isHidden =  false, поэтому заводим отдельную переменную navBarIsHidden
+      navigationController?.setNavigationBarHidden(navBarIsHidden, animated: navBarIsHidden)
+    }
+  }
+ 
   private func setShowHideNavBar( show: Bool) {
     
-    navigationController?.setNavigationBarHidden(!show, animated: false)
+    
+    navBarIsHidden = !show
+    //navigationController?.setNavigationBarHidden(!show, animated: !show)
     
     // false - так как уже в нути анимационного блока если поставить true - проблемы будут с расчетом высоты коллекции
     showStatusBar = show
