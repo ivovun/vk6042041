@@ -40,8 +40,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
- 
     foundUsersCollectionView.decelerationRate = foundUsersCollectionView.decelerationRate / 10
     
     foundUsersCollectionView.isPagingEnabled = false
@@ -137,13 +135,15 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     {
       print("====> ДО ИЗМЕНЕНИЯ self.foundUsersCollectionView.contentOffset.y = \(self.foundUsersCollectionView.contentOffset.y)")
       layout.itemSize = CGSize(width: self.itemWidth, height: self.itemWidth)
+      
+      self.setShowNavBarIfFirstPageContainsAllCells()
+      
       self.recalculateConstraints_And_FirstCell_And_OffsetY_WhenBoundsChangeOrItemWidthChanges()
     }
     
   }
  
   var cvp_numberOfColumnsForCurrentDeviceOrientation: Int {
-    //return Int( floor(foundUsersCollectionView.frame.width / itemWidth))
     let freeSpace = foundUsersCollectionView.superview!.bounds.width - max(UIApplication.shared.keyWindow!.safeAreaInsets.right, UIApplication.shared.keyWindow!.safeAreaInsets.left)
     
     //print(".superview!.bounds.width=\(foundUsersCollectionView.superview!.bounds.width), max(.safeAreaInsets.right, left)=\(max(UIApplication.shared.keyWindow!.safeAreaInsets.right, UIApplication.shared.keyWindow!.safeAreaInsets.left)), freeSpace=\(freeSpace), numberOfColumns=\(Int( floor( freeSpace / itemWidth)))")
@@ -160,8 +160,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     
     if let navigationBar = self.navigationController?.navigationBar {
       
-      //return navigationBar.isHidden ?  safeArea().layoutFrame.origin.y : navigationBar.frame.height + UIApplication.shared.statusBarFrame.height + searchBar.frame.height
-      cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight =  navigationBar.isHidden ?  UIApplication.shared.keyWindow!.safeAreaInsets.top : navigationBar.frame.height + UIApplication.shared.statusBarFrame.height + searchBar.frame.height
+       cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight =  navigationBar.isHidden ?  UIApplication.shared.keyWindow!.safeAreaInsets.top : navigationBar.frame.height + UIApplication.shared.statusBarFrame.height + searchBar.frame.height
     } else {
       cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight =  0.0
     }
@@ -173,7 +172,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   
   var cvp_numberOfRowsForCurrentDeviceOrientation: Int {
     
-     return Int(floor( (cvp_maxAllowableCollectionViewHeight ) /  itemWidth ))
+     return Int(floor( (cvp_maxAllowableCollectionViewHeight + itemWidth * ConstantsStruct.Sizes.maxPortionOfCellHeightThatCanBeClipped ) /  itemWidth ))
   }
  
  
@@ -192,25 +191,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     
     return   cvp_numberOfRowsAboveFirstVisibleCell * itemWidth
   }
-  
-//  var cvp_collectionTopConstraintConstant: CGFloat  {
-//    if navigationController!.isNavigationBarHidden {
-//
-//      return UIApplication.shared.keyWindow!.safeAreaInsets.top == 0.0 ? (foundUsersCollectionView.superview!.bounds.height - CGFloat( cvp_numberOfRowsForCurrentDeviceOrientation) * itemWidth) / 2.0  : 0.0
-//    }
-//
-//    return   ConstantsStruct.Sizes.searchBarHeight
-//  }
-  
+ 
   var cvp_numberOfVeryLastCell : Int { return max(0,(foundUsers?.count ?? 0) - 1)  }
   
   var cvp_maxPossibleNumberOfVisibleCellsOnPage : Int  { return cvp_numberOfColumnsForCurrentDeviceOrientation * cvp_numberOfRowsForCurrentDeviceOrientation }
-
  
   var wasFirstCalculationOf_FirstVisibleCellNumber = false
-  
-
-  
+ 
   private func calculateFirstVisibleCellNumber_and_OffsetY_ifNeeded()
   {
     
@@ -245,8 +232,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
               
               self.foundUsersCollectionView.contentOffset.y =  self.observeSettingNewContentOffsetY(to: self.cvp_numberOfRowsAboveFirstVisibleCell * self.itemWidth)
               
-              
-              
+ 
               self.firstVisibleCellNumber = Int( self.cvp_numberOfRowsAboveFirstVisibleCell * CGFloat( self.cvp_numberOfColumnsForCurrentDeviceOrientation) )
 
             }
@@ -548,6 +534,34 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     foundUsersCollectionView.addObserver(self, forKeyPath: nameOf_bounds_keyPath, options: [.new, .old], context: nil)
   }
   
+  private func setShowHideNavBar( show: Bool) {
+    
+    navigationController?.setNavigationBarHidden(!show, animated: false)
+    
+    // false - так как уже в нути анимационного блока если поставить true - проблемы будут с расчетом высоты коллекции
+    showStatusBar = show
+    
+    //self.searchBar.isHidden = isUp
+    searchBarTopConstraint.constant = !show ? (-navigationController!.navigationBar.frame.height - searchBar.frame.height) * 2   : 0.0
+    
+  }
+  
+  private func setShowNavBarIfFirstPageContainsAllCells() {
+    if  cvp_numberOfVeryLastCell <=  cvp_maxPossibleNumberOfVisibleCellsOnPage {
+      setShowHideNavBar(show: true)
+    }
+  }
+  
+  private func setShowHideNavBarAfterPageWasChanged( isUp: Bool) {
+    
+    // сначала установим видимость или невидимость, чтобы можно быо рассчитать cvp_maxPossibleNumberOfVisibleCellsOnPage и cvp_numberOfVeryLastCell
+    self.setShowHideNavBar(show: !isUp)
+    
+    // а теперь пересчитаем заново и если все ячейки умещаются на первой странице то обязельно выведем навигейшн бар
+    self.setShowNavBarIfFirstPageContainsAllCells()
+
+  }
+
   private var pageWillBeTurnedUp: Bool? {
     didSet{
       
@@ -556,13 +570,24 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
         
           
           if let isUp = self.pageWillBeTurnedUp  {
-            self.navigationController?.setNavigationBarHidden(isUp, animated: false)
             
-            // false - так как уже в нути анимационного блока если поставить true - проблемы будут с расчетом высоты коллекции
-            self.showStatusBar = !isUp
+            self.setShowHideNavBarAfterPageWasChanged(isUp: isUp)
             
-            //self.searchBar.isHidden = isUp
-            self.searchBarTopConstraint.constant = isUp ? (-self.navigationController!.navigationBar.frame.height - self.searchBar.frame.height) * 2   : 0.0
+//            // сначала установим видимость, чтобы можно быо рассчитать cvp_maxPossibleNumberOfVisibleCellsOnPage и cvp_numberOfVeryLastCell
+//            self.setShowHideNavBar(show: !isUp)
+//
+//            // а теперь пересчитаем заново и если все ячейки умещаются на первой странице то обязельно выведем навигейшн бар
+//            if self.cvp_numberOfVeryLastCell <= self.cvp_maxPossibleNumberOfVisibleCellsOnPage {
+//              self.setShowHideNavBar(show: true)
+//            }
+            
+//            self.navigationController?.setNavigationBarHidden(isUp, animated: false)
+//
+//            // false - так как уже в нути анимационного блока если поставить true - проблемы будут с расчетом высоты коллекции
+//            self.showStatusBar = !isUp
+//
+//            //self.searchBar.isHidden = isUp
+//            self.searchBarTopConstraint.constant = isUp ? (-self.navigationController!.navigationBar.frame.height - self.searchBar.frame.height) * 2   : 0.0
             
           }
         
@@ -606,15 +631,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   }
   
   var lastContentOffset_Y_BeforPageBeginDragging:CGFloat = 0.0
-//  var fixedCollectionViewContentOffsetY: CGFloat = 0.0 {
-//    didSet{
-//
-//      if currentPinchState == .began || currentPinchState == .changed || currentPinchState == .possible {
-//        foundUsersCollectionView.contentOffset.y = oldValue
-//      }
-//    }
-//  }
-  
+ 
  
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     if let keyPath = keyPath, let collectionView = object as? UICollectionView {
@@ -634,15 +651,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
           
           recalculateConstraints_And_FirstCell_And_OffsetY_WhenBoundsChangeOrItemWidthChanges()
           
-          //collectionView.contentOffset.y = observeSettingNewContentOffsetY(to: 0.0) //  иногда в ландшавте когда делают пинч - то почему то  collectionView.contentOffset.y - улетает сильно в МИНУС  поэтому тут его обнуляем
-        }
+         }
         
         
-//        if !navigationController!.navigationBar.isHidden &&  -searchBarTopConstraint.constant <= searchBar.bounds.height {
-//          searchBarTopConstraint.constant = max(-searchBar.bounds.height, lastContentOffset_Y_BeforPageBeginDragging - foundUsersCollectionView.contentOffset.y)
-//          //collectionTopConstraint.constant = collectionHeightConstraint.constant + searchBarTopConstraint.constant
-//        }
-
+ 
       } else if keyPath == nameOf_bounds_keyPath {
         if oldBoundsWidth != collectionView.bounds.size.width {
           print(" bounds changed")
@@ -700,22 +712,37 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     
     
     if let isUp = pageWillBeTurnedUp {
+      
+      let maxQuantityOfCellsOnNextPage = Int(cvp_numberOfRowsForCurrentDeviceOrientation) * cvp_numberOfColumnsForCurrentDeviceOrientation
+      
+
       if isUp {
         
-        let numberOfShownRows = CGFloat( ceil(Double(( lastVisibleCellNumber + 1) / cvp_numberOfColumnsForCurrentDeviceOrientation)))
+        let remainsOfCells = foundUsers!.count - lastVisibleCellNumber - 1
         
+        var newFirstCellNumber = lastVisibleCellNumber + 1
+        
+        if remainsOfCells < maxQuantityOfCellsOnNextPage {
+          //  значит последняя страница
+          let numberOfRowsForAllContentSize = Int( ceil( scrollView.contentSize.height / itemWidth ))
+          let numberOfRowsAboveLastPage = numberOfRowsForAllContentSize - cvp_numberOfRowsForCurrentDeviceOrientation
+          newFirstCellNumber =   numberOfRowsAboveLastPage  * cvp_numberOfColumnsForCurrentDeviceOrientation
+          
+          
+        }
+ 
+        let numberOfShownRows = CGFloat( ceil(Double(( newFirstCellNumber ) / cvp_numberOfColumnsForCurrentDeviceOrientation)))
         targetContentOffset.pointee.y = observeSettingNewContentOffsetY(to: numberOfShownRows *  itemWidth)
-        
+
       } else {
         
-        let numberOfRowsInNextPage =   cvp_numberOfRowsForCurrentDeviceOrientation
-        let maxQuantityOfCellsInNextPage = Int(numberOfRowsInNextPage) * cvp_numberOfColumnsForCurrentDeviceOrientation
         
-        if maxQuantityOfCellsInNextPage > firstVisibleCellNumber {
+        if maxQuantityOfCellsOnNextPage > firstVisibleCellNumber {
+          //значит переходим на первую страницу
           targetContentOffset.pointee.y  = observeSettingNewContentOffsetY(to: 0.0)
         } else {
           
-          let numberOfCellsAboveNextPage = firstVisibleCellNumber   - maxQuantityOfCellsInNextPage
+          let numberOfCellsAboveNextPage = firstVisibleCellNumber   - maxQuantityOfCellsOnNextPage
           let numberOfRowsAboveNextPage = ceil(Double(numberOfCellsAboveNextPage  / cvp_numberOfColumnsForCurrentDeviceOrientation))
           targetContentOffset.pointee.y = observeSettingNewContentOffsetY(to: CGFloat(numberOfRowsAboveNextPage) * itemWidth)
           
