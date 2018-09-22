@@ -44,7 +44,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     //    searchBarBoundsY = (navigationController?.navigationBar.frame.height ?? 0.0) + UIApplication.shared.statusBarFrame.height
     addCollectionViewObserver()
     
-    numberOfPhotosColumns = ConstantsStruct.SearchesDefaults.numberOfPhotosColumns
+    numberOfPhotosColumnsForPortretToCalculateItemWidth = ConstantsStruct.SearchesDefaults.numberOfPhotosColumns
     
     searchForUsers()
     
@@ -74,13 +74,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   
   // MARK: Sizing
   
-  var numberOfPhotosColumns = 0 {
+  var numberOfPhotosColumnsForPortretToCalculateItemWidth = 0 {
     
     didSet{
-      ConstantsStruct.SearchesDefaults.numberOfPhotosColumns = numberOfPhotosColumns
+      ConstantsStruct.SearchesDefaults.numberOfPhotosColumns = numberOfPhotosColumnsForPortretToCalculateItemWidth
  
       
-      itemWidth = itemWidthFor(newNumberOfPhotosColumns: numberOfPhotosColumns)
+      itemWidth = itemWidthFor(newNumberOfPhotosColumns: numberOfPhotosColumnsForPortretToCalculateItemWidth)
       
       //    let superViewBounds = foundUsersCollectionView.superview!.bounds
       //    let minBoundsSize = superViewBounds.height > superViewBounds.width ? superViewBounds.width : superViewBounds.height
@@ -335,10 +335,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     } else if sender.state == .ended {
      let difMax = abs(maxZoomingScale - 1)
       let difMin = abs(minZoomingScale - 1)
-     let newNumberOfPhotosColumns  = min(ConstantsStruct.SearchParameters.maxNumberOfColumns ,max( numberOfPhotosColumns + ( difMin > difMax ? 1 : -1) , 1))
+     let newNumberOfPhotosColumns  = min(ConstantsStruct.SearchParameters.maxNumberOfColumns ,max( numberOfPhotosColumnsForPortretToCalculateItemWidth + ( difMin > difMax ? 1 : -1) , 1))
      let newItemWidth = itemWidthFor(newNumberOfPhotosColumns: newNumberOfPhotosColumns)
      if (newItemWidth + ConstantsStruct.Sizes.constraintTolerance) < cvp_maxAllowableCollectionViewHeight   { // высота фото не должна быть болььше высоты коллешн]вью
-         numberOfPhotosColumns = newNumberOfPhotosColumns
+         numberOfPhotosColumnsForPortretToCalculateItemWidth = newNumberOfPhotosColumns
        }
      //print(" difMax = \(difMax), difMin = \(difMin)")
     }
