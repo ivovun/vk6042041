@@ -18,15 +18,9 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   }
   var lastSearchTime = DispatchTime.now()
   var itIsAFirstApearanceOfTheView = true
-  var needCalculateItemSize = true
-  var itemWidth: CGFloat = 0.0 {
+   var itemWidth: CGFloat = 0.0 {
     didSet{
       print("-------------------------------------------------------------   --------------------------------------------\n ------new item size: = \(itemWidth)")
-    }
-  }
-  var showStatusBar = false {
-    didSet{
-      setNeedsStatusBarAppearanceUpdate()
     }
   }
   
@@ -50,7 +44,11 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     //    searchBarBoundsY = (navigationController?.navigationBar.frame.height ?? 0.0) + UIApplication.shared.statusBarFrame.height
     addCollectionViewObserver()
     
+    numberOfPhotosColumns = ConstantsStruct.SearchesDefaults.numberOfPhotosColumns
+    
     searchForUsers()
+    
+    
     
     constraints()
     
@@ -76,11 +74,32 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   
   // MARK: Sizing
   
-  var numberOfPhotosColumns = ConstantsStruct.SearchesDefaults.numberOfPhotosColumns {
+  var numberOfPhotosColumns = 0 {
+    
     didSet{
       ConstantsStruct.SearchesDefaults.numberOfPhotosColumns = numberOfPhotosColumns
-      needCalculateItemSize = true
-      self.calculateItemSize()
+ 
+      
+      itemWidth = itemWidthFor(newNumberOfPhotosColumns: numberOfPhotosColumns)
+      
+      //    let superViewBounds = foundUsersCollectionView.superview!.bounds
+      //    let minBoundsSize = superViewBounds.height > superViewBounds.width ? superViewBounds.width : superViewBounds.height
+      //
+      //    itemWidth = minBoundsSize / CGFloat( numberOfPhotosColumns)
+      
+      let layout  = foundUsersCollectionView!.collectionViewLayout as! UICollectionViewFlowLayout
+      UIView.animate(withDuration:   ConstantsStruct.Durations.pinchCellResizeInSeconds)
+      {
+        print("====> ДО ИЗМЕНЕНИЯ self.foundUsersCollectionView.contentOffset.y = \(self.foundUsersCollectionView.contentOffset.y)")
+        layout.itemSize = CGSize(width: self.itemWidth, height: self.itemWidth)
+        
+        // а теперь пересчитаем   если все ячейки умещаются на первой странице то обязельно выведем навигейшн бар
+        if  self.cvp_numberOfVeryLastCell <=  self.cvp_maxPossibleNumberOfVisibleCellsOnPage {
+          self.navBarIsHidden = false
+        }
+        
+        self.recalculateConstraints_And_FirstCell_And_OffsetY_WhenBoundsChangeOrItemWidthChanges()
+      }
     }
   }
   
@@ -98,26 +117,27 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   
   private func calculateItemSize() {
     
-    if needCalculateItemSize == false {
-      return
-    }
-    needCalculateItemSize = false
-    
-    itemWidth = itemWidthFor(newNumberOfPhotosColumns: numberOfPhotosColumns)
-    
-    //    let superViewBounds = foundUsersCollectionView.superview!.bounds
-    //    let minBoundsSize = superViewBounds.height > superViewBounds.width ? superViewBounds.width : superViewBounds.height
-    //
-    //    itemWidth = minBoundsSize / CGFloat( numberOfPhotosColumns)
-    
-    let layout  = foundUsersCollectionView!.collectionViewLayout as! UICollectionViewFlowLayout
-    UIView.animate(withDuration:   ConstantsStruct.Durations.pinchCellResizeInSeconds)
-    {
-      print("====> ДО ИЗМЕНЕНИЯ self.foundUsersCollectionView.contentOffset.y = \(self.foundUsersCollectionView.contentOffset.y)")
-      layout.itemSize = CGSize(width: self.itemWidth, height: self.itemWidth)
-     self.setShowNavBarIfFirstPageContainsAllCells()
-     self.recalculateConstraints_And_FirstCell_And_OffsetY_WhenBoundsChangeOrItemWidthChanges()
-    }
+ 
+//    itemWidth = itemWidthFor(newNumberOfPhotosColumns: numberOfPhotosColumns)
+//
+//    //    let superViewBounds = foundUsersCollectionView.superview!.bounds
+//    //    let minBoundsSize = superViewBounds.height > superViewBounds.width ? superViewBounds.width : superViewBounds.height
+//    //
+//    //    itemWidth = minBoundsSize / CGFloat( numberOfPhotosColumns)
+//
+//    let layout  = foundUsersCollectionView!.collectionViewLayout as! UICollectionViewFlowLayout
+//    UIView.animate(withDuration:   ConstantsStruct.Durations.pinchCellResizeInSeconds)
+//    {
+//      print("====> ДО ИЗМЕНЕНИЯ self.foundUsersCollectionView.contentOffset.y = \(self.foundUsersCollectionView.contentOffset.y)")
+//      layout.itemSize = CGSize(width: self.itemWidth, height: self.itemWidth)
+//
+//      // а теперь пересчитаем   если все ячейки умещаются на первой странице то обязельно выведем навигейшн бар
+//      if  self.cvp_numberOfVeryLastCell <=  self.cvp_maxPossibleNumberOfVisibleCellsOnPage {
+//        self.navBarIsHidden = false
+//      }
+//
+//     self.recalculateConstraints_And_FirstCell_And_OffsetY_WhenBoundsChangeOrItemWidthChanges()
+//    }
   }
   
   var cvp_numberOfColumnsForCurrentDeviceOrientation: Int {
@@ -141,7 +161,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
       cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight =  0.0
     }
     
-    print("cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight = \(cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight)")
+    //print("cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight = \(cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight)")
     
     return cvp_navBarAndStatusAndSearchBarHeightIfTheyVisible_else_safeAreaHeight
   }
@@ -166,30 +186,27 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   {
     
     if let isUp = pageWillBeTurnedUp {
-     if isUp {
-         firstVisibleCellNumber = min(cvp_numberOfVeryLastCell , lastVisibleCellNumber + 1)
-       } else // down
+      if isUp {
+        firstVisibleCellNumber = min(cvp_numberOfVeryLastCell , lastVisibleCellNumber + 1)
+      } else // down
       {
         firstVisibleCellNumber = cvp_maxPossibleNumberOfVisibleCellsOnPage >= firstVisibleCellNumber ? 0 : firstVisibleCellNumber - cvp_maxPossibleNumberOfVisibleCellsOnPage
-       }
+      }
       
     } else // pageWillBeTurnedUp == nil
     {
-     if scrollViewShouldScrollToTop_JustHappens {
-        firstVisibleCellNumber = 0
-        scrollViewShouldScrollToTop_JustHappens = false
-      } else {
-         if let  firstVisibleCellIndexPath = foundUsersCollectionView.indexPathForItem(at: CGPoint(x: foundUsersCollectionView.contentOffset.x  + itemWidth /  2.0 , y: foundUsersCollectionView.contentOffset.y +  itemWidth /  2.0 ))    {
-             if firstVisibleCellNumber != firstVisibleCellIndexPath.item {
-                 //значит скорее всего поворот или измененился  size class
-            //значит нужно вернуться к firstVisibleCellNumber как  был до поворота то есть текщее значение firstVisibleCellNumber - мы актулизируем так
-            UIView.animate(withDuration: ConstantsStruct.Durations.correctContentOffsetForPinchOrRotate) {
-              self.foundUsersCollectionView.contentOffset.y =  self.observeSettingNewContentOffsetY(to: self.cvp_numberOfRowsAboveFirstVisibleCell * self.itemWidth)
-              self.firstVisibleCellNumber = Int( self.cvp_numberOfRowsAboveFirstVisibleCell * CGFloat( self.cvp_numberOfColumnsForCurrentDeviceOrientation) )
-                   }
+      
+      if let  firstVisibleCellIndexPath = foundUsersCollectionView.indexPathForItem(at: CGPoint(x: foundUsersCollectionView.contentOffset.x  + itemWidth /  2.0 , y: foundUsersCollectionView.contentOffset.y +  itemWidth /  2.0 ))    {
+        if firstVisibleCellNumber != firstVisibleCellIndexPath.item {
+          //значит скорее всего поворот или измененился  size class
+          //значит нужно вернуться к firstVisibleCellNumber как  был до поворота то есть текщее значение firstVisibleCellNumber - мы актулизируем так
+          UIView.animate(withDuration: ConstantsStruct.Durations.correctContentOffsetForPinchOrRotate) {
+            self.foundUsersCollectionView.contentOffset.y =  self.observeSettingNewContentOffsetY(to: self.cvp_numberOfRowsAboveFirstVisibleCell * self.itemWidth)
+            self.firstVisibleCellNumber = Int( self.cvp_numberOfRowsAboveFirstVisibleCell * CGFloat( self.cvp_numberOfColumnsForCurrentDeviceOrientation) )
           }
         }
       }
+      
     }
     pageWillBeTurnedUp = nil
   }
@@ -260,8 +277,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
          self?.foundUsers = (self?.foundUsers ?? [User]()) + newItems
         print( "Количество пользователей = \(self?.foundUsers?.count ?? 0)")
         self?.firstVisibleCellNumber = 0
-        self?.calculateFirstVisibleCellNumber_and_OffsetY_ifNeeded()
-        } catch DecodingError.dataCorrupted(let context) {
+         } catch DecodingError.dataCorrupted(let context) {
         print(context)
       } catch DecodingError.keyNotFound(let key, let context) {
         print("Key '\(key)' not found:", context.debugDescription)
@@ -416,72 +432,48 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     collectionHeightConstraint?.constant = cvp_heightOfAllVisibleRows
   }
   
-  private func safeArea() -> UILayoutGuide {
-    //https://www.youtube.com/watch?v=TU7C4jW6ASc
-    if #available(iOS 11, *) {
-      let margins = foundUsersCollectionView.superview!.safeAreaLayoutGuide
-      return margins
-    } else {
-      let margins = foundUsersCollectionView.superview!.layoutMarginsGuide
-      return margins
-    }
-  }
-  
+ 
   func addCollectionViewObserver() {
     //https://www.youtube.com/watch?v=OlpCyPcLSp4
     foundUsersCollectionView.addObserver(self, forKeyPath: nameOf_contentOffset_keyPath, options: [.new, .old], context: nil)
     foundUsersCollectionView.addObserver(self, forKeyPath: nameOf_bounds_keyPath, options: [.new, .old], context: nil)
   }
   
+  var showStatusBar = true {
+    didSet{
+      setNeedsStatusBarAppearanceUpdate()
+      searchBarTopConstraint.constant = !showStatusBar ? (-navigationController!.navigationBar.frame.height - searchBar.frame.height) * 2   : 0.0
+      
+    }
+  }
+ 
   private var navBarIsHidden = false {
     didSet{
       // navBarIsHidden - выносим в отдельную перемнную так как navigationBat.isHidden - не всегда выдает правильное значение видимо из-за анимации
       // то есть на самом деле он уже начал уибраться но  navigationBat.isHidden =  false, поэтому заводим отдельную переменную navBarIsHidden
       navigationController?.setNavigationBarHidden(navBarIsHidden, animated: navBarIsHidden)
-    }
-  }
- 
-  private func setShowHideNavBar( show: Bool) {
-    
-    
-    navBarIsHidden = !show
-    //navigationController?.setNavigationBarHidden(!show, animated: !show)
-    
-    // false - так как уже в нути анимационного блока если поставить true - проблемы будут с расчетом высоты коллекции
-    showStatusBar = show
-    
-    //self.searchBar.isHidden = isUp
-    searchBarTopConstraint.constant = !show ? (-navigationController!.navigationBar.frame.height - searchBar.frame.height) * 2   : 0.0
-    
-  }
-  
-  private func setShowNavBarIfFirstPageContainsAllCells() {
-    if  cvp_numberOfVeryLastCell <=  cvp_maxPossibleNumberOfVisibleCellsOnPage {
-      setShowHideNavBar(show: true)
+      showStatusBar = !navBarIsHidden
     }
   }
   
-  private func setShowHideNavBarAfterPageWasChanged( isUp: Bool) {
-    
-    // сначала установим видимость или невидимость, чтобы можно быо рассчитать cvp_maxPossibleNumberOfVisibleCellsOnPage и cvp_numberOfVeryLastCell
-    self.setShowHideNavBar(show: !isUp)
-    
-    // а теперь пересчитаем заново и если все ячейки умещаются на первой странице то обязельно выведем навигейшн бар
-    self.setShowNavBarIfFirstPageContainsAllCells()
-    
+  var cvp_printDebug_ParametersString: String {
+    return "!!!->>>col TopConstraint=\(collectionTopConstraint.constant), col HeightConstraint=\(collectionHeightConstraint.constant),itemWidth=\(itemWidth),  numberOfRowsFor Orientation=\(cvp_numberOfRowsForCurrentDeviceOrientation),  Offset y=\(foundUsersCollectionView.contentOffset.y), searchBarTopConstraint=\(searchBarTopConstraint.constant), showStatusBar=\(showStatusBar), navBarIsHidden=\(navBarIsHidden) "
   }
   
   private var pageWillBeTurnedUp: Bool? {
     didSet{
      
       UIView.animate(withDuration: 0.5, animations: {
-         if let isUp = self.pageWillBeTurnedUp  {
-             self.setShowHideNavBarAfterPageWasChanged(isUp: isUp)
-           }
-         print("!!!!!--BEFORE---- self.collectionHeightConstraint.constant = \(self.collectionHeightConstraint.constant)")
+        if let isUp = self.pageWillBeTurnedUp  {
+          // сначала установим видимость или невидимость, чтобы можно быо рассчитать cvp_maxPossibleNumberOfVisibleCellsOnPage и cvp_numberOfVeryLastCell
+          self.navBarIsHidden = isUp
+          
+         }
+//         print("!!!!!--BEFORE---- self.collectionHeightConstraint.constant = \(self.collectionHeightConstraint.constant)")
          self.collectionHeightConstraint.constant = self.cvp_heightOfAllVisibleRows
-         print("!!!!!---AFTER--- self.collectionHeightConstraint.constant = \(self.collectionHeightConstraint.constant)")
-         if self.navigationController!.isNavigationBarHidden {
+//         print("!!!!!---AFTER---  collectionHeightConstraint = \(self.collectionHeightConstraint.constant)")
+        //if self.navigationController!.isNavigationBarHidden {
+          if self.navBarIsHidden {
              self.collectionTopConstraint.constant =  UIApplication.shared.keyWindow!.safeAreaInsets.top == 0.0 ? (self.foundUsersCollectionView.superview!.bounds.height - CGFloat( self.cvp_numberOfRowsForCurrentDeviceOrientation) * self.itemWidth) / 2.0  : 0.0
            } else {
              self.collectionTopConstraint.constant =  ConstantsStruct.Sizes.searchBarHeight
@@ -503,19 +495,20 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   
   var lastContentOffset_Y_BeforPageBeginDragging:CGFloat = 0.0
   
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
+  {
     if let keyPath = keyPath, let collectionView = object as? UICollectionView {
-     if keyPath == nameOf_contentOffset_keyPath {
-         //fixedCollectionViewContentOffsetY = collectionView.contentOffset.y
-         if  collectionView.contentOffset.y == 0.0   || !wasFirstCalculationOf_FirstVisibleCellNumber {
+      if keyPath == nameOf_contentOffset_keyPath {
+        //fixedCollectionViewContentOffsetY = collectionView.contentOffset.y
+        if  collectionView.contentOffset.y == 0.0   || !wasFirstCalculationOf_FirstVisibleCellNumber {
           // чтобы когда вернуться тапом на статус баре на самую первую страницу рассчитался бы первый и поседний видимый клетка
           lastContentOffset_Y_BeforPageBeginDragging = 0.0
         }
-         //print("----Observation Observation Observation-----collectionView.contentOffset.y = \(collectionView.contentOffset.y)")
-         if collectionView.contentOffset.y < -itemWidth / 2.0 {
-             recalculateConstraints_And_FirstCell_And_OffsetY_WhenBoundsChangeOrItemWidthChanges()
-           }
-        } else if keyPath == nameOf_bounds_keyPath {
+        //print("----Observation Observation Observation-----collectionView.contentOffset.y = \(collectionView.contentOffset.y)")
+        if collectionView.contentOffset.y < -itemWidth / 2.0 {
+          recalculateConstraints_And_FirstCell_And_OffsetY_WhenBoundsChangeOrItemWidthChanges()
+        }
+      } else if keyPath == nameOf_bounds_keyPath {
         if oldBoundsWidth != collectionView.bounds.size.width {
           print(" bounds changed")
           oldBoundsWidth = collectionView.bounds.size.width
@@ -531,14 +524,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
   {
     lastContentOffset_Y_BeforPageBeginDragging = scrollView.contentOffset.y
+    print("\(cvp_printDebug_ParametersString)")
+
   }
   
-  var scrollViewShouldScrollToTop_JustHappens = false
-  
+ 
   func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-    pageWillBeTurnedUp = nil
-    scrollViewShouldScrollToTop_JustHappens = true
-    calculateFirstVisibleCellNumber_and_OffsetY_ifNeeded()
+    
+    firstVisibleCellNumber = 0
     
     return true
   }
@@ -596,7 +589,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     }
     
     calculateFirstVisibleCellNumber_and_OffsetY_ifNeeded()
-    
   }
 }
 extension SearchViewController: UICollectionViewDataSource {
