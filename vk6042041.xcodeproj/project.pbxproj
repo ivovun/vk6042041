@@ -30,6 +30,8 @@
 		50CBF74E1F2342550088CF3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50CBF74C1F2342550088CF3D /* LaunchScreen.storyboard */; };
 		50E097CC1F4ADB1800B05A50 /* FoundUserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E097CB1F4ADB1800B05A50 /* FoundUserCollectionViewCell.swift */; };
 		50E949D120F7475400F18423 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E949D020F7475400F18423 /* ImageManager.swift */; };
+		50E9A1DA21661ADB005420AB /* ScrollViewAlgorithm.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 50E9A1D921661ADB005420AB /* ScrollViewAlgorithm.pdf */; };
+		50E9A1DE21661C65005420AB /* ScrollViewAlgorithm.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E9A1DD21661C65005420AB /* ScrollViewAlgorithm.png */; };
 		50F318191F359CB300F42F2A /* UsersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F318181F359CB300F42F2A /* UsersInfo.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		50CBF74F1F2342550088CF3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50E097CB1F4ADB1800B05A50 /* FoundUserCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundUserCollectionViewCell.swift; sourceTree = "<group>"; };
 		50E949D020F7475400F18423 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		50E9A1D921661ADB005420AB /* ScrollViewAlgorithm.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ScrollViewAlgorithm.pdf; sourceTree = "<group>"; };
+		50E9A1DD21661C65005420AB /* ScrollViewAlgorithm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScrollViewAlgorithm.png; sourceTree = "<group>"; };
 		50F318181F359CB300F42F2A /* UsersInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,7 +105,7 @@
 			children = (
 				5098F60B211942EB00C736F2 /* var1 */,
 				5065A8B31F271057007B42DC /* TestTableTableViewController.swift */,
-				50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */,
+				509399C6215A071400F66475 /* OLD_VERSIONS */,
 				50C1D9F721003A8C0097FC49 /* UserInfoCollectionViewController.swift */,
 				5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */,
 				5058F9C11F23579E006F1E3B /* VKStartScreenVC.swift */,
@@ -125,9 +129,19 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		509399C6215A071400F66475 /* OLD_VERSIONS */ = {
+			isa = PBXGroup;
+			children = (
+				50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */,
+			);
+			name = OLD_VERSIONS;
+			sourceTree = "<group>";
+		};
 		5098F60B211942EB00C736F2 /* var1 */ = {
 			isa = PBXGroup;
 			children = (
+				50E9A1DD21661C65005420AB /* ScrollViewAlgorithm.png */,
+				50E9A1D921661ADB005420AB /* ScrollViewAlgorithm.pdf */,
 				50686E492115B87B009ECF8B /* SearchViewController.swift */,
 				50C26FAE212D6A2A0002F642 /* vk6042041-Bridging-Header.h */,
 			);
@@ -258,7 +272,9 @@
 				50CBF74E1F2342550088CF3D /* LaunchScreen.storyboard in Resources */,
 				5048721520F84BBE00C70950 /* json_example in Resources */,
 				50CBF74B1F2342550088CF3D /* Assets.xcassets in Resources */,
+				50E9A1DA21661ADB005420AB /* ScrollViewAlgorithm.pdf in Resources */,
 				50CBF7491F2342550088CF3D /* Main.storyboard in Resources */,
+				50E9A1DE21661C65005420AB /* ScrollViewAlgorithm.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
