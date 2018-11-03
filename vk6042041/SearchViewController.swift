@@ -8,7 +8,15 @@
 import UIKit
 import VK_ios_sdk
 private let reuseIdentifier = ConstantsStruct.CellIdentifiers.FoundUsersCollectionViewCell
-class SearchViewController: UIViewController, UICollectionViewDelegate, UIScrollViewDelegate {
+class SearchViewController: UIViewController, UIScrollViewDelegate {
+  
+  
+//  @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
+//  {
+//    didSet {
+//      pinchGesture.delegate = self
+//    }
+//  }
   
   // MARK: DataSource
   var foundUsers:[User]? = []  {
@@ -33,6 +41,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
       }) { (finished) in
         if finished {
           self.correctContentOffset_Y_ForFirstCellNumber_ToBeAtUpperEdge()
+          self.foundUsersCollectionView.panGestureRecognizer.isEnabled = true
         }
       }
      }
@@ -56,6 +65,8 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     foundUsersCollectionView.decelerationRate = foundUsersCollectionView.decelerationRate / 100
     
     foundUsersCollectionView.isPagingEnabled = false
+    
+    foundUsersCollectionView.delegate = self
 
     self.navigationController?.hidesBarsOnSwipe = false
     
@@ -67,6 +78,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     searchForUsers()
     
     numberOfPhotosColumnsInPortraitForPinchRegulationsToCalculateItemWidth = ConstantsStruct.SearchesDefaults.numberOfPhotosColumns
+    
+    //foundUsersCollectionView.panGestureRecognizer.delegate = self
+    //foundUsersCollectionView.pinchGestureRecognizer?.delegate = self
+    
 
    }
   
@@ -89,6 +104,15 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
       return false
     }
     return true
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == ConstantsStruct.SegueIdentifiers.SHOW_USER_INFO, let row = sender as? Int {
+      if let userVC = segue.destination as? UserInfoCollectionViewController {
+        userVC.user = foundUsers![row]
+      }
+    }
+
   }
   
   // MARK: Sizing
@@ -297,6 +321,8 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     
     if sender.state == .began {
       
+      foundUsersCollectionView.panGestureRecognizer.isEnabled = false
+      
       pinchResult = 1.0
     }
     else  if sender.state == .changed {
@@ -305,6 +331,9 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
       //print("pinchResult = \(pinchResult), sender.scale=\(sender.scale)")
       
     } else if sender.state == .ended {
+      
+      foundUsersCollectionView.panGestureRecognizer.isEnabled = true
+
       
       numberOfPhotosColumnsInPortraitForPinchRegulationsToCalculateItemWidth  = min(ConstantsStruct.SearchParameters.maxNumberOfColumns ,max( numberOfPhotosColumnsInPortraitForPinchRegulationsToCalculateItemWidth + ( pinchResult > 1 ? -1 : 1) , 1))
      }
@@ -622,6 +651,9 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UIScroll
     }
     
    }
+  
+
+  
 }
 extension SearchViewController: UICollectionViewDataSource {
   // MARK: UICollectionViewDataSource
@@ -643,6 +675,14 @@ extension SearchViewController: UICollectionViewDataSource {
     return cell
   }
 }
+
+extension SearchViewController: UICollectionViewDelegate {
+  // MARK: UICollectionViewDelegate
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    performSegue(withIdentifier: ConstantsStruct.SegueIdentifiers.SHOW_USER_INFO, sender: indexPath.row)
+  }
+}
+
 //MARK: UICollectionViewDelegateFlowLayout
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
   
@@ -669,8 +709,28 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
   }
 }
 
-extension SearchViewController: UIGestureRecognizerDelegate {
-  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-    return true
-  }
-}
+//extension SearchViewController: UIGestureRecognizerDelegate {
+//  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//    
+////    if gestureRecognizer  == foundUsersCollectionView.panGestureRecognizer {
+////      if otherGestureRecognizer == foundUsersCollectionView.panGestureRecognizer {
+////        return false
+////
+////      } else if otherGestureRecognizer == pinchGesture {
+////        if pinchGesture.scale != 1 {
+////          gestureRecognizer.isEnabled = false
+////          gestureRecognizer.isEnabled = true
+////        }
+////      }
+////
+////
+////    }
+//    
+////    if gestureRecognizer == pinchGesture {
+////      foundUsersCollectionView.panGestureRecognizer.isEnabled = false
+////      foundUsersCollectionView.panGestureRecognizer.isEnabled = true
+////    }
+//    
+//    return false
+//  }
+//}

@@ -57,7 +57,14 @@ class TestTableTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+      performSegue(withIdentifier: ConstantsStruct.SegueIdentifiers.SHOW_COLLECTION_VIEW_SEARCH, sender: nil)
+
     }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+  }
   
   // MARK: - Navigation
   @objc func logout(sender: Any) {

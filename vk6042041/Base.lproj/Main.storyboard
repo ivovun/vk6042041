@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wuB-ZR-Zb7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wuB-ZR-Zb7">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -199,7 +197,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RHy-cK-6AZ">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="RHy-cK-6AZ">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="50" height="245"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -215,21 +213,21 @@
                                 </view>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="UserInfoSectionHeaderUICollectionReusableView" id="aEQ-nh-mB3" customClass="UserInfoSectionHeaderUICollectionReusableView" customModule="vk6042041" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserInfoSectionHeaderUICollectionReusableView" id="aEQ-nh-mB3" customClass="UserInfoSectionHeaderUICollectionReusableView" customModule="vk6042041" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="245"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="d1j-Jw-B52" userLabel="MainReusViewStackView">
-                                    <rect key="frame" x="8" y="8" width="359" height="229"/>
+                                    <rect key="frame" x="8" y="52" width="359" height="185"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ql8-Kp-vo3" userLabel="ImAndNameStackView">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="175"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="147"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="fpw-q8-Qy4" userLabel="ImgStackView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="175.66666666666666" height="175"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="175.66666666666666" height="147"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="no_photo_200" translatesAutoresizingMaskIntoConstraints="NO" id="b5Q-uU-7lR" userLabel="userPhoto_200">
-                                                            <rect key="frame" x="0.0" y="0.0" width="175.66666666666666" height="175"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="147" height="147"/>
                                                             <color key="backgroundColor" red="0.59607843140000005" green="0.58039215690000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="b5Q-uU-7lR" secondAttribute="height" multiplier="1:1" id="NhJ-bX-pSD"/>
@@ -238,37 +236,37 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Li5-9T-42W">
-                                                    <rect key="frame" x="183.66666666666663" y="0.0" width="175.33333333333337" height="175"/>
+                                                    <rect key="frame" x="183.66666666666663" y="0.0" width="175.33333333333337" height="147"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="right" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="84I-CQ-5Jr" userLabel="NameStackView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="175.33333333333334" height="175"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="175.33333333333334" height="147"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tf7-kA-jSJ" userLabel="first_name">
-                                                                    <rect key="frame" x="132.66666666666666" y="0.0" width="42.666666666666657" height="35"/>
+                                                                    <rect key="frame" x="132.66666666666666" y="0.0" width="42.666666666666657" height="29.333333333333332"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXA-gW-cgC" userLabel="last_name">
-                                                                    <rect key="frame" x="130.33333333333334" y="35" width="45" height="35"/>
+                                                                    <rect key="frame" x="130.33333333333334" y="29.333333333333329" width="45" height="29.333333333333329"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZjZ-9H-H2G" userLabel="screen_name">
-                                                                    <rect key="frame" x="130.33333333333334" y="70" width="45" height="35"/>
+                                                                    <rect key="frame" x="130.33333333333334" y="58.666666666666664" width="45" height="29.666666666666664"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6h-V0-rIf" userLabel="Age">
-                                                                    <rect key="frame" x="145.33333333333334" y="105" width="30" height="35"/>
+                                                                    <rect key="frame" x="145.33333333333334" y="88.333333333333343" width="30" height="29.333333333333329"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEN-Gt-zQN">
-                                                                    <rect key="frame" x="111.00000000000003" y="140" width="64.333333333333343" height="35"/>
+                                                                    <rect key="frame" x="111.00000000000003" y="117.66666666666664" width="64.333333333333343" height="29.333333333333329"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -281,7 +279,7 @@
                                             <color key="backgroundColor" red="0.62752893330000004" green="0.86187476610000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="752" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ILb-vn-XRx" userLabel="ButtonsStackView">
-                                            <rect key="frame" x="11" y="199" width="337" height="30"/>
+                                            <rect key="frame" x="11" y="155" width="337" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fy0-6y-bM2">
                                                     <rect key="frame" x="0.0" y="0.0" width="107" height="30"/>
@@ -457,6 +455,7 @@
                         <outlet property="foundUsersCollectionView" destination="gAa-ah-YUr" id="9j6-Vj-coP"/>
                         <outlet property="searchBar" destination="jbz-SH-uM5" id="1r3-ql-3LY"/>
                         <outlet property="searchBarTopConstraint" destination="jWA-cc-DqJ" id="ELs-Fm-0LX"/>
+                        <segue destination="8a3-Ll-6jG" kind="show" identifier="showUserInfo" id="gaN-f2-4Dt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sfg-ct-ucq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -537,6 +536,7 @@
         <image name="no_photo_200" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uoZ-vK-ePC"/>
+        <segue reference="gaN-f2-4Dt"/>
+        <segue reference="IW7-6E-cPk"/>
     </inferredMetricsTieBreakers>
 </document>

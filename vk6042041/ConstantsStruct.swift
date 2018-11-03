@@ -69,7 +69,7 @@ struct ConstantsStruct {
   }
   
   struct Durations {
-    static let pinchCellResizeInSeconds = 0.5
+    static let pinchCellResizeInSeconds = 1.0
     static let correctContentOffsetForPinchOrRotate = 0.5
   }
   
