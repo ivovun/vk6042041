@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "SearchCollectionViewController.handlePinch(_:):SearchCollectionViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "numberOfPhotosColumns">
+            </PersistentString>
+            <PersistentString
+               value = "sender.scale">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UsersInfo.init(jsonString : String?) -&gt; UsersInfo?:UsersInfo.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "users">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SearchViewController.calculateNewCollectionFrameOrigin_and_CollectionFrame():SearchViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "windowTraitParameters">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
