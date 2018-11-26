@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wuB-ZR-Zb7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wuB-ZR-Zb7">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -427,7 +427,7 @@
                                     <outletCollection property="gestureRecognizers" destination="1YO-WT-icC" appends="YES" id="eLK-pJ-ktn"/>
                                 </connections>
                             </collectionView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="jbz-SH-uM5">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" showsBookmarkButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jbz-SH-uM5">
                                 <rect key="frame" x="0.0" y="88" width="375" height="56"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -458,7 +458,7 @@
                         <outlet property="collectionTopConstraint" destination="BxV-6z-hdc" id="JxE-RK-GMY"/>
                         <outlet property="collectionTrailingConstraint" destination="oUi-od-Ufd" id="GtB-Zg-Ki7"/>
                         <outlet property="foundUsersCollectionView" destination="gAa-ah-YUr" id="9j6-Vj-coP"/>
-                        <outlet property="searchBar" destination="jbz-SH-uM5" id="1r3-ql-3LY"/>
+                        <outlet property="searchBar" destination="jbz-SH-uM5" id="WLe-1X-Oey"/>
                         <outlet property="searchBarTopConstraint" destination="jWA-cc-DqJ" id="ELs-Fm-0LX"/>
                         <segue destination="8a3-Ll-6jG" kind="show" identifier="showUserInfo" id="gaN-f2-4Dt"/>
                     </connections>

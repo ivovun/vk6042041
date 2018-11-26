@@ -55,7 +55,6 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
  
   }
   
-  @IBOutlet weak var searchBar: UISearchBar!
   
   //MARK: ViewController
   
@@ -71,6 +70,10 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     self.navigationController?.hidesBarsOnSwipe = false
     
     title = "Users"
+    
+    searchBar.setImage(UIImage(named: "filter_list_order_sequence_sort_sorting_outline-512.png"), for: .bookmark, state: .normal)
+    searchBar.delegate = self
+    
     
     //    searchBarBoundsY = (navigationController?.navigationBar.frame.height ?? 0.0) + UIApplication.shared.statusBarFrame.height
     addCollectionViewObserver()
@@ -305,13 +308,16 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
   
   var searchParameters: [String: Any]?
   var searchBarBoundsY: CGFloat = 0.0
-  
+  //MARK: Outlets
   @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var collectionLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var collectionTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var collectionTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var collectionHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var foundUsersCollectionView: UICollectionView!
+
+  @IBOutlet weak var searchBar: UISearchBar!
+  
   
   var  pinchResult:CGFloat = 0.0
   
@@ -709,6 +715,12 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
   
   func printDataForScrollView( _ cv: UIScrollView) {
     print("  cv.contentOffset.y = \(Int(cv.contentOffset.y)), cv Height=\(Int(cv.bounds.height)), cv fr origin.y=\(Int(cv.bounds.origin.y)) ")
+  }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+  func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+    print("clicked")
   }
 }
 

@@ -143,7 +143,6 @@
 				50E9A1DD21661C65005420AB /* ScrollViewAlgorithm.png */,
 				50E9A1D921661ADB005420AB /* ScrollViewAlgorithm.pdf */,
 				50686E492115B87B009ECF8B /* SearchViewController.swift */,
-				50C26FAE212D6A2A0002F642 /* vk6042041-Bridging-Header.h */,
 			);
 			name = var1;
 			sourceTree = "<group>";
@@ -192,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				50CBF7431F2342550088CF3D /* AppDelegate.swift */,
+				50C26FAE212D6A2A0002F642 /* vk6042041-Bridging-Header.h */,
 				50CBF74A1F2342550088CF3D /* Assets.xcassets */,
 				50CBF74F1F2342550088CF3D /* Info.plist */,
 			);
