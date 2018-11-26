@@ -75,6 +75,12 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     searchBar.setImage(UIImage(named: "filter_list_order_sequence_sort_sorting_outline-512.png"), for: .bookmark, state: .normal)
     searchBar.delegate = self
     
+    pinchGesture.delegate = self
+//    pinchGesture.delaysTouchesBegan = true
+    pinchGesture.cancelsTouchesInView = true
+    
+    
+ 
     
     //    searchBarBoundsY = (navigationController?.navigationBar.frame.height ?? 0.0) + UIApplication.shared.statusBarFrame.height
     addCollectionViewObserver()
@@ -120,7 +126,10 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
   }
   
   // MARK: Sizing
+  
+  
  
+  @IBOutlet weak var pinchGesture: UIPinchGestureRecognizer!
   var numberOfPhotosColumnsInPortraitForPinchRegulationsToCalculateItemWidth  = 0  {
     
     didSet{
@@ -723,6 +732,22 @@ extension SearchViewController: UISearchBarDelegate {
   func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
     print("clicked")
   }
+}
+
+extension SearchViewController: UIGestureRecognizerDelegate {
+  
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    
+    return false
+    
+//    if gestureRecognizer is UIPinchGestureRecognizer {
+//      return false
+//    }
+//
+//    return true
+  }
+  
+  
 }
 
 //extension SearchViewController: UIGestureRecognizerDelegate {

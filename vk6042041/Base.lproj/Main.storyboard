@@ -458,6 +458,7 @@
                         <outlet property="collectionTopConstraint" destination="BxV-6z-hdc" id="JxE-RK-GMY"/>
                         <outlet property="collectionTrailingConstraint" destination="oUi-od-Ufd" id="GtB-Zg-Ki7"/>
                         <outlet property="foundUsersCollectionView" destination="gAa-ah-YUr" id="9j6-Vj-coP"/>
+                        <outlet property="pinchGesture" destination="1YO-WT-icC" id="SMy-Tg-buW"/>
                         <outlet property="searchBar" destination="jbz-SH-uM5" id="WLe-1X-Oey"/>
                         <outlet property="searchBarTopConstraint" destination="jWA-cc-DqJ" id="ELs-Fm-0LX"/>
                         <segue destination="8a3-Ll-6jG" kind="show" identifier="showUserInfo" id="gaN-f2-4Dt"/>
