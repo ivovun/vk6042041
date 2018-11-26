@@ -11,6 +11,10 @@ private let reuseIdentifier = ConstantsStruct.CellIdentifiers.FoundUsersCollecti
 class SearchViewController: UIViewController, UIScrollViewDelegate {
   
   
+//  func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+//    scrollView.isScrollEnabled = false
+//  }
+  
 //  @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
 //  {
 //    didSet {
@@ -75,9 +79,9 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     searchBar.setImage(UIImage(named: "filter_list_order_sequence_sort_sorting_outline-512.png"), for: .bookmark, state: .normal)
     searchBar.delegate = self
     
-    pinchGesture.delegate = self
-//    pinchGesture.delaysTouchesBegan = true
-    pinchGesture.cancelsTouchesInView = true
+//    pinchGesture.delegate = self
+////    pinchGesture.delaysTouchesBegan = true
+//    pinchGesture.cancelsTouchesInView = true
     
     
  
@@ -734,21 +738,21 @@ extension SearchViewController: UISearchBarDelegate {
   }
 }
 
-extension SearchViewController: UIGestureRecognizerDelegate {
-  
-  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-    
-    return false
-    
-//    if gestureRecognizer is UIPinchGestureRecognizer {
-//      return false
-//    }
+//extension SearchViewController: UIGestureRecognizerDelegate {
 //
-//    return true
-  }
-  
-  
-}
+//  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//
+//    return false
+//
+////    if gestureRecognizer is UIPinchGestureRecognizer {
+////      return false
+////    }
+////
+////    return true
+//  }
+//
+//
+//}
 
 //extension SearchViewController: UIGestureRecognizerDelegate {
 //  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
