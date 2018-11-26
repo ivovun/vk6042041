@@ -37,7 +37,7 @@ struct ConstantsStruct {
   
   struct Sizes {
     static let searchBarHeight: CGFloat = 56.0
-    static let constraintTolerance: CGFloat = 10.0
+    static let constraintTolerance: CGFloat = 1.0
     static let maxPortionOfCellHeightThatCanBeClipped: CGFloat =  0.2
 
   }
