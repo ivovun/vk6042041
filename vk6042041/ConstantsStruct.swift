@@ -64,6 +64,7 @@ struct ConstantsStruct {
     static let maxNumberOfColumns = 20
   }
   
+  
   struct UserDefaults {
     static let DEFAULT_BIRTH_DATE = "1.1.0001"
   }
