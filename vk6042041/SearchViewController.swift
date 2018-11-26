@@ -32,9 +32,10 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
       
       let layout  = foundUsersCollectionView!.collectionViewLayout as! UICollectionViewFlowLayout
        UIView.animate(withDuration:  ConstantsStruct.Durations.pinchCellResizeInSeconds, animations: {
-        let firstVisibleCellBeforeResize = self.firstVisibleCellNumber
+        self.firstVisibleCellNumber = 0
+//        let firstVisibleCellBeforeResize = self.firstVisibleCellNumber
         self.updateCollectionViewConstraints()
-        self.firstVisibleCellNumber = firstVisibleCellBeforeResize
+//        self.firstVisibleCellNumber = firstVisibleCellBeforeResize
         
         print("====> после  ИЗМЕНЕНИЯ cvp_CurrentCollectionContentOffsetY = \(self.cvp_CurrentCollectionContentOffsetY)")
         layout.itemSize = CGSize(width: self.itemWidth, height: self.itemWidth)

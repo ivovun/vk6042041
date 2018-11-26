@@ -19,7 +19,7 @@ extension UIView {
     
     let fadeView:UIView = fadeViewForActivivtyIndicator()
     fadeView.frame = self.frame
-    fadeView.backgroundColor = UIColor.white
+    fadeView.backgroundColor = UIColor.black
     fadeView.alpha = 0.4
     
     // add fade view to main view
