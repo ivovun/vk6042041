@@ -13,7 +13,7 @@ private let reuseIdentifier = ConstantsStruct.CellIdentifiers.FoundUsersCollecti
 // про использование NSCache нашел тут https://stackoverflow.com/questions/37018916/swift-async-load-image
 private let kLazyLoadCellImageViewTag = 1
 
-class SearchCollectionViewController: UICollectionViewController, ControllerNeedToHaveThisMethod, UIGestureRecognizerDelegate  {
+class SearchCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate  {
   
   // MARK: Model
   
@@ -39,7 +39,8 @@ class SearchCollectionViewController: UICollectionViewController, ControllerNeed
     comeBackFromUserDetail = true
   }
 
-  
+//  func setNavBarVisible() { return}
+
   // public part of our Model
   // when this is set
   // we'll reset our findedUsers Array

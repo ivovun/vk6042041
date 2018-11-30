@@ -144,10 +144,13 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     }
    }
   
-  //добавил протокол и свойство comeBackFromUserDetail  ,   так как при возврате от USER Detail система автоматически ставит navigationBar ( даже если он не виден - все равно isHidden == false ) и в результате на  phone X все съезжает collectionView frame из-за того что обнуляется свойство collectionView?.frame.origin.y == 0.0 когда в портрете
-  var comeBackFromUserDetail = false
+ 
   
-  func setComeBackFromUserDetailToTrue() { comeBackFromUserDetail = true }
+//  //добавил протокол и   setNavBarVisible  ,   так как при возврате от USER Detail система автоматически ставит navigationBar ( даже если он не виден - все равно isHidden == false ) и в результате на  phone X все съезжает collectionView frame из-за того что обнуляется свойство collectionView?.frame.origin.y == 0.0 когда в портрете
+//  func setNavBarVisible() {
+//    navBarIsHidden = false
+//    
+//  }
   
   private func itemWidthFor(newNumberOfPhotosColumns : Int) -> CGFloat {
     let superViewBounds = foundUsersCollectionView.superview!.bounds
