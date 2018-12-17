@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E3D2FB221B4415B0057E923 /* UsersFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D2FB121B4415B0057E923 /* UsersFilterViewController.swift */; };
+		0E491CA421C2E89E0066E280 /* SwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E491CA321C2E89E0066E280 /* SwipeInteractionController.swift */; };
+		0E491CAE21C2EC440066E280 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E491CAB21C2EC440066E280 /* SlideInPresentationManager.swift */; };
+		0E491CAF21C2EC440066E280 /* SlideInPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E491CAC21C2EC440066E280 /* SlideInPresentationAnimator.swift */; };
+		0E491CB021C2EC440066E280 /* SlideInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E491CAD21C2EC440066E280 /* SlideInPresentationController.swift */; };
 		3280C916EC574C6C44B5D9BF /* Pods_vk6042041.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0EDC9040E46BB6644BF48F /* Pods_vk6042041.framework */; };
 		50349B991F3D6602006D4528 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */; };
 		5048721520F84BBE00C70950 /* json_example in Resources */ = {isa = PBXBuildFile; fileRef = 5048721420F84BBE00C70950 /* json_example */; };
@@ -36,6 +41,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E3D2FB121B4415B0057E923 /* UsersFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFilterViewController.swift; sourceTree = "<group>"; };
+		0E491CA321C2E89E0066E280 /* SwipeInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeInteractionController.swift; sourceTree = "<group>"; };
+		0E491CAB21C2EC440066E280 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
+		0E491CAC21C2EC440066E280 /* SlideInPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationAnimator.swift; sourceTree = "<group>"; };
+		0E491CAD21C2EC440066E280 /* SlideInPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationController.swift; sourceTree = "<group>"; };
 		1B69F39E6691DB4A856375D8 /* Pods-vk6042041.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk6042041.release.xcconfig"; path = "Pods/Target Support Files/Pods-vk6042041/Pods-vk6042041.release.xcconfig"; sourceTree = "<group>"; };
 		2F0EDC9040E46BB6644BF48F /* Pods_vk6042041.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vk6042041.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3B9CF9B776F0A972E70C15 /* Pods-vk6042041.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk6042041.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vk6042041/Pods-vk6042041.debug.xcconfig"; sourceTree = "<group>"; };
@@ -81,6 +91,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E3D2FA821B43E3F0057E923 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				0E491CAC21C2EC440066E280 /* SlideInPresentationAnimator.swift */,
+				0E491CAD21C2EC440066E280 /* SlideInPresentationController.swift */,
+				0E491CAB21C2EC440066E280 /* SlideInPresentationManager.swift */,
+			);
+			name = Presentation;
+			sourceTree = "<group>";
+		};
+		0E491CA221C2E8190066E280 /* Interaction */ = {
+			isa = PBXGroup;
+			children = (
+				0E491CA321C2E89E0066E280 /* SwipeInteractionController.swift */,
+			);
+			name = Interaction;
+			sourceTree = "<group>";
+		};
 		2A01FA5F24F1B5A86FFABDF6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,8 +131,10 @@
 		50349B9A1F3D6627006D4528 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5098F60B211942EB00C736F2 /* var1 */,
+				50686E492115B87B009ECF8B /* SearchViewController.swift */,
+				0E3D2FB121B4415B0057E923 /* UsersFilterViewController.swift */,
 				5065A8B31F271057007B42DC /* TestTableTableViewController.swift */,
+				5098F60B211942EB00C736F2 /* docs */,
 				509399C6215A071400F66475 /* OLD_VERSIONS */,
 				50C1D9F721003A8C0097FC49 /* UserInfoCollectionViewController.swift */,
 				5065A8AF1F26FDCF007B42DC /* ApiCallViewController.swift */,
@@ -137,14 +167,13 @@
 			name = OLD_VERSIONS;
 			sourceTree = "<group>";
 		};
-		5098F60B211942EB00C736F2 /* var1 */ = {
+		5098F60B211942EB00C736F2 /* docs */ = {
 			isa = PBXGroup;
 			children = (
 				50E9A1DD21661C65005420AB /* ScrollViewAlgorithm.png */,
 				50E9A1D921661ADB005420AB /* ScrollViewAlgorithm.pdf */,
-				50686E492115B87B009ECF8B /* SearchViewController.swift */,
 			);
-			name = var1;
+			name = docs;
 			sourceTree = "<group>";
 		};
 		50CBF7371F2342550088CF3D = {
@@ -169,6 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				50349B9B1F3D666E006D4528 /* Model */,
+				0E491CA221C2E8190066E280 /* Interaction */,
+				0E3D2FA821B43E3F0057E923 /* Presentation */,
 				50349B9A1F3D6627006D4528 /* Controllers */,
 				50E949CF20F7471C00F18423 /* App & Resources */,
 				50E949CE20F746ED00F18423 /* Storyboards & Views */,
@@ -324,11 +355,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E491CAE21C2EC440066E280 /* SlideInPresentationManager.swift in Sources */,
+				0E491CAF21C2EC440066E280 /* SlideInPresentationAnimator.swift in Sources */,
+				0E3D2FB221B4415B0057E923 /* UsersFilterViewController.swift in Sources */,
 				50349B991F3D6602006D4528 /* SearchCollectionViewController.swift in Sources */,
 				5085C00C2102E0F8006FC14E /* extensions.swift in Sources */,
 				50F318191F359CB300F42F2A /* UsersInfo.swift in Sources */,
 				50888AC221086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift in Sources */,
 				50686E4A2115B87B009ECF8B /* SearchViewController.swift in Sources */,
+				0E491CA421C2E89E0066E280 /* SwipeInteractionController.swift in Sources */,
 				5058F9C31F23579E006F1E3B /* UIViewControllerExtensions.swift in Sources */,
 				5058F9C41F23579E006F1E3B /* VKStartScreenVC.swift in Sources */,
 				50C1D9FA2101E3480097FC49 /* UserInfoSectionHeaderHeaderUICollectionReusableView.swift in Sources */,
@@ -342,6 +377,7 @@
 				50C1D9F821003A8C0097FC49 /* UserInfoCollectionViewController.swift in Sources */,
 				50CBF7441F2342550088CF3D /* AppDelegate.swift in Sources */,
 				5058F9C61F2357FA006F1E3B /* mainVC.swift in Sources */,
+				0E491CB021C2EC440066E280 /* SlideInPresentationController.swift in Sources */,
 				50E949D120F7475400F18423 /* ImageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

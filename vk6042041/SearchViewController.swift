@@ -63,6 +63,10 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
   
   //MARK: ViewController
   
+  lazy var slideInTransitioningDelegate = SlideInPresentationManager()
+  
+
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -73,6 +77,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     foundUsersCollectionView.delegate = self
 
     self.navigationController?.hidesBarsOnSwipe = false
+    
     
     title = "Users"
     
@@ -124,6 +129,20 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     if segue.identifier == ConstantsStruct.SegueIdentifiers.SHOW_USER_INFO, let row = sender as? Int {
       if let userVC = segue.destination as? UserInfoCollectionViewController {
         userVC.user = foundUsers![row]
+      }
+    } else if segue.identifier == ConstantsStruct.SegueIdentifiers.SHOW_USERS_FILTER {
+      if let filterVC = segue.destination as? UsersFilterViewController {
+        
+        if traitCollection.horizontalSizeClass == .compact {
+          slideInTransitioningDelegate.direction = .bottom
+        } else {
+          slideInTransitioningDelegate.direction = .right
+        }
+        
+        filterVC.transitioningDelegate = slideInTransitioningDelegate
+        
+        filterVC.modalPresentationStyle = .custom
+        
       }
     }
 
@@ -737,7 +756,8 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 extension SearchViewController: UISearchBarDelegate {
   func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-    print("clicked")
+    //print("clicked")
+    performSegue(withIdentifier: ConstantsStruct.SegueIdentifiers.SHOW_USERS_FILTER, sender: self)
   }
 }
 

@@ -47,6 +47,8 @@ struct ConstantsStruct {
     static let API_CALL = "API_CALL"
     static let SHOW_COLLECTION_VIEW_SEARCH = "ShowFoundUsersCVC"
     static let SHOW_USER_INFO = "showUserInfo"
+    static let SHOW_USERS_FILTER = "ShowUsersFilter"
+    
     
      
     static let Detail = "DetailViewController"
