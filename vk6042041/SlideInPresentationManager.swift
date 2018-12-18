@@ -17,13 +17,13 @@ enum PresentationDirection {
 
 class SlideInPresentationManager: NSObject {
   
-
+  
   
   var direction = PresentationDirection.left
   // to indicate if the presentation supports compact height.
   var disableCompactHeight = false
   
-
+  
 }
 
 
@@ -32,22 +32,44 @@ extension SlideInPresentationManager:UIViewControllerTransitioningDelegate {
                               presenting: UIViewController?,
                               source: UIViewController) -> UIPresentationController? {
     let presentationController = SlideInPresentationController(presentedViewController: presented,
-                                                              presentingViewController: presenting,
-                                                              direction: direction)
-    presentationController.delegate = self 
+                                                               presentingViewController: presenting,
+                                                               direction: direction)
+    presentationController.delegate = self
     
     return presentationController
   }
   
   //returns the animation controller for presenting the view controller
   func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return SlideInPresentationAnimator(direction: direction, isPresentation: true)
+    
+    guard let  presented = presented as? HasSwipeInterractionControllerProperty else {
+      return SlideInPresentationAnimator(direction: direction, isPresentation: true, interactionController: nil )
+    }
+    
+    return SlideInPresentationAnimator(direction: direction, isPresentation: true, interactionController: presented.swipeInteractionController )
   }
   
   //returns the animation controller for dismissing the view controller
   func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return SlideInPresentationAnimator(direction: direction, isPresentation: false)
+    
+    guard let  dismissed = dismissed as? HasSwipeInterractionControllerProperty else {
+      return SlideInPresentationAnimator(direction: direction, isPresentation: true, interactionController: nil )
+    }
+    
+    return SlideInPresentationAnimator(direction: direction, isPresentation: false, interactionController: dismissed.swipeInteractionController )
   }
+  
+  func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning)
+    -> UIViewControllerInteractiveTransitioning? {
+      guard let animator = animator as? SlideInPresentationAnimator,
+        let interactionController = animator.interactionController,
+        interactionController.interactionInProgress
+        else {
+          return nil
+      }
+      return interactionController
+  }
+  
   
 }
 

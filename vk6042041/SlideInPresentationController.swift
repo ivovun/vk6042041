@@ -91,7 +91,7 @@ class SlideInPresentationController: UIPresentationController {
       return CGSize(width: parentSize.width, height: parentSize.height * (2.0/3.0))
     }
   }
-
+  
 }
 
 
@@ -107,7 +107,7 @@ extension SlideInPresentationController {
     dimmingView.addGestureRecognizer(recognizer)
   }
   
-  @objc dynamic func handleTap(recogniszer: UITapGestureRecognizer) {
+  dynamic func handleTap(recogniszer: UITapGestureRecognizer) {
     presentingViewController.dismiss(animated: true)
   }
   

@@ -1,57 +1,60 @@
-//
-//  SlideInPresentationAnimator.swift
-//  MedalCount
-//
-//  Created by vladimirfilippov on 02/12/2018.
-//  Copyright © 2018 Ron Kliffer. All rights reserved.
-//
+/**
+ * Copyright (c) 2016 Razeware LLC
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 
 import UIKit
 
-class SlideInPresentationAnimator: NSObject {
+final class SlideInPresentationAnimator: NSObject {
   
-  //1
-  //MARK: - Properties
-  //Declare a direction property that tells the animation controller the direction from which it should animate the view controller’s view.
+  // MARK: - Properties
   let direction: PresentationDirection
-  
-  //2
-  //Declare an isPresentation property to tell the animation controller whether to present or dismiss the view controller.
   let isPresentation: Bool
   
-  //3
-  // MARK: - Initialisers
-  init(direction: PresentationDirection, isPresentation: Bool) {
+  let interactionController: SwipeInteractionController?
+  
+  
+  // MARK: - Initializers
+  init(direction: PresentationDirection, isPresentation: Bool, interactionController: SwipeInteractionController?) {
     self.direction = direction
     self.isPresentation = isPresentation
+    self.interactionController = interactionController
     super.init()
   }
-
 }
 
-
-
+// MARK: - UIViewControllerAnimatedTransitioning
 extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
+  
   func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
     return 0.3
   }
   
   func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-    // 1
-    //If this is a presentation, the method asks the transitionContext for the view controller associated with the .to key, aka the view controller you’re moving to. If dismissal, it asks the transitionContext for the view controller associated with the .from, aka the view controller you’re moving from.
-    let key = isPresentation ? UITransitionContextViewControllerKey.to
-      : UITransitionContextViewControllerKey.from
-    
+    let key = isPresentation ? UITransitionContextViewControllerKey.to : UITransitionContextViewControllerKey.from
     let controller = transitionContext.viewController(forKey: key)!
     
-    // 2
-    //If the action is a presentation, your code adds the view controller’s view to the view hierarchy; this code uses the transitionContext to get the container view
     if isPresentation {
       transitionContext.containerView.addSubview(controller.view)
     }
     
-    // 3
-    //Calculate the frames you’re animating from and to. The first line asks the transitionContext for the view’s frame when it’s presented. The rest of the section tackles the trickier task of calculating the view’s frame when it’s dismissed. This section sets the frame’s origin so it’s just outside the visible area based on the presentation direction.
     let presentedFrame = transitionContext.finalFrame(for: controller)
     var dismissedFrame = presentedFrame
     switch direction {
@@ -65,28 +68,25 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
       dismissedFrame.origin.y = transitionContext.containerView.frame.size.height
     }
     
-    // 4
-    //Determine the transition’s initial and final frames. When presenting the view controller, it moves from the dismissed frame to the presented frame — vice versa when dismissing
     let initialFrame = isPresentation ? dismissedFrame : presentedFrame
     let finalFrame = isPresentation ? presentedFrame : dismissedFrame
     
-    // 5
-    //Lastly, this method animates the view from initial to final frame. Note that it calls completeTransition(_:) on the transitionContext to show the transition has finished.
     let animationDuration = transitionDuration(using: transitionContext)
     controller.view.frame = initialFrame
     
     UIView.animate(withDuration: animationDuration, delay: 0.0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.0, options: [], animations: {
       controller.view.frame = finalFrame
-
-    }) { finished in
+      
+    }) { (finished) in
       transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-
+      //      transitionContext.cancelInteractiveTransition()
+      
     }
     
-//    UIView.animate(withDuration: animationDuration, animations: {
-//      controller.view.frame = finalFrame
-//    }) { finished in
-//      transitionContext.completeTransition(finished)
-//    }
+    //    UIView.animate(withDuration: animationDuration, animations: {
+    //      controller.view.frame = finalFrame
+    //    }) { finished in
+    //      transitionContext.completeTransition(finished)
+    //    }
   }
 }

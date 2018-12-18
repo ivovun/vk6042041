@@ -30,10 +30,10 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
     self.viewController = viewController
     self.direction = direction
     super.init()
-
+    
     prepareGestureRecognizer(in: viewController.view)
   }
- 
+  
   
   private func prepareGestureRecognizer(in view: UIView) {
     //let gesture = UIPanGestureRecognizer(
@@ -61,7 +61,7 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
     default:
       progress = 0.0
     }
-
+    
     progress = progress / 600
     
     //var progress =  direction == PresentationDirection.right ? translation.x / 200 : translation.y / 200
@@ -74,20 +74,19 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
     //2
     case .began: //When the gesture starts, you set interactionInProgress to true and trigger the dismissal of the view controller.
       interactionInProgress = true
-//      viewController.view.frame.origin.x = viewController.view.frame.origin.x + progress
+      //      viewController.view.frame.origin.x = viewController.view.frame.origin.x + progress
       viewController.dismiss(animated: true, completion: nil)
       
     //3
     case .changed:
       shouldCompleteTransition = progress > 0.15
-//      viewController.view.frame.origin.x = viewController.view.frame.origin.x + progress * 300
+      //      viewController.view.frame.origin.x = viewController.view.frame.origin.x + progress * 300
       update(progress)
       
     //4
     case .cancelled:
       interactionInProgress = false
       cancel()
-      print("canceled =  .cancelled")
       
     //5
     case .ended:
