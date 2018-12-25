@@ -51,6 +51,8 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
     
     var progress: CGFloat = 0.0
     
+    direction = UIApplication.shared.statusBarOrientation.isLandscape ? .right : .bottom
+    
     switch direction {
     case .left:
       progress = -translation.x

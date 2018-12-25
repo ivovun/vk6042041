@@ -21,7 +21,7 @@ class SlideInPresentationController: UIPresentationController {
     //2
     switch direction {
     case .right:
-      frame.origin.x = containerView!.frame.width * (1.0 / 3.0)
+      frame.origin.x = containerView!.frame.width * (4.0 / 7.0)
     case .bottom:
       frame.origin.y = containerView!.frame.height * (1.0 / 3.0)
     default:
@@ -80,13 +80,16 @@ class SlideInPresentationController: UIPresentationController {
   }
   
   override func containerViewWillLayoutSubviews() {
+    
+    direction = UIApplication.shared.statusBarOrientation.isLandscape ? .right : .bottom
+    
     presentedView?.frame = frameOfPresentedViewInContainerView
   }
   
   override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
     switch direction {
     case .left, .right:
-      return CGSize(width: parentSize.width * (2.0 / 3.0), height: parentSize.height)
+      return CGSize(width: parentSize.width * (1.0 / 3.0), height: parentSize.height)
     default:
       return CGSize(width: parentSize.width, height: parentSize.height * (2.0/3.0))
     }
@@ -107,7 +110,7 @@ extension SlideInPresentationController {
     dimmingView.addGestureRecognizer(recognizer)
   }
   
-  dynamic func handleTap(recogniszer: UITapGestureRecognizer) {
+  @objc dynamic func handleTap(recogniszer: UITapGestureRecognizer) {
     presentingViewController.dismiss(animated: true)
   }
   

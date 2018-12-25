@@ -133,11 +133,14 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     } else if segue.identifier == ConstantsStruct.SegueIdentifiers.SHOW_USERS_FILTER {
       if let filterVC = segue.destination as? UsersFilterViewController {
         
-        if traitCollection.horizontalSizeClass == .compact {
-          slideInTransitioningDelegate.direction = .bottom
-        } else {
-          slideInTransitioningDelegate.direction = .right
-        }
+//        if traitCollection.horizontalSizeClass == .compact {
+//          slideInTransitioningDelegate.direction = .bottom
+//        } else {
+//          slideInTransitioningDelegate.direction = .right
+//        }
+        
+        
+        slideInTransitioningDelegate.direction = UIApplication.shared.statusBarOrientation.isLandscape ? .right : .bottom
         
         filterVC.transitioningDelegate = slideInTransitioningDelegate
         

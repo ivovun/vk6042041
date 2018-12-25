@@ -25,7 +25,7 @@ import UIKit
 final class SlideInPresentationAnimator: NSObject {
   
   // MARK: - Properties
-  let direction: PresentationDirection
+  var direction: PresentationDirection  
   let isPresentation: Bool
   
   let interactionController: SwipeInteractionController?
