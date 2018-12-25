@@ -17,26 +17,26 @@ fileprivate func errorForUserWithId(id: String, missingField: String) -> String 
    return " for user with ID = \(id) error:  missing field = \(missingField)"
 }
 
-fileprivate func tryToDecodeElseReturnDefault(defaultValue: String, values: KeyedDecodingContainer<User.CodingKeys>, key: User.CodingKeys) -> String {
-  
-  var resultString: String
-  
-  if let photo_200_try = try? values.decode(String.self, forKey: key) {
-    resultString = photo_200_try
-  }  else {
-    resultString = defaultValue
-  }
-  
-  return resultString
-  
-}
+//fileprivate func tryToDecodeElseReturnDefault(defaultValue: String, values: KeyedDecodingContainer<User.CodingKeys>, key: User.CodingKeys) -> String {
+//
+//  var resultString: String
+//
+//  if let photo_200_try = try? values.decode(String.self, forKey: key) {
+//    resultString = photo_200_try
+//  }  else {
+//    resultString = defaultValue
+//  }
+//
+//  return resultString
+//
+//}
 
 protocol TypeWithOptional_user_Property {
   var user: User? {get}
 }
 
 
-struct User: Decodable  {
+struct User: Codable  {
   
   let id : Int
   let first_name: String
@@ -51,7 +51,7 @@ struct User: Decodable  {
 
   
   public enum CodingKeys: String, CodingKey {
-   case id
+    case id
     case first_name
     case last_name
     case screen_name
@@ -65,20 +65,38 @@ struct User: Decodable  {
   
   
   init(from decoder: Decoder) throws  {
-    let values = try decoder.container(keyedBy: CodingKeys.self)
+    let container = try decoder.container(keyedBy: CodingKeys.self)
     
-    id = try values.decode(Int.self, forKey: .id)
+    id          = (try container.decodeIfPresent(Int.self,    forKey: .id)) ?? 0
+    let photo   = (try container.decodeIfPresent(String.self, forKey: .photo)) ?? ""
+    first_name  = (try container.decodeIfPresent(String.self, forKey: .first_name)) ?? ""
+    last_name   = (try container.decodeIfPresent(String.self, forKey: .last_name)) ?? ""
+    screen_name = (try container.decodeIfPresent(String.self, forKey: .screen_name)) ?? ""
+    photo_50    = (try container.decodeIfPresent(String.self, forKey: .photo_50)) ?? photo
+    photo_100   = (try container.decodeIfPresent(String.self, forKey: .photo_100)) ?? photo
+    photo_200   = (try container.decodeIfPresent(String.self, forKey: .photo_200)) ?? photo
+    photo_max   = (try container.decodeIfPresent(String.self, forKey: .photo_max)) ?? photo
+    bdate       = (try container.decodeIfPresent(String.self, forKey: .bdate)) ?? ConstantsStruct.UserDefaults.DEFAULT_BIRTH_DATE
     
-    photo = tryToDecodeElseReturnDefault(defaultValue: "", values: values, key: .photo)
-    first_name  = tryToDecodeElseReturnDefault(defaultValue: "", values: values, key: .first_name)
-    last_name   = tryToDecodeElseReturnDefault(defaultValue: "", values: values, key: .last_name)
-    screen_name = tryToDecodeElseReturnDefault(defaultValue: "", values: values, key: .screen_name)
-    photo_50  = tryToDecodeElseReturnDefault(defaultValue: photo, values: values, key: .photo_50)
-    photo_100 = tryToDecodeElseReturnDefault(defaultValue: photo, values: values, key: .photo_100)
-    photo_200 = tryToDecodeElseReturnDefault(defaultValue: photo, values: values, key: .photo_200)
-    photo_max = tryToDecodeElseReturnDefault(defaultValue: photo, values: values, key: .photo_max)
     
-    bdate = tryToDecodeElseReturnDefault(defaultValue: ConstantsStruct.UserDefaults.DEFAULT_BIRTH_DATE, values: values, key: .bdate)
+    self.photo = photo
+//    photo = (try container.decodeIfPresent(String.self, forKey: .photo)) ?? ""
+//    photo = (try container.decodeIfPresent(String.self, forKey: .photo)) ?? ""
+//    photo = (try container.decodeIfPresent(String.self, forKey: .photo)) ?? ""
+//    photo = (try container.decodeIfPresent(String.self, forKey: .photo)) ?? ""
+//    photo = (try container.decodeIfPresent(String.self, forKey: .photo)) ?? ""
+//    photo = (try container.decodeIfPresent(String.self, forKey: .photo)) ?? ""
+//
+//    photo = tryToDecodeElseReturnDefault(defaultValue: "", values: values, key: .photo)
+//    first_name  = tryToDecodeElseReturnDefault(defaultValue: "", values: values, key: .first_name)
+//    last_name   = tryToDecodeElseReturnDefault(defaultValue: "", values: values, key: .last_name)
+//     = tryToDecodeElseReturnDefault(defaultValue: "", values: values, key: .screen_name)
+//      = tryToDecodeElseReturnDefault(defaultValue: photo, values: values, key: .photo_50)
+//     = tryToDecodeElseReturnDefault(defaultValue: photo, values: values, key: .photo_100)
+//     = tryToDecodeElseReturnDefault(defaultValue: photo, values: values, key: .photo_200)
+//     = tryToDecodeElseReturnDefault(defaultValue: photo, values: values, key: .photo_max)
+//
+//     = tryToDecodeElseReturnDefault(defaultValue: ConstantsStruct.UserDefaults.DEFAULT_BIRTH_DATE, values: values, key: .bdate)
 
 
    }
