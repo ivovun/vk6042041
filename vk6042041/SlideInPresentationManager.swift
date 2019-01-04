@@ -13,6 +13,10 @@ enum PresentationDirection {
   case top
   case right
   case bottom
+  
+  static func getDirection() -> PresentationDirection {
+    return UIApplication.shared.statusBarOrientation.isLandscape ? .right : .bottom
+  }
 }
 
 class SlideInPresentationManager: NSObject {

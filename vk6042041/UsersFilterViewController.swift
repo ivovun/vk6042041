@@ -16,7 +16,7 @@ class UsersFilterViewController: UIViewController, HasSwipeInterractionControlle
     override func viewDidLoad() {
         super.viewDidLoad()
       
-      swipeInteractionController = SwipeInteractionController(viewController: self, direction: .right)
+      swipeInteractionController = SwipeInteractionController(viewController: self, direction: PresentationDirection.getDirection())
 
 
         // Do any additional setup after loading the view.

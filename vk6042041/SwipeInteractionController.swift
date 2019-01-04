@@ -19,7 +19,13 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
   //https://www.raywenderlich.com/322-custom-uiviewcontroller-transitions-getting-started
   
   var interactionInProgress = false //as the name suggests, indicates whether an interaction is already happening.
-  var direction: PresentationDirection
+  var direction: PresentationDirection {
+    didSet{
+      print(direction)
+    }
+  }
+  
+  
   
   private var shouldCompleteTransition = false
   
@@ -51,7 +57,8 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
     
     var progress: CGFloat = 0.0
     
-    direction = UIApplication.shared.statusBarOrientation.isLandscape ? .right : .bottom
+//    direction = PresentationDirection.getDirection()
+//    print(direction)
     
     switch direction {
     case .left:

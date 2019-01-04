@@ -78,7 +78,11 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
       controller.view.frame = finalFrame
       
     }) { (finished) in
+      
       transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+
+      
+      
       //      transitionContext.cancelInteractiveTransition()
       
     }
@@ -89,4 +93,5 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
     //      transitionContext.completeTransition(finished)
     //    }
   }
-}
+  
+ }

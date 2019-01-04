@@ -140,7 +140,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
 //        }
         
         
-        slideInTransitioningDelegate.direction = UIApplication.shared.statusBarOrientation.isLandscape ? .right : .bottom
+        slideInTransitioningDelegate.direction = PresentationDirection.getDirection()
         
         filterVC.transitioningDelegate = slideInTransitioningDelegate
         

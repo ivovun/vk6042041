@@ -12,6 +12,10 @@ class SlideInPresentationController: UIPresentationController {
   //1
   //MARK: - Properties
   fileprivate var dimmingView: UIView!
+  
+  var widthOfRightSlideInMenu: CGFloat = 4.0 / 7.0
+  var heightOfBottomSlideInMenu: CGFloat = 2.0 / 3.0
+  
   private var direction: PresentationDirection
   override var frameOfPresentedViewInContainerView: CGRect  {
     //1
@@ -21,9 +25,9 @@ class SlideInPresentationController: UIPresentationController {
     //2
     switch direction {
     case .right:
-      frame.origin.x = containerView!.frame.width * (4.0 / 7.0)
+      frame.origin.x = containerView!.frame.width * widthOfRightSlideInMenu
     case .bottom:
-      frame.origin.y = containerView!.frame.height * (1.0 / 3.0)
+      frame.origin.y = containerView!.frame.height * (1.0 - heightOfBottomSlideInMenu)
     default:
       frame.origin = .zero
     }
@@ -81,7 +85,7 @@ class SlideInPresentationController: UIPresentationController {
   
   override func containerViewWillLayoutSubviews() {
     
-    direction = UIApplication.shared.statusBarOrientation.isLandscape ? .right : .bottom
+//    direction = PresentationDirection.getDirection()
     
     presentedView?.frame = frameOfPresentedViewInContainerView
   }
@@ -89,9 +93,9 @@ class SlideInPresentationController: UIPresentationController {
   override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
     switch direction {
     case .left, .right:
-      return CGSize(width: parentSize.width * (1.0 / 3.0), height: parentSize.height)
+      return CGSize(width: parentSize.width * (1.0 - widthOfRightSlideInMenu), height: parentSize.height)
     default:
-      return CGSize(width: parentSize.width, height: parentSize.height * (2.0/3.0))
+      return CGSize(width: parentSize.width, height: parentSize.height * heightOfBottomSlideInMenu)
     }
   }
   
