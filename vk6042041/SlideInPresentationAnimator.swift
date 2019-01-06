@@ -79,6 +79,7 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
       
     }) { (finished) in
       
+      
       transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
 
       

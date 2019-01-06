@@ -123,7 +123,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="foundUsersCollectionViewCell" id="Thb-mV-wGe" customClass="FoundUserCollectionViewCell" customModule="vk6042041" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="foundUsersCollectionViewCell" id="Thb-mV-wGe" customClass="FoundUserCollectionViewCell" customModule="vk6042041" customModuleProvider="target">
                                 <rect key="frame" x="87.666666666666671" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -131,7 +131,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rJT-pG-XKC">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <rect key="frame" x="44" y="0.0" width="112" height="112"/>
                                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="rJT-pG-XKC" secondAttribute="height" multiplier="1:1" priority="800" id="bcA-mc-dJX"/>
@@ -447,7 +447,7 @@
                             </collectionView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" showsBookmarkButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jbz-SH-uM5">
                                 <rect key="frame" x="0.0" y="88" width="375" height="56"/>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>

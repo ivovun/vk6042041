@@ -82,7 +82,14 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     title = "Users"
     
     searchBar.setImage(UIImage(named: "filter_list_order_sequence_sort_sorting_outline-512.png"), for: .bookmark, state: .normal)
+//    searchBar.showsCancelButton = true
     searchBar.delegate = self
+    
+    let cancelButtonAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+    
+    UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes, for: .normal)
+
+//    searchBar.sizeToFit()
     
 //    pinchGesture.delegate = self
 ////    pinchGesture.delaysTouchesBegan = true
@@ -117,6 +124,10 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
       searchForUsers()
     }
   }
+  
+//  override func viewDidDisappear(_ animated: Bool) {
+//    searchBar.resignFirstResponder()
+//  }
   
   override var prefersStatusBarHidden: Bool {
     if showStatusBar {
@@ -761,6 +772,25 @@ extension SearchViewController: UISearchBarDelegate {
   func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
     //print("clicked")
     performSegue(withIdentifier: ConstantsStruct.SegueIdentifiers.SHOW_USERS_FILTER, sender: self)
+  }
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    searchBar.setShowsCancelButton(true, animated: true)
+  }
+  
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    searchBar.setShowsCancelButton(false, animated: true)
+    
+  }
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    print("searchBarCancelButtonClicked")
+  }
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    print("searchBarSearchButtonClicked")
   }
 }
 
