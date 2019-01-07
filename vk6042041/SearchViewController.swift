@@ -771,7 +771,11 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: UISearchBarDelegate {
   func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
     //print("clicked")
+    searchBar.resignFirstResponder() // if keyboard was visible
     performSegue(withIdentifier: ConstantsStruct.SegueIdentifiers.SHOW_USERS_FILTER, sender: self)
+    
+    //searchBarCancelButtonClicked(searchBar ) //
+//    searchBar.delegate = nil
   }
   
   func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
