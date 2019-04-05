@@ -11,16 +11,6 @@ private let reuseIdentifier = ConstantsStruct.CellIdentifiers.FoundUsersCollecti
 class SearchViewController: UIViewController, UIScrollViewDelegate {
   
   
-//  func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-//    scrollView.isScrollEnabled = false
-//  }
-  
-//  @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
-//  {
-//    didSet {
-//      pinchGesture.delegate = self
-//    }
-//  }
   
   // MARK: DataSource
   var foundUsers:[User]? = []  {
@@ -78,7 +68,6 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
 
     self.navigationController?.hidesBarsOnSwipe = false
     
-    
     title = "Users"
     
     searchBar.setImage(UIImage(named: "filter_list_order_sequence_sort_sorting_outline-512.png"), for: .bookmark, state: .normal)
@@ -89,24 +78,12 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     
     UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes, for: .normal)
 
-//    searchBar.sizeToFit()
-    
-//    pinchGesture.delegate = self
-////    pinchGesture.delaysTouchesBegan = true
-//    pinchGesture.cancelsTouchesInView = true
-    
-    
- 
-    
-    //    searchBarBoundsY = (navigationController?.navigationBar.frame.height ?? 0.0) + UIApplication.shared.statusBarFrame.height
     addCollectionViewObserver()
     
     searchForUsers()
     
     numberOfPhotosColumnsInPortraitForPinchRegulationsToCalculateItemWidth = ConstantsStruct.SearchesDefaults.numberOfPhotosColumns
     
-    //foundUsersCollectionView.panGestureRecognizer.delegate = self
-    //foundUsersCollectionView.pinchGestureRecognizer?.delegate = self
     
 
    }

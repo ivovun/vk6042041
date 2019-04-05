@@ -98,95 +98,12 @@
                     </tableView>
                     <connections>
                         <segue destination="yTj-lQ-nnN" kind="show" identifier="API_CALL" id="NSr-Hd-Vzo"/>
-                        <segue destination="v6P-pq-gSW" kind="show" identifier="ShowFoundUsersCVC_OLD" id="uoZ-vK-ePC"/>
-                        <segue destination="v6P-pq-gSW" kind="show" identifier="ShowFoundUsersCVC_3" id="IW7-6E-cPk"/>
                         <segue destination="WoD-dn-JDA" kind="show" identifier="ShowFoundUsersCVC" id="dvX-AV-MnD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VHd-GY-nGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="894" y="1567"/>
-        </scene>
-        <!--Search Collection View Controller-->
-        <scene sceneID="q30-mI-BJJ">
-            <objects>
-                <collectionViewController id="v6P-pq-gSW" customClass="SearchCollectionViewController" customModule="vk6042041" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" pagingEnabled="YES" dataMode="prototypes" id="ygo-2f-QzW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <gestureRecognizers/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="mwD-24-roB">
-                            <size key="itemSize" width="200" height="200"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="foundUsersCollectionViewCell" id="Thb-mV-wGe" customClass="FoundUserCollectionViewCell" customModule="vk6042041" customModuleProvider="target">
-                                <rect key="frame" x="87.666666666666671" y="0.0" width="200" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rJT-pG-XKC">
-                                            <rect key="frame" x="44" y="0.0" width="112" height="112"/>
-                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="rJT-pG-XKC" secondAttribute="height" multiplier="1:1" priority="800" id="bcA-mc-dJX"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="showCellRowNumber" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OxS-vY-YwX" userLabel="RowNumber">
-                                            <rect key="frame" x="45.5" y="110" width="146.5" height="18"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <color key="textColor" red="1" green="0.027751767635061264" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="leading" secondItem="Thb-mV-wGe" secondAttribute="leading" priority="250" id="1uf-2m-5Ft"/>
-                                    <constraint firstItem="OxS-vY-YwX" firstAttribute="centerY" secondItem="Thb-mV-wGe" secondAttribute="centerY" id="Fdp-en-twU"/>
-                                    <constraint firstAttribute="trailing" secondItem="rJT-pG-XKC" secondAttribute="trailing" priority="250" id="HzU-xw-RmW"/>
-                                    <constraint firstAttribute="bottom" secondItem="rJT-pG-XKC" secondAttribute="bottom" id="WtA-R5-Iad"/>
-                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="centerX" secondItem="Thb-mV-wGe" secondAttribute="centerX" id="Za2-ST-sXY"/>
-                                    <constraint firstItem="OxS-vY-YwX" firstAttribute="centerX" secondItem="Thb-mV-wGe" secondAttribute="centerX" id="afF-6b-QFY"/>
-                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="centerY" secondItem="Thb-mV-wGe" secondAttribute="centerY" id="bcn-0d-4vX"/>
-                                    <constraint firstItem="rJT-pG-XKC" firstAttribute="top" secondItem="Thb-mV-wGe" secondAttribute="top" id="wCJ-Vq-Anh"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="rowNumberLabel" destination="OxS-vY-YwX" id="RjL-bR-N8S"/>
-                                    <outlet property="userImageView" destination="rJT-pG-XKC" id="mtx-OU-cTi"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="v6P-pq-gSW" id="DxQ-re-nBt"/>
-                            <outlet property="delegate" destination="v6P-pq-gSW" id="sfE-ob-Huy"/>
-                            <outletCollection property="gestureRecognizers" destination="nEX-rE-5G1" appends="YES" id="MoP-PS-jRR"/>
-                        </connections>
-                    </collectionView>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <connections>
-                        <outlet property="collectionView" destination="ygo-2f-QzW" id="9w8-41-oEV"/>
-                        <outlet property="pinchGesture" destination="nEX-rE-5G1" id="G2G-Sk-eR5"/>
-                        <segue destination="8a3-Ll-6jG" kind="show" identifier="showUserInfo" id="BAR-sz-vQY"/>
-                    </connections>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SOo-N4-cmR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchBar contentMode="redraw" id="dTM-oh-BKf">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
-                <pinchGestureRecognizer id="nEX-rE-5G1">
-                    <connections>
-                        <action selector="handlePinch:" destination="v6P-pq-gSW" id="4Bj-co-Eja"/>
-                    </connections>
-                </pinchGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="1822" y="2029"/>
         </scene>
         <!--User Info Collection View Controller-->
         <scene sceneID="aDv-B6-oye">
@@ -733,8 +650,4 @@
         <image name="icons8-close-button-90" width="90" height="90"/>
         <image name="no_photo_200" width="200" height="200"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="gaN-f2-4Dt"/>
-        <segue reference="IW7-6E-cPk"/>
-    </inferredMetricsTieBreakers>
 </document>

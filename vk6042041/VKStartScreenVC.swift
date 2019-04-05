@@ -53,7 +53,7 @@ class VKStartScreenVC: UIViewController, VKSdkUIDelegate, VKSdkDelegate {
       print("authorisation success!!!")
       startWorking()
     } else if result.error != nil {
-      self.presentAlert(withTitle: nil, withMessage: "Access denied\n\(result.error)")
+      self.presentAlert(withTitle: nil, withMessage: "Access denied\n\(String(describing: result.error))")
      }
   }
  

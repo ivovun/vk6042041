@@ -96,7 +96,7 @@ class ApiCallViewController: UIViewController {
         
         
       }, errorBlock: { (error : Error?) in
-        self.callResult.text = error as! String
+        self.callResult.text = error as? String
         self.callingRequest = nil
     })
     

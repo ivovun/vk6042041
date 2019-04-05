@@ -74,14 +74,15 @@ extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
     let animationDuration = transitionDuration(using: transitionContext)
     controller.view.frame = initialFrame
     
+ 
     UIView.animate(withDuration: animationDuration, delay: 0.0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.0, options: [], animations: {
       controller.view.frame = finalFrame
       
+      
     }) { (finished) in
       
-      
-      transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-
+         transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+ 
       
       
       //      transitionContext.cancelInteractiveTransition()
