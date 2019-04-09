@@ -13,7 +13,6 @@
 		0E491CAF21C2EC440066E280 /* SlideInPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E491CAC21C2EC440066E280 /* SlideInPresentationAnimator.swift */; };
 		0E491CB021C2EC440066E280 /* SlideInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E491CAD21C2EC440066E280 /* SlideInPresentationController.swift */; };
 		3280C916EC574C6C44B5D9BF /* Pods_vk6042041.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0EDC9040E46BB6644BF48F /* Pods_vk6042041.framework */; };
-		50349B991F3D6602006D4528 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */; };
 		5048721520F84BBE00C70950 /* json_example in Resources */ = {isa = PBXBuildFile; fileRef = 5048721420F84BBE00C70950 /* json_example */; };
 		5058F9C21F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9BF1F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift */; };
 		5058F9C31F23579E006F1E3B /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058F9C01F23579E006F1E3B /* UIViewControllerExtensions.swift */; };
@@ -49,7 +48,6 @@
 		1B69F39E6691DB4A856375D8 /* Pods-vk6042041.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk6042041.release.xcconfig"; path = "Pods/Target Support Files/Pods-vk6042041/Pods-vk6042041.release.xcconfig"; sourceTree = "<group>"; };
 		2F0EDC9040E46BB6644BF48F /* Pods_vk6042041.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vk6042041.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3B9CF9B776F0A972E70C15 /* Pods-vk6042041.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk6042041.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vk6042041/Pods-vk6042041.debug.xcconfig"; sourceTree = "<group>"; };
-		50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		5048721420F84BBE00C70950 /* json_example */ = {isa = PBXFileReference; lastKnownFileType = text; path = json_example; sourceTree = "<group>"; };
 		5058F9BF1F23579E006F1E3B /* GlobalConstantsForObjCAndSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstantsForObjCAndSwift.swift; sourceTree = "<group>"; };
 		5058F9C01F23579E006F1E3B /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 		509399C6215A071400F66475 /* OLD_VERSIONS */ = {
 			isa = PBXGroup;
 			children = (
-				50349B981F3D6602006D4528 /* SearchCollectionViewController.swift */,
 			);
 			name = OLD_VERSIONS;
 			sourceTree = "<group>";
@@ -358,7 +355,6 @@
 				0E491CAE21C2EC440066E280 /* SlideInPresentationManager.swift in Sources */,
 				0E491CAF21C2EC440066E280 /* SlideInPresentationAnimator.swift in Sources */,
 				0E3D2FB221B4415B0057E923 /* UsersFilterViewController.swift in Sources */,
-				50349B991F3D6602006D4528 /* SearchCollectionViewController.swift in Sources */,
 				5085C00C2102E0F8006FC14E /* extensions.swift in Sources */,
 				50F318191F359CB300F42F2A /* UsersInfo.swift in Sources */,
 				50888AC221086AF80067B393 /* Full_ImageCollectionViewFlowLayout.swift in Sources */,

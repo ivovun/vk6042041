@@ -11,16 +11,6 @@ private let reuseIdentifier = ConstantsStruct.CellIdentifiers.FoundUsersCollecti
 class SearchViewController: UIViewController, UIScrollViewDelegate {
   
   
-//  func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-//    scrollView.isScrollEnabled = false
-//  }
-  
-//  @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
-//  {
-//    didSet {
-//      pinchGesture.delegate = self
-//    }
-//  }
   
   // MARK: DataSource
   var foundUsers:[User]? = []  {
@@ -78,28 +68,22 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
 
     self.navigationController?.hidesBarsOnSwipe = false
     
-    
     title = "Users"
     
     searchBar.setImage(UIImage(named: "filter_list_order_sequence_sort_sorting_outline-512.png"), for: .bookmark, state: .normal)
+//    searchBar.showsCancelButton = true
     searchBar.delegate = self
     
-//    pinchGesture.delegate = self
-////    pinchGesture.delaysTouchesBegan = true
-//    pinchGesture.cancelsTouchesInView = true
+    let cancelButtonAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
     
-    
- 
-    
-    //    searchBarBoundsY = (navigationController?.navigationBar.frame.height ?? 0.0) + UIApplication.shared.statusBarFrame.height
+    UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes, for: .normal)
+
     addCollectionViewObserver()
     
     searchForUsers()
     
     numberOfPhotosColumnsInPortraitForPinchRegulationsToCalculateItemWidth = ConstantsStruct.SearchesDefaults.numberOfPhotosColumns
     
-    //foundUsersCollectionView.panGestureRecognizer.delegate = self
-    //foundUsersCollectionView.pinchGestureRecognizer?.delegate = self
     
 
    }
@@ -117,6 +101,10 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
       searchForUsers()
     }
   }
+  
+//  override func viewDidDisappear(_ animated: Bool) {
+//    searchBar.resignFirstResponder()
+//  }
   
   override var prefersStatusBarHidden: Bool {
     if showStatusBar {
@@ -760,7 +748,30 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: UISearchBarDelegate {
   func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
     //print("clicked")
+    searchBar.resignFirstResponder() // if keyboard was visible
     performSegue(withIdentifier: ConstantsStruct.SegueIdentifiers.SHOW_USERS_FILTER, sender: self)
+    
+    //searchBarCancelButtonClicked(searchBar ) //
+//    searchBar.delegate = nil
+  }
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    searchBar.setShowsCancelButton(true, animated: true)
+  }
+  
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    searchBar.setShowsCancelButton(false, animated: true)
+    
+  }
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    print("searchBarCancelButtonClicked")
+  }
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    print("searchBarSearchButtonClicked")
   }
 }
 

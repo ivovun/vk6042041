@@ -71,7 +71,9 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
       progress = 0.0
     }
     
-    progress = progress / 600
+    progress = progress / 1200
+    
+//    completionCurve = UIView.AnimationCurve.easeOut
     
     //var progress =  direction == PresentationDirection.right ? translation.x / 200 : translation.y / 200
     progress = CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
@@ -94,7 +96,10 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
       
     //4
     case .cancelled:
+          completionCurve = UIView.AnimationCurve.easeOut
+
       interactionInProgress = false
+      
       cancel()
       
     //5
